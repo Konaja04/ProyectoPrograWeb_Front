@@ -1,0 +1,219 @@
+.card-body {
+    box-shadow: 1px 2px 1px 1px rgb(172, 172, 172);
+    margin-top: 30px;
+    border-radius: 4px;
+}
+
+.card-text {
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.15000000596046448px;
+    text-align: left;
+    color: rgb(129, 129, 129);
+
+}
+
+.second-content {
+    width: Fixed (938px);
+    height: Hug (1, 057px);
+    padding: 0px, 24px, 0px, 24px;
+    gap: 5px;
+    margin-left: 40px;
+}
+
+.first-part {
+    width: Fixed (914px);
+    height: Hug (106px);
+}
+
+
+.card-body {
+    padding-top: 20px;
+    box-shadow: 1px 2px 2px 1px rgb(172, 172, 172);
+}
+
+.card-title {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.type-pelicula {
+    padding: 0.2em 0.6em;
+    background-color: rgb(236, 235, 235);
+    border: 1px solid rgb(210, 209, 209);
+    border-radius: 100px;
+    margin-bottom: 20px;
+    margin: 10px;
+}
+
+.image-logo-ubicacion {
+    width: 24px;
+    height: 24px;
+    display: inline;
+    color: #2196F3;
+    font-size: 1.1em;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0.10000000149011612px;
+    text-align: left;
+}
+
+.title-pelicuas {
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 42px;
+    letter-spacing: 0.25px;
+    text-align: left;
+}
+
+#sinopsis-imagen {
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.image-principal {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 70%;
+    height: auto;
+    max-height: 100%;
+    border-radius: 4px;
+}
+
+.icon-time {
+    color: rgb(92, 92, 92);
+    margin-bottom: 5px;
+}
+
+#peliculas-disponibles {
+    margin-top: 60px;
+}
+
+.peliculas-container {
+    position: relative;
+    padding: 50px;
+    background-color: #fafafa;
+    border-radius: 10px;
+    padding-bottom: 20px;
+    margin: 15px;
+    height: 400px;
+    padding-top: 60%;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.135);
+    box-sizing: border-box;
+}
+
+.img-peliculas-dispo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+
+
+
+.cartelera-card {
+    position: relative;
+    padding: 10px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    margin: 15px;
+    height: 400px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.135);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.cartelera-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cartelera-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+    /* Asegura que esté detrás de los botones */
+}
+
+.cartelera-card:hover::after {
+    opacity: 0.7;
+    /* Ajusta la opacidad del fondo oscuro al pasar el ratón */
+}
+
+.botones-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.cartelera-card:hover .botones-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+.botones-overlay-comprar {
+    display: block;
+    background-color: #FA7525;
+    width: 200px;
+    color: #fff;
+    border: none;
+    /* Quita el borde */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.botones-overlay-detalles {
+    display: block;
+    background-color: #fff;
+    width: 200px;
+    color: #FA7525;
+    padding: 10px 17px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    transition: border 0.4s ease, color 0.4s ease;
+    margin-top: 15px;
+    border: 3px solid #FA7525;
+}
+
+.botones-overlay-comprar:hover {
+    background-color: #c45511;
+}
+
+.botones-overlay-detalles:hover {
+    background-color: #ebebeb;
+    color: #c45511;
+    border: 3px solid #c45511;
+
+}

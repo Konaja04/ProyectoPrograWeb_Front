@@ -1,0 +1,108 @@
+body {
+    margin: 0px;
+    background-color: white;
+}
+
+.image-logo-ubicacion {
+    width: 24px;
+    height: 24px;
+    display: inline;
+    color: #2196F3;
+    font-size: 1.1em;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0.10000000149011612px;
+    text-align: left;
+}
+
+.image-principal-reserva {
+    margin-top: 20px;
+    margin-bottom: 25px;
+    width: 60%;
+    border-radius: 4px;
+    max-width: 100%;
+    height: auto;
+}
+
+h1 {
+    font-size: 2.6em;
+}
+
+h4 {
+    font-size: 1.7em;
+}
+
+.image-logo-ubicacion {
+    width: 30px;
+    height: 30px;
+    display: inline;
+    color: #2196F3;
+    font-size: 1.3em;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0.10000000149011612px;
+    text-align: left;
+    margin-left: 6px;
+}
+
+.formulario {
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fafafa;
+    font-size: 1.455em;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.135);
+}
+
+
+.boton1 {
+    font-size: 0.8em;
+}
+
+.info-container {
+    background-color: #fafafa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.135);
+}
+
+.tabla-asientos th,
+.tabla-asientos td {
+    padding: 1px;
+    text-align: center;
+}
+
+#asiento-disponible {
+    position: relative;
+    display: inline;
+    width: 30px;
+    height: 26px;
+    padding: 0;
+    margin: 4px;
+    font-size: 10px;
+    line-height: 17px;
+    border-radius: 3px;
+    min-width: 5px;
+    background-color: gray;
+    color: white;
+
+}
+
+.asiento-ocupado {
+    background-color: rgb(166, 8, 8);
+}
+
+.boton-reserva {
+    margin-top: 30px;
+    color: white;
+    background-color: #FA7525;
+    border-radius: 10px;
+    width: 87%;
+    flex: auto;
+    margin-left: 50px;
+    margin-right: 15px;
+}
+
+.botones-paypal {
+    margin-top: 20px;
+    margin-left: 50px;
+}

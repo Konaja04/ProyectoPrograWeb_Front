@@ -1,0 +1,1049 @@
+[
+    {
+        "ID": 1,
+        "name": "CP Alcazar",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Santa Cruz 814-816",
+        "secondAddress": "Miraflores Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET ALCAZAR",
+        "path": "cp-alcazar",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/b70aa8b9-f9f9-49c5-8f7e-28e6afd5646f"
+    },
+    {
+        "ID": 37,
+        "name": "CP Arequipa",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Ejercito 793 Cayma",
+        "secondAddress": "Cayma Arequipa Arequipa",
+        "city": "Arequipa",
+        "description": "CINEPLANET AREQUIPA",
+        "path": "cp-arequipa",
+        "formats": [
+            "2D",
+            "3D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/f0c0deba-02e8-4e07-9d70-ab29336bc551"
+    },
+    {
+        "ID": 51,
+        "name": "CP Arequipa Paseo Central",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Arturo Ibañez S/N,",
+        "secondAddress": "Arequipa Arequipa",
+        "city": "Arequipa",
+        "description": "CINEPLANET AREQUIPA PASEO CENTRAL",
+        "path": "cp-arequipa-paseo-central",
+        "formats": [
+            "2D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/b06aa9ea-73e2-4f7b-9608-f99536d6cf3b"
+    },
+    {
+        "ID": 38,
+        "name": "CP Arequipa Real Plaza",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Ejercito 1009 Cayma",
+        "secondAddress": "Cayma Arequipa Arequipa",
+        "city": "Arequipa",
+        "description": "CINEPLANET AREQUIPA REAL PLAZA",
+        "path": "cp-arequipa-real-plaza",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/d777a757-28b0-4ba2-870b-f807c3e72950"
+    },
+    {
+        "ID": 4,
+        "name": "CP Brasil",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Brasil 714 - 792 Piso 3  ",
+        "secondAddress": "Breña Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET BRASIL",
+        "path": "cp-brasil",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/bc5cbd20-d5f2-4e79-931f-d31911c26968"
+    },
+    {
+        "ID": 39,
+        "name": "CP Cajamarca",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Vía de Evitamiento Norte",
+        "secondAddress": "Cajamarca Cajamarca Cajamarca",
+        "city": "Cajamarca",
+        "description": "CINEPLANET CAJAMARCA",
+        "path": "cp-cajamarca",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/35bd2686-f0f3-42aa-881c-627cb5f59e43"
+    },
+    {
+        "ID": 50,
+        "name": "CP Caminos del Inca",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av Caminos del Inca 241 Int401",
+        "secondAddress": "Santiago de Surco Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET CAMINOS DEL INCA",
+        "path": "cp-caminos-del-inca",
+        "formats": [
+            "2D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/3c788c2c-2fdf-452c-867a-69da795373cd"
+    },
+    {
+        "ID": 54,
+        "name": "CP Canto Grande",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "AV CANTO GRANDE MZ.A LT.15",
+        "secondAddress": "San Juan de Lurigancho Lima",
+        "city": "Lima",
+        "description": "CINEPLANET CANTO GRANDE",
+        "path": "cp-canto-grande",
+        "formats": [
+            "2D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/778b2dad-e44a-41af-8f11-694bf4b4f40b"
+    },
+    {
+        "ID": 6,
+        "name": "CP Centro",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Jr. De la Unión 819  ",
+        "secondAddress": "Cercado Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET CENTRO",
+        "path": "cp-centro",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/a98e74ee-4e80-40f7-9c5f-4bdde69f948d"
+    },
+    {
+        "ID": 7,
+        "name": "CP Centro Civico",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Inca Garcilazo de la Vega ",
+        "secondAddress": "Cercado Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET CENTRO CIVICO",
+        "path": "cp-centro-civico",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/ef527115-a564-4d62-acc9-e7579913705c"
+    },
+    {
+        "ID": 8,
+        "name": "CP Chiclayo",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Miguel de Cervantes 300",
+        "secondAddress": "Chiclayo Chiclayo Chiclayo",
+        "city": "Chiclayo",
+        "description": "CINEPLANET CHICLAYO",
+        "path": "cp-chiclayo",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/c6fa7835-f590-4290-8b1e-68338f63841c"
+    },
+    {
+        "ID": 9,
+        "name": "CP Comas",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Túpac Amaru 3840 2do P",
+        "secondAddress": "Comas Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET COMAS",
+        "path": "cp-comas",
+        "formats": [
+            "2D",
+            "3D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/d8df08b5-75b2-4d20-88f4-3df92f9aae80"
+    },
+    {
+        "ID": 40,
+        "name": "CP Cusco",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Collasuyo 2964 Lote A",
+        "secondAddress": "Cusco Cusco Cusco",
+        "city": "Cusco",
+        "description": "CINEPLANET CUSCO",
+        "path": "cp-cusco",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/5adbec58-499f-416c-80ba-bb76516aa31e"
+    },
+    {
+        "ID": 53,
+        "name": "CP El Polo",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "AV. El Polo 695 ",
+        "secondAddress": "Surco Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET PURUCHUCO",
+        "path": "cp-el-polo",
+        "formats": [
+            "2D",
+            "3D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/b935b4bf-1e25-4d08-9989-e7531919baaf"
+    },
+    {
+        "ID": 11,
+        "name": "CP Guardia Civil",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Guardia Civil 1035 Chorrillos",
+        "secondAddress": "Chorrillos Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET CHORRILLOS",
+        "path": "cp-guardia-civil",
+        "formats": [
+            "2D",
+            "3D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/bc68e0b0-ae70-43de-b211-065adcc75baa"
+    },
+    {
+        "ID": 41,
+        "name": "CP Huancayo Real Plaza",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Ferrocarril Cuadra 8 S/N ",
+        "secondAddress": "Huancayo Huancayo Huancayo",
+        "city": "Huancayo",
+        "description": "CINEPLANET HUANCAYO",
+        "path": "cp-huancayo-real-plaza",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/a28d01f0-c685-4e38-9cd6-d75ee8613e6b"
+    },
+    {
+        "ID": 42,
+        "name": "CP Huanuco Real Plaza",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Jr. Independencia s/n ",
+        "secondAddress": "Huánuco Huánuco Huánuco",
+        "city": "Huánuco",
+        "description": "CINEPLANET HUANUCO",
+        "path": "cp-huanuco-real-plaza",
+        "formats": [
+            "2D",
+            "3D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/664f9f0b-0eda-449e-b864-dca738862d77"
+    },
+    {
+        "ID": 14,
+        "name": "CP Juliaca",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Calle Tumbes 395 - San Roman",
+        "secondAddress": "Juliaca",
+        "city": "Juliaca",
+        "description": "CINEPLANET JULIACA",
+        "path": "cp-juliaca",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/e2c04bde-e0ba-4949-9266-5c2fbd0a53ff"
+    },
+    {
+        "ID": 15,
+        "name": "CP La Molina",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Raúl Ferrero 1205 3er P",
+        "secondAddress": "La Molina Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET LA MOLINA",
+        "path": "cp-la-molina",
+        "formats": [
+            "2D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/3a7a57dd-a458-4c4d-bc81-3a9ec195e795"
+    },
+    {
+        "ID": 16,
+        "name": "CP Lurin",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "S/N San Pedro Parcela B-43",
+        "secondAddress": "Lurín Lima Lima (Ref. Antigua ",
+        "city": "Lima",
+        "description": "CINEPLANET LURIN",
+        "path": "cp-lurin",
+        "formats": [
+            "2D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/f07bd7ad-c805-4ca7-964e-4db23464417b"
+    },
+    {
+        "ID": 55,
+        "name": "CP Mall Aventura Chiclayo",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "AV. PANAMERICANA 639 -INT 01",
+        "secondAddress": "Mall Aventura - Chiclayo",
+        "city": "Chiclayo",
+        "description": "CINEPLANET CHICLAYO MALL AVENTURA",
+        "path": "cp-mall-aventura-chiclayo",
+        "formats": [
+            "2D",
+            "3D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/66b4b284-8528-4ac1-88f4-e5c929b52330"
+    },
+    {
+        "ID": 17,
+        "name": "CP Mall del Sur",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Carr. Atocongo Lote 1 Mall del",
+        "secondAddress": "San Juan de Miraflores Lima ",
+        "city": "Lima",
+        "description": "CINEPLANET MALL DEL SUR",
+        "path": "cp-mall-del-sur",
+        "formats": [
+            "2D",
+            "3D",
+            "REGULAR",
+            "SCREENX",
+            "XTREME"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/2ff15f93-85d2-44a5-93df-8f7affec3ccb"
+    },
+    {
+        "ID": 18,
+        "name": "CP Norte",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Carlos Izaguirre Cdra 5 ",
+        "secondAddress": "Los Olivos Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET CENTRO",
+        "path": "cp-norte",
+        "formats": [
+            "2D",
+            "3D",
+            "REGULAR",
+            "XTREME"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/02ab5858-ec87-4214-953d-4b7f228eab62"
+    },
+    {
+        "ID": 19,
+        "name": "CP Piura",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Jr. Huancavelica 537 - Piura",
+        "secondAddress": "Piura Piura Piura",
+        "city": "Piura",
+        "description": "CINEPLANET PIURA",
+        "path": "cp-piura",
+        "formats": [
+            "2D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/7fa2cf18-ce1c-4b3a-a946-4c1ecca3d59f"
+    },
+    {
+        "ID": 20,
+        "name": "CP Piura Real Plaza",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av.Sanchez Cerro 234-Z.I",
+        "secondAddress": "Piura Piura Piura",
+        "city": "Piura",
+        "description": "CINEPLANET PIURA REAL PLAZA",
+        "path": "cp-piura-real-plaza",
+        "formats": [
+            "2D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/d92a5f50-b3cb-4e3d-82df-6179fd4a6e82"
+    },
+    {
+        "ID": 56,
+        "name": "CP Plaza Santa Catalina",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "AV. CARLOS VILLARÁN NRO 520",
+        "secondAddress": "La Victoria - Lima",
+        "city": "Lima",
+        "description": "CINEPLANET PLAZA SANTA CATALINA",
+        "path": "cp-plaza-santa-catalina",
+        "formats": [
+            "2D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/cce852cc-9685-4039-a094-285722ece2f1"
+    },
+    {
+        "ID": 21,
+        "name": "CP Primavera",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Angamos Este 2681",
+        "secondAddress": "Surquillo Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET PRIMAVERA",
+        "path": "cp-primavera",
+        "formats": [
+            "2D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/8c7f42b2-3c98-47b2-9093-6efdae3f3af0"
+    },
+    {
+        "ID": 22,
+        "name": "CP Pro",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Alfredo Mendiola Km. 21.5 ",
+        "secondAddress": "San Martin de Porres Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET PRO",
+        "path": "cp-pro",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/f4e5bb6f-2d8c-495c-97bf-3063a04b0fb6"
+    },
+    {
+        "ID": 43,
+        "name": "CP Pucallpa",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av.Centenario s/n M2 365 Lt 16",
+        "secondAddress": "Pucallpa Pucallpa Ucayali",
+        "city": "Pucallpa",
+        "description": "CINEPLANET PUCALLPA",
+        "path": "cp-pucallpa",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/0af72d8d-b398-4663-b8f9-b03e86f9af86"
+    },
+    {
+        "ID": 24,
+        "name": "CP Puno",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Los Incas s/n ",
+        "secondAddress": "Puno",
+        "city": "Puno",
+        "description": "CINEPLANET PUNO",
+        "path": "cp-puno",
+        "formats": [
+            "2D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/2706f157-269c-422d-a63b-d4667c36995c"
+    },
+    {
+        "ID": 52,
+        "name": "CP Puruchuco",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "AV. Nicolas Ayllon 4770",
+        "secondAddress": "AteLima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET PURUCHUCO",
+        "path": "cp-puruchuco",
+        "formats": [
+            "2D",
+            "3D",
+            "XTREME"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/b6b1871d-a6f9-400d-8e89-7f8c764f4a12"
+    },
+    {
+        "ID": 25,
+        "name": "CP Risso",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Arequipa 2250 - Lince",
+        "secondAddress": "Lince Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET RISSO",
+        "path": "cp-risso",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/4f801ae1-e4da-4c30-a2b3-d09435c31118"
+    },
+    {
+        "ID": 26,
+        "name": "CP Salaverry",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. San Felipe Salaverry s/n",
+        "secondAddress": "Jesús María Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET SALAVERRY",
+        "path": "cp-salaverry",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D",
+            "PRIME"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/6f47b144-63fc-4abb-9636-dae8043af72c"
+    },
+    {
+        "ID": 27,
+        "name": "CP San Borja",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Calle A. Morelli Mz 1 Urb. ",
+        "secondAddress": "San Borja Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET SAN BORJA",
+        "path": "cp-san-borja",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D",
+            "PRIME"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/353b07d1-35ab-4257-befd-21beabcdef15"
+    },
+    {
+        "ID": 36,
+        "name": "CP San Miguel",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Calle Mantaro 356 Cruce",
+        "secondAddress": "San Miguel Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET SAN MIGUEL",
+        "path": "cp-san-miguel",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D",
+            "SCREENX",
+            "PRIME"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/464db0e8-f6c2-47fa-9d42-cdfe1b7b1465"
+    },
+    {
+        "ID": 44,
+        "name": "CP Santa Clara",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Nicolas Ayllon 8694 ",
+        "secondAddress": "Ate Vitarte Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET SANTA CLARA",
+        "path": "cp-santa-clara",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/5690ea58-835d-4638-8115-c330d479ba46"
+    },
+    {
+        "ID": 45,
+        "name": "CP Tacna",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Calle Cuzco 36 ",
+        "secondAddress": "Tacna Tacna Tacna",
+        "city": "Tacna",
+        "description": "CINEPLANET TACNA",
+        "path": "cp-tacna",
+        "formats": [
+            "2D",
+            "3D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/0dccce68-ef17-49fb-9818-f0c5095ed1f9"
+    },
+    {
+        "ID": 30,
+        "name": "CP Trujillo Centro",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Calle Mariscal de Orbegoso 239",
+        "secondAddress": "Trujillo Trujillo Trujillo",
+        "city": "Trujillo",
+        "description": "CINEPLANET TRUJILLO",
+        "path": "cp-trujillo-centro",
+        "formats": [
+            "2D",
+            "REGULAR"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/ac0d5bb4-2e28-4b8b-abd2-3ca0a590f6f9"
+    },
+    {
+        "ID": 31,
+        "name": "CP Trujillo Real Plaza",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. César Vallejo 1345",
+        "secondAddress": "Trujillo Trujillo Trujillo",
+        "city": "Trujillo",
+        "description": "CINEPLANET TRUJILLO REAL PLAZA",
+        "path": "cp-trujillo-real-plaza",
+        "formats": [
+            "REGULAR",
+            "2D",
+            "3D",
+            "PRIME"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/83f16fbf-1a6d-4164-b471-e15d4cbe00fb"
+    },
+    {
+        "ID": 46,
+        "name": "CP Ventanilla",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Nestor Gambeta",
+        "secondAddress": "Ventanilla  Callao  Callao",
+        "city": "Lima",
+        "description": "CINEPLANET VENTANILLA",
+        "path": "cp-ventanilla",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/51ae5569-e7cd-4048-aad4-dbc6ba25353d"
+    },
+    {
+        "ID": 47,
+        "name": "CP Villa El Salvador",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Parcel H del Parque Industrial",
+        "secondAddress": "Villa el Salvador Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET VILLA EL SALVADOR",
+        "path": "cp-villa-el-salvador",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/2143c4c1-d838-4e49-8372-3123b2b06d18"
+    },
+    {
+        "ID": 48,
+        "name": "CP Villa María del Triunfo",
+        "phoneNumber": "016194400",
+        "emailAddress": "",
+        "address": "Av. Pachacutec 3721",
+        "secondAddress": "Villa María Lima Lima",
+        "city": "Lima",
+        "description": "CINEPLANET VILLA MARIA",
+        "path": "cp-villa-maria-del-triunfo",
+        "formats": [
+            "2D",
+            "REGULAR",
+            "3D"
+        ],
+        "available_times": [
+            "03:00",
+            "05:00",
+            "06:00",
+            "08:00",
+            "09:00",
+            "11:00"
+        ],
+        "img": "https://cdn.cineplanet.com.pe/contentAsset/raw-data/4f3e7772-2f36-42ee-b4bc-aaf5d6e5d729"
+    }
+]
