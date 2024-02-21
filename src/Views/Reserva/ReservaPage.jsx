@@ -1,9 +1,9 @@
 import './ReservaPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBar from '../../components/Navbar'
-import { TextField, Button, Modal, Box, Icon, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import NavBar from '../../common/Navbar'
+import { TextField, Button, Modal, Box, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 //Linea Paso-Paso
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -16,7 +16,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 //paypal
-import PaymentForm from '../../components/PaymentForm';
+import PaymentForm from './components/PaymentForm';
 
 
 const product = {
@@ -25,16 +25,6 @@ const product = {
 const clientId = "AWDCMzDPFw-IKStz4P6NM9DKSvQUoFaXScky6_gLaA7DLdrf7nUP0iCGJistG-NuqVPYMpx_MibilLZ4";
 
 const steps = ['USUARIO', 'ENTRADAS', 'ASIENTOS', 'PAGO'];
-
-
-//postMark
-
-//const postmark = require("postmark");
-//const client = new postmark.ServerClient('800b556b-bb43-4118-8940-18ffec329bce');
-
-
-
-
 
 const ReservaPage = () => {
 
@@ -87,20 +77,16 @@ const ReservaPage = () => {
         const dataSalas = await responseSalas.json()
         const dataPelis = await responsePelis.json()
         setDataSala(dataSalas.filter((sala) => {
-            return sala.ID == sala_ID
+            return sala.ID === sala_ID
         })[0])
         setDataPeli(dataPelis.filter((peli) => {
-            return peli.id == peli_id
+            return peli.id === peli_id
         })[0])
 
     }
     useEffect(() => {
         obtenerData()
-    }, [])
-
-
-
-
+    },)
 
     //Line
     const [activeStep, setActiveStep] = React.useState(0);
@@ -145,25 +131,7 @@ const ReservaPage = () => {
     const handleReservar = () => {
         reservarAsientos();
         handleNext();
-
-        // const templateModel = {
-        //     nombre: formData.nombre,
-        //     apellido: formData.apellido,
-        //     codigo: formData.codigo,
-        //     cantidad: formData.cantidad,
-        //     asientosSeleccionados: asientosSeleccionados.join(', ')
-        // };
-
-        // client.sendEmailWithTemplate({
-        //     "TemplateId": "34740253",
-        //     "TemplateModel": templateModel,
-        //     "From": "20211628@aloe.ulima.edu.pe",
-        //     "To": formData.codigo,
-        // }).then(() => {
         handleFormSubmit(true);
-        //})
-
-
     };
 
 

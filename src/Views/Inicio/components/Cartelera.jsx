@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap"
 import { useNavigate, useParams } from "react-router-dom";
-import '../Views/Peliculas_Item/PeliculasItemPage.css'
+import '../../Peliculas_Item/PeliculasItemPage.css'
 import { Grid } from "@mui/material";
 import Carousel from 'react-material-ui-carousel';
 import { Link } from 'react-router-dom';
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
+
 const obtenerPeliculasRandom = (lista, cantidad) => {
     const peliculasClon = lista.slice();
     cantidad = Math.min(cantidad, peliculasClon.length);
@@ -20,16 +21,10 @@ const obtenerPeliculasRandom = (lista, cantidad) => {
     return peliculasRandom;
 }
 
-const PeliculasRecomendadas = () => {
+const Cartelera = () => {
     const { path } = useParams();
     const [sala, setDataSala] = useState({})
     const [pelis, setDataPelis] = useState([])
-
-    const navigate = useNavigate();
-
-    const realizarReserva = (pelicula, horario) => {
-        navigate("/reserva/" + sala.ID + "/" + pelicula.id + "/" + horario.toString())
-    }
 
     const obtenerSala = async () => {
 
@@ -47,16 +42,14 @@ const PeliculasRecomendadas = () => {
         obtenerSala()
     }, [])
 
-    return <Container sx={{ py: 12 }} maxWidth="md">
-        <h1 id="title-pelicuas">Recomendados</h1>
+    return <Container sx={{ py: 12 }} style={{ marginTop: '160px' }} maxWidth="md">
+        <h1 id="title-pelicuas">En cartelera</h1>
         <hr />
         <Carousel
             autoPlay={false}
             animation="slide"
             indicators={false}
         >
-
-
             {pelis.reduce((rows, pelicula, index) => {
                 if (index % 4 === 0) rows.push([]);
                 rows[rows.length - 1].push(
@@ -91,7 +84,6 @@ const PeliculasRecomendadas = () => {
     </Container >
 
 
-
 }
 
-export default PeliculasRecomendadas
+export default Cartelera

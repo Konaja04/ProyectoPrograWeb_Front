@@ -1,16 +1,16 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Divider from '@mui/material/Divider';
-import FormLabel from '@mui/material/FormLabel';
-import Input from '@mui/material/Input';
-import Button from '@mui/material/Button';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
-import EventIcon from '@mui/icons-material/Event';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import PersonIcon from '@mui/icons-material/Person';
-import { TextField } from '@mui/material';
+import {
+    Card,
+    CardActions,
+    CardContent,
+    Divider,
+    FormLabel,
+    Input,
+    Button,
+    CreditCardIcon,
+    TextField
+} from '@mui/material';
+import { EventIcon, InfoOutlinedIcon, PersonIcon } from '@mui/icons-material';
 
 export default function CreditCardCustom() {
     return (

@@ -1,7 +1,4 @@
-
-import React, { useState } from 'react';
-
-import { Typography, Card, Button, CardMedia, CardActions, CardContent, Rating, Chip, Link } from '@mui/material/';
+import { Typography, Card, CardMedia, CardActions, CardContent, Chip } from '@mui/material/';
 const CardViewSalas = ({ data }) => {
 
     return (

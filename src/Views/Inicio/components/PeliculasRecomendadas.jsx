@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap"
 import { useNavigate, useParams } from "react-router-dom";
-import '../Views/Peliculas_Item/PeliculasItemPage.css'
+import '../../Peliculas_Item/PeliculasItemPage.css'
 import { Grid } from "@mui/material";
 import Carousel from 'react-material-ui-carousel';
-import { Button } from "bootstrap";
-import { BorderColor } from "@mui/icons-material";
 import { Link } from 'react-router-dom';
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
-
 const obtenerPeliculasRandom = (lista, cantidad) => {
     const peliculasClon = lista.slice();
     cantidad = Math.min(cantidad, peliculasClon.length);
@@ -23,16 +20,10 @@ const obtenerPeliculasRandom = (lista, cantidad) => {
     return peliculasRandom;
 }
 
-const Cartelera = () => {
+const PeliculasRecomendadas = () => {
     const { path } = useParams();
     const [sala, setDataSala] = useState({})
     const [pelis, setDataPelis] = useState([])
-
-    const navigate = useNavigate();
-
-    const realizarReserva = (pelicula, horario) => {
-        navigate("/reserva/" + sala.ID + "/" + pelicula.id + "/" + horario.toString())
-    }
 
     const obtenerSala = async () => {
 
@@ -50,8 +41,8 @@ const Cartelera = () => {
         obtenerSala()
     }, [])
 
-    return <Container sx={{ py: 12 }} style={{ marginTop: '160px' }} maxWidth="md">
-        <h1 id="title-pelicuas">En cartelera</h1>
+    return <Container sx={{ py: 12 }} maxWidth="md">
+        <h1 id="title-pelicuas">Recomendados</h1>
         <hr />
         <Carousel
             autoPlay={false}
@@ -63,7 +54,6 @@ const Cartelera = () => {
             {pelis.reduce((rows, pelicula, index) => {
                 if (index % 4 === 0) rows.push([]);
                 rows[rows.length - 1].push(
-
 
                     <Grid item key={index} xs={12} sm={6} md={3}>
                         <div key={index} className="cartelera-card">
@@ -94,6 +84,7 @@ const Cartelera = () => {
     </Container >
 
 
+
 }
 
-export default Cartelera
+export default PeliculasRecomendadas

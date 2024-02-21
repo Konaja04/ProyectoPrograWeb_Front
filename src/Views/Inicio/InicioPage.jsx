@@ -1,11 +1,11 @@
 import './InicioPage.css';
 import { Link } from 'react-router-dom';
-import { TextField, Container, Typography, Box, Popover, Button } from '@mui/material';
+import { TextField, Container, Box, Popover } from '@mui/material';
 import { useEffect, useState } from "react";
-import CustomCarousel from '../../components/CustomCarousel';
-import Cartelera from '../../components/Cartelera';
-import PeliculasRecomendadas from '../../components/PeliculasRecomendadas';
+import CustomCarousel from './components/CustomCarousel';
 import BotView from './components/bot/botView';
+import Cartelera from './components/Cartelera';
+import PeliculasRecomendadas from './components/PeliculasRecomendadas';
 const InicioPage = () => {
 
 

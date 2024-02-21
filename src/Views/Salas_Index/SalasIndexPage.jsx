@@ -1,11 +1,11 @@
 
 import './SalasIndexPage.css';
-import Navbar from '../../components/Navbar';
-import CardViewSalas from '../../components/CardViewSalas';
+import Navbar from '../../common/Navbar';
+import CardViewSalas from './components/CardViewSalas';
 import Grid from '@mui/material/Grid';
 import { Container, TextField } from '@mui/material/';
 import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const SalasIndexPage = () => {
 

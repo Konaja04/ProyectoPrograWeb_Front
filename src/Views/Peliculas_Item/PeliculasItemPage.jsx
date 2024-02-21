@@ -1,10 +1,10 @@
 import './PeliculasItemPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBar from '../../components/Navbar'
+import NavBar from '../../common/Navbar'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import SinopsisMovie from '../../components/SinopsisMovie';
-import ListaSalaDisponible from '../../components/ListaSalaDisponible';
+import SinopsisMovie from './components/SinopsisMovie';
+import ListaSalaDisponible from './components/ListaSalaDisponible';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 
 const obtenerSalasRandom = (lista, cantidad) => {
@@ -24,15 +24,9 @@ const PeliculasItemPage = () => {
     const { path } = useParams();
     const [pelicula, setDataPelicula] = useState({})
     const [salas, setDataSalas] = useState([])
-
-    const navigate = useNavigate();
-
-    const realizarReserva = (sala, horario) => {
-        navigate("/reserva/" + sala.ID + "/" + pelicula.id + "/" + horario)
-    }
     const obtenerData = async () => {
 
-        const responseSalas = await fetch("https://raw.githubusercontent.com/ulima-pw/data-20240/main/salasv2.json")
+        const responseSalas = await fetch("http://localhost:3000/data_json/salas_data.json")
         const responsePelis = await fetch("https://raw.githubusercontent.com/ulima-pw/data-20240/main/peliculas_limpio.json")
         const dataSalas = await responseSalas.json()
         const dataPelis = await responsePelis.json()
@@ -46,14 +40,13 @@ const PeliculasItemPage = () => {
         obtenerData()
     }, [])
     useEffect(() => {
-        // Load Disqus when the component mounts
         const loadDisqus = () => {
             if (window.DISQUS) {
                 window.DISQUS.reset({
                     reload: true,
                     config: function () {
-                        this.page.identifier = pelicula.id; // Replace 'pelicula.id' with your unique identifier
-                        this.page.url = window.location.href; // URL of the page
+                        this.page.identifier = pelicula.id;
+                        this.page.url = window.location.href;
                     },
                 });
             } else {
@@ -65,8 +58,6 @@ const PeliculasItemPage = () => {
         };
 
         loadDisqus();
-
-        // Cleanup Disqus when the component unmounts
         return () => {
             const disqusThread = document.getElementById("disqus_thread");
             if (disqusThread) {
@@ -75,7 +66,7 @@ const PeliculasItemPage = () => {
                 }
             }
         };
-    }, [pelicula]);
+    }, []);
 
 
     return <div>
@@ -91,8 +82,8 @@ const PeliculasItemPage = () => {
                         <p class="image-logo-ubicacion">{pelicula.year}</p>
 
                     </div>
-                    <SinopsisMovie />
-                    <ListaSalaDisponible />
+                    <SinopsisMovie pelicula={pelicula} />
+                    <ListaSalaDisponible salas={salas} pelicula={pelicula} />
                     < div id="disqus_thread" ></div >
 
 

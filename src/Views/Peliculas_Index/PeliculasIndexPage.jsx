@@ -6,8 +6,8 @@ import {
     Pagination,
 } from "@mui/material";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar";
-import CardView from "../../components/CardView";
+import Navbar from "../../common/Navbar";
+import CardView from "../../common/CardView";
 
 const PeliculasIndexPage = () => {
     const { page } = useParams();
@@ -15,7 +15,6 @@ const PeliculasIndexPage = () => {
     const num_pelis = 30;
     const [peliculas, setDataPeliculas] = useState([]);
     const [paginas, setPaginas] = useState();
-    const [num_pelis_total, setNumPelisTotal] = useState();
     const [busqueda, setBusqueda] = useState("");
     const navigate = useNavigate();
 
@@ -35,13 +34,12 @@ const PeliculasIndexPage = () => {
 
 
         const filteredPeliculas = busqueda ? data.filter((pelicula) =>
-        (pelicula.title.toLowerCase().includes(busqueda.toLowerCase()) ||
+        (
+            pelicula.title.toLowerCase().includes(busqueda.toLowerCase()) ||
             pelicula.genres.map((genero) => (genero.toLowerCase())).includes(busqueda.toLowerCase()) ||
             pelicula.year.toString().toLowerCase().includes(busqueda.toLowerCase())
         )
         ) : data;
-
-        setNumPelisTotal(filteredPeliculas.length);
         setPaginas(Math.ceil(filteredPeliculas.length / num_pelis));
         setDataPeliculas(
             filteredPeliculas.slice(
