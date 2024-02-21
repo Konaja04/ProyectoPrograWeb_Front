@@ -39,6 +39,7 @@ const BotView = () => {
     };
 
     const handleSendMessage = () => {
+
         if (inputText.trim() !== '') {
             const userMessage = { author: 'user', text: inputText };
             setMessages([...messages, userMessage]);
@@ -74,17 +75,15 @@ const BotView = () => {
 };
 
 const Message = ({ author, text }) => {
+
     const renderTextWithLinks = (text) => {
-        // Asegúrate de que text sea un string
         if (typeof text !== 'string') {
-            console.error('renderTextWithLinks: Expected a string, got', typeof text);
-            return null; // O puedes devolver un string vacío o algún otro valor por defecto
+            text = text.toString()
         }
 
         const urlRegex = /(\bhttps?:\/\/\S+)/ig;
         return text.split(' ').map((word, index) => {
             if (urlRegex.test(word)) {
-                // Asegúrate de que word sea un string antes de llamar a substring
                 const displayText = typeof word === 'string' ? word.substring(0, Math.min(word.length, 30)) : '';
                 return (
                     <span key={index}>
@@ -105,7 +104,7 @@ const Message = ({ author, text }) => {
             p={2}
             mb={1}
             borderRadius={5}
-            width="60%" // Establece el ancho al 33.33% del contenedor padre
+            width="60%"
             bgcolor={author === 'bot' ? 'primary.main' : 'info.light'}
             color={author === 'bot' ? 'primary.contrastText' : 'textPrimary'}
             boxShadow={3}
