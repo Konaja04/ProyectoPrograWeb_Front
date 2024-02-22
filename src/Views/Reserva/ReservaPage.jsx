@@ -1,7 +1,7 @@
 import './ReservaPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../../common/Navbar'
-import { TextField, Button, Modal, Box, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
+import { Modal, Box } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 //Linea Paso-Paso
@@ -10,13 +10,14 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
 //Icons
-import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
-import InputAdornment from '@mui/material/InputAdornment';
-import PersonIcon from '@mui/icons-material/Person';
-import EmailIcon from '@mui/icons-material/Email';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
-//paypal
-import PaymentForm from './components/PaymentForm';
+
+
+//Pasos
+import UsuarioStep from './components/UsuarioStep';
+import EntradasStep from './components/EntradasStep';
+import AsientosStep from './components/AsientosStep';
+import PagoStep from './components/PagoStep';
 
 
 const product = {
@@ -26,8 +27,23 @@ const clientId = "AWDCMzDPFw-IKStz4P6NM9DKSvQUoFaXScky6_gLaA7DLdrf7nUP0iCGJistG-
 
 const steps = ['USUARIO', 'ENTRADAS', 'ASIENTOS', 'PAGO'];
 
+
 const ReservaPage = () => {
 
+    const obtenerData = async () => {
+
+        const responseSalas = await fetch("https://raw.githubusercontent.com/ulima-pw/data-20240/main/salasv2.json")
+        const responsePelis = await fetch("https://raw.githubusercontent.com/ulima-pw/data-20240/main/peliculas_limpio.json")
+        const dataSalas = await responseSalas.json()
+        const dataPelis = await responsePelis.json()
+        setDataSala(dataSalas.filter((sala) => {
+            return sala.ID == sala_ID
+        })[0])
+        setDataPeli(dataPelis.filter((peli) => {
+            return peli.id == peli_id
+        })[0])
+
+    }
     const name = sessionStorage.getItem("name");
     const lastname = sessionStorage.getItem("lastname");
     const username = sessionStorage.getItem("username");
@@ -36,12 +52,21 @@ const ReservaPage = () => {
     const { sala_ID, peli_id, horario } = useParams();
     const [openModal, setOpenModal] = useState(false);
 
+
+
     const [formData, setFormData] = useState({
         nombre: name || '',
         apellido: lastname || '',
         codigo: username || '',
         cantidad: '',
     });
+    const areFieldsFilled = () => {
+        if (activeStep === 0) {
+            return formData.nombre && formData.apellido && formData.codigo && !formData.nombreError && !formData.apellidoError;
+        } else if (activeStep === 1) {
+            return formData.cantidad && !formData.cantidadError;
+        }
+    };
     const [sala, setDataSala] = useState({})
     const [peli, setDataPeli] = useState({})
     const [cantidadAsientosSeleccionados, setCantidadAsientosSeleccionados] = useState(0);
@@ -70,23 +95,9 @@ const ReservaPage = () => {
         setOpenModal(false); //cierra el resultado
     };
 
-    const obtenerData = async () => {
-
-        const responseSalas = await fetch("https://raw.githubusercontent.com/ulima-pw/data-20240/main/salasv2.json")
-        const responsePelis = await fetch("https://raw.githubusercontent.com/ulima-pw/data-20240/main/peliculas_limpio.json")
-        const dataSalas = await responseSalas.json()
-        const dataPelis = await responsePelis.json()
-        setDataSala(dataSalas.filter((sala) => {
-            return sala.ID === sala_ID
-        })[0])
-        setDataPeli(dataPelis.filter((peli) => {
-            return peli.id === peli_id
-        })[0])
-
-    }
     useEffect(() => {
         obtenerData()
-    },)
+    }, [])
 
     //Line
     const [activeStep, setActiveStep] = React.useState(0);
@@ -120,13 +131,6 @@ const ReservaPage = () => {
         setActiveStep(0);
     };
 
-    const areFieldsFilled = () => {
-        if (activeStep === 0) {
-            return formData.nombre && formData.apellido && formData.codigo && !formData.nombreError && !formData.apellidoError;
-        } else if (activeStep === 1) {
-            return formData.cantidad && !formData.cantidadError;
-        }
-    };
 
     const handleReservar = () => {
         reservarAsientos();
@@ -175,10 +179,6 @@ const ReservaPage = () => {
             });
         });
         setSillasReservadas(sillasReservadas);
-
-
-        // ENVIA sillasReservadas al backend como JSON
-        //const jsonSillasReservadas = JSON.stringify(sillasReservadas);
         console.log('Sillas reservadas:', sillasReservadas);
 
     };
@@ -266,397 +266,58 @@ const ReservaPage = () => {
                             </div>
 
                             {activeStep === 0 && (
-
-                                <div className='col-md-12 d-flex flex-column align-items-center'>
-                                    <div className='row w-100 justify-content-center'>
-
-                                        <div className='col-md-12 formulario'>
-                                            <h5>
-                                                1. USUARIO
-                                            </h5>
-                                            <h6 style={{ color: 'gray' }}>
-                                                Si no has ingresado haslo ahora.
-                                            </h6>
-                                            <hr />
-                                            <form className='form-group'>
-                                                <Box
-                                                    component="form"
-                                                    sx={{
-                                                        '& .MuiTextField-root': { m: 1, width: '25ch' },
-                                                    }}
-                                                    noValidate
-                                                    autoComplete="off"
-                                                >
-                                                    <div className="form-group">
-
-                                                        <TextField
-                                                            error={Boolean(formData.nombreError)}
-                                                            helperText={formData.nombreError}
-                                                            margin="normal"
-                                                            required
-                                                            fullWidth
-                                                            id="nombre"
-                                                            label="Nombre"
-                                                            name="nombre"
-                                                            autoComplete="nombre"
-                                                            autoFocus
-                                                            value={formData.nombre}
-                                                            onChange={handleInputChange}
-                                                            type="text"
-                                                            inputProps={{ pattern: "[A-Za-z\s]+", title: "Solo se permiten caracteres de texto" }}
-                                                            InputProps={{
-                                                                startAdornment: (
-                                                                    <InputAdornment position="start">
-                                                                        <PersonIcon />
-                                                                    </InputAdornment>
-                                                                ),
-                                                            }}
-                                                        />
-                                                    </div>
-                                                    <div className="form-group">
-                                                        <TextField
-                                                            error={Boolean(formData.apellidoError)}
-                                                            helperText={formData.apellidoError}
-                                                            margin="normal"
-                                                            required
-                                                            fullWidth
-                                                            id="apellido"
-                                                            label="Apellido"
-                                                            name="apellido"
-                                                            autoComplete="apellido"
-                                                            autoFocus
-                                                            value={formData.apellido}
-                                                            onChange={handleInputChange}
-                                                            type="text"
-                                                            inputProps={{ pattern: "[A-Za-z\s]+", title: "Solo se permiten caracteres de texto" }} // Permitir solo caracteres de texto
-                                                            InputProps={{
-                                                                startAdornment: (
-                                                                    <InputAdornment position="start">
-                                                                        <PersonIcon />
-                                                                    </InputAdornment>
-                                                                ),
-                                                            }}
-                                                        />
-                                                    </div>
-                                                    <div className="form-group">
-                                                        <TextField
-                                                            margin="normal"
-                                                            required
-                                                            fullWidth
-                                                            id="codigo"
-                                                            label="Código"
-                                                            name="codigo"
-                                                            autoComplete="codigo"
-                                                            autoFocus
-                                                            type="text"
-                                                            value={formData.codigo}
-                                                            onChange={handleInputChange}
-                                                            InputProps={{
-                                                                startAdornment: (
-                                                                    <InputAdornment position="start">
-                                                                        <EmailIcon />
-                                                                    </InputAdornment>
-                                                                ),
-                                                            }}
-                                                        />
-
-                                                    </div>
-                                                </Box>
-                                            </form>
-                                            {activeStep === steps.length ? (
-                                                <React.Fragment>
-                                                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                                                        <Box sx={{ flex: '1 1 auto' }} />
-                                                        <Button onClick={handleReset}>Volver</Button>
-                                                    </Box>
-                                                </React.Fragment>
-                                            ) : (
-                                                <React.Fragment>
-                                                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                                                        <Button
-                                                            color="inherit"
-                                                            disabled={activeStep === 0}
-                                                            onClick={handleBack}
-                                                            sx={{ mr: 1 }}
-                                                        >
-                                                            Volver
-                                                        </Button>
-                                                        <Box sx={{ flex: '1 1 auto' }} />
-                                                        <Button
-                                                            onClick={handleNext}
-                                                            disabled={!areFieldsFilled()}
-                                                        >
-                                                            {activeStep === steps.length - 1 ? null : 'Siguiente'}
-                                                        </Button>
-                                                    </Box>
-                                                </React.Fragment>
-                                            )}
-                                        </div>
-                                    </div>
-
-                                </div>
+                                <UsuarioStep
+                                    formData={formData}
+                                    handleInputChange={handleInputChange}
+                                    activeStep={activeStep}
+                                    steps={steps}
+                                    handleReset={handleReset}
+                                    handleBack={handleBack}
+                                    handleNext={handleNext}
+                                    areFieldsFilled={areFieldsFilled}
+                                />
                             )}
 
                             {activeStep === 1 && (
 
-                                <div className='col-md-12 d-flex flex-column align-items-center'>
-                                    <div className='row w-100 justify-content-center'>
-
-                                        <div className='col-md-12 formulario'>
-                                            <h5>
-                                                2. ENTRADAS
-                                            </h5>
-                                            <form className=''>
-
-                                                <h6 style={{ color: 'gray' }}>
-                                                    Ingresa la cantidad de entradas.
-                                                </h6>
-                                                <hr />
-                                                <div className="row align-items-start">
-
-                                                    <div className="col-lg-5">
-                                                        <img src='https://enlima.pe/sites/default/files/venta-indiscreta-cine-universidad-lima.jpg' style={{
-                                                            width: '200px',
-                                                            float: 'left',
-                                                            borderRadius: '10px'
-                                                        }} />
-                                                    </div>
-                                                    <div className="col-lg-6">
-                                                        <div className="form-group" style={{ marginTop: '20px', display: 'flex', alignItems: 'center' }}>
-                                                            <TextField
-                                                                error={Boolean(formData.cantidadError)}
-                                                                helperText={formData.cantidadError}
-                                                                margin="normal"
-                                                                required
-                                                                fullWidth
-                                                                id="cantidad"
-                                                                label="Cantidad"
-                                                                name="cantidad"
-                                                                autoComplete="cantidad"
-                                                                autoFocus
-                                                                value={formData.cantidad}
-                                                                onChange={handleInputChange}
-                                                                type="number"
-                                                                inputProps={{ min: "1", max: "10" }}
-                                                                InputProps={{
-                                                                    startAdornment: (
-                                                                        <InputAdornment position="start">
-                                                                            <ConfirmationNumberIcon />
-                                                                        </InputAdornment>
-                                                                    ),
-                                                                }}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    {activeStep === steps.length ? (
-                                                        <React.Fragment>
-                                                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                                                                <Box sx={{ flex: '1 1 auto' }} />
-                                                                <Button onClick={handleReset}>Volver</Button>
-                                                            </Box>
-                                                        </React.Fragment>
-                                                    ) : (
-                                                        <React.Fragment>
-                                                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                                                                <Button
-                                                                    color="inherit"
-                                                                    disabled={activeStep === 0}
-                                                                    onClick={handleBack}
-                                                                    sx={{ mr: 1 }}
-                                                                >
-                                                                    Volver
-                                                                </Button>
-                                                                <Box sx={{ flex: '1 1 auto' }} />
-
-                                                                <Button
-                                                                    onClick={handleNext}
-                                                                    disabled={!areFieldsFilled()}
-                                                                >
-                                                                    {activeStep === steps.length - 1 ? null : 'Siguiente'}
-                                                                </Button>
-                                                            </Box>
-                                                        </React.Fragment>
-                                                    )}
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                                <EntradasStep
+                                    formData={formData}
+                                    handleInputChange={handleInputChange}
+                                    activeStep={activeStep}
+                                    steps={steps}
+                                    handleReset={handleReset}
+                                    handleBack={handleBack}
+                                    handleNext={handleNext}
+                                    areFieldsFilled={areFieldsFilled}
+                                />
 
                             )}
                             {activeStep === 2 && (
 
-                                <div className='col-md-12 d-flex flex-column align-items-center'>
-                                    <div className='row w-100 justify-content-center'>
-
-                                        <div className='col-md-12 formulario'>
-                                            <h5>
-                                                3. ASIENTOS
-                                            </h5>
-                                            <form className=''>
-
-                                                <h6 style={{ color: 'gray' }}>
-                                                    Selecciona tus asientos.
-                                                </h6>
-                                                <hr />
-
-                                                <img src="https://cinemarkla.modyocdn.com/uploads/59905513-95b1-4e8a-8f7c-1b2547c285f9/original/screen.png"
-                                                    style={{
-                                                        width: '90%',
-                                                        display: 'block',
-                                                        margin: 'auto',
-                                                        paddingBottom: '25px',
-                                                    }}
-                                                />
-                                                <div className="d-flex align-items-center" >
-                                                    <TableContainer>
-                                                        <Table className="tabla-asientos" aria-label="simple table">
-                                                            <TableBody>
-                                                                {[...Array(14)].map((_, rowIndex) => (
-                                                                    <TableRow key={rowIndex}>
-                                                                        {[...Array(6)].map((_, colIndex) => (
-                                                                            <TableCell key={colIndex}>
-                                                                                <Button
-                                                                                    variant="outlined"
-                                                                                    id="asiento-disponible"
-                                                                                    style={{
-                                                                                        backgroundColor: esAsientoReservado(rowIndex, colIndex) ? 'red' : (asientos[rowIndex][colIndex] === 'disponible' ? 'gray' : '#5C8374'),
-                                                                                        border: 'none',
-                                                                                        borderTopLeftRadius: '10px',
-                                                                                        borderTopRightRadius: '10px',
-                                                                                    }}
-                                                                                    onClick={() => cambiarEstadoAsiento(rowIndex, colIndex)}
-                                                                                >
-                                                                                    {String.fromCharCode(65 + rowIndex) + (colIndex + 1)}
-                                                                                </Button>
-                                                                            </TableCell>
-                                                                        ))}
-                                                                    </TableRow>
-                                                                ))}
-                                                            </TableBody>
-                                                        </Table>
-                                                    </TableContainer>
-
-                                                    <div style={{ width: '60px' }}></div>
-
-                                                    <TableContainer>
-                                                        <Table className="tabla-asientos" aria-label="simple table">
-                                                            <TableBody>
-                                                                {[...Array(14)].map((_, rowIndex) => (
-                                                                    <TableRow key={rowIndex}>
-                                                                        {[...Array(6)].map((_, colIndex) => (
-                                                                            <TableCell key={colIndex}>
-                                                                                <Button
-                                                                                    variant="outlined"
-                                                                                    id="asiento-disponible"
-                                                                                    style={{
-                                                                                        backgroundColor: esAsientoReservado(rowIndex, colIndex + 6) ? 'red' : (asientos[rowIndex][colIndex + 6] === 'disponible' ? 'gray' : '#5C8374'),
-                                                                                        border: 'none',
-                                                                                        borderTopLeftRadius: '10px',
-                                                                                        borderTopRightRadius: '10px',
-                                                                                    }}
-                                                                                    onClick={() => cambiarEstadoAsiento(rowIndex, colIndex + 6)}
-                                                                                >
-                                                                                    {String.fromCharCode(65 + rowIndex) + (colIndex + 7)}
-                                                                                </Button>
-                                                                            </TableCell>
-                                                                        ))}
-                                                                    </TableRow>
-                                                                ))}
-                                                            </TableBody>
-                                                        </Table>
-                                                    </TableContainer>
-                                                </div>
-
-                                                {activeStep === steps.length ? (
-                                                    <React.Fragment>
-                                                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                                                            <Box sx={{ flex: '1 1 auto' }} />
-                                                            <Button onClick={handleReset}>Volver</Button>
-                                                        </Box>
-                                                    </React.Fragment>
-                                                ) : (
-                                                    <React.Fragment>
-                                                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                                                            <Button
-                                                                color="inherit"
-                                                                disabled={activeStep === 0}
-                                                                onClick={handleBack}
-                                                                sx={{ mr: 1 }}
-                                                            >
-                                                                Volver
-                                                            </Button>
-                                                            <Box sx={{ flex: '1 1 auto' }} />
-
-                                                            <Button
-                                                                onClick={handleNext}
-                                                                disabled={!todosAsientosSelec}
-                                                            >
-                                                                {activeStep === steps.length - 1 ? null : 'Siguiente'}
-                                                            </Button>
-                                                        </Box>
-                                                    </React.Fragment>
-                                                )}
-
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                </div>
+                                <AsientosStep
+                                    activeStep={activeStep}
+                                    steps={steps}
+                                    handleReset={handleReset}
+                                    handleBack={handleBack}
+                                    handleNext={handleNext}
+                                    asientos={asientos}
+                                    esAsientoReservado={esAsientoReservado}
+                                    cambiarEstadoAsiento={cambiarEstadoAsiento}
+                                    todosAsientosSelec={todosAsientosSelec}
+                                />
 
                             )}
                             {activeStep === 3 && (
-
-                                <div className='col-md-12 d-flex flex-column align-items-center'>
-                                    <div className='row w-100 justify-content-center'>
-
-                                        <div className='col-md-12 formulario'>
-                                            <h5>
-                                                2. PAGO
-                                            </h5>
-                                            <h6 style={{ color: 'gray' }}>
-                                                Realiza el pago.
-                                            </h6>
-                                            <hr />
-                                            <div className='botones-paypal'>
-                                                <PaymentForm product={product} clientId={clientId} />
-                                            </div>
-
-                                            <div className="form-group">
-                                                <button type="button" className="boton boton-reserva" onClick={() => { handleReservar() }}>
-                                                    Reservar
-                                                </button>
-                                            </div>
-                                            {showModal && (
-                                                <Modal
-                                                    open={true}
-                                                    onClose={handleCloseModal}
-                                                    aria-labelledby="modal-modal-title"
-                                                    aria-describedby="modal-modal-description"
-                                                >
-                                                    <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 500, backgroundColor: 'white', p: 2, borderRadius: '5px', padding: '30px' }}>
-                                                        <h2 id="modal-modal-title">Reserva confirmada</h2>
-                                                        <p id="modal-modal-description" style={{ paddingLeft: '30px', backgroundColor: '#fffaf6', border: '2px dotted #fcba92', borderRadius: '5px', color: ' #fb8e4c' }}>
-                                                            Nombre: {formData.nombre} <br />
-                                                            Apellido: {formData.apellido} <br />
-                                                            Código: {formData.codigo} <br />
-                                                            Cantidad: {formData.cantidad} pases<br />
-                                                            Asientos seleccionados: {asientosSeleccionados.join(', ')}
-                                                        </p>
-                                                        <Button
-                                                            onClick={handleCloseModal}
-                                                            sx={{ position: 'absolute', bottom: '16px', left: '375px' }}
-                                                        >
-                                                            Entendido
-                                                        </Button>
-                                                    </Box>
-                                                </Modal>
-                                            )}
-                                        </div>
-
-                                    </div>
-
-                                </div>
+                                <PagoStep
+                                    formData={formData}
+                                    product={product}
+                                    clientId={clientId}
+                                    handleReservar={handleReservar}
+                                    handleCloseModal={handleCloseModal}
+                                    Modal={Modal}
+                                    asientosSeleccionados={asientosSeleccionados}
+                                    showModal={showModal}
+                                />
 
                             )}
                             {activeStep === 4 && (

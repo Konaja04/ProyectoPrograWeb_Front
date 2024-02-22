@@ -58,7 +58,7 @@ const PeliculasRecomendadas = () => {
                     <Grid item key={index} xs={12} sm={6} md={3}>
                         <div key={index} className="cartelera-card">
                             <img className="img-peliculas-dispo"
-                                src={pelicula.thumbnail}
+                                src={pelicula.thumbnail || "ProyectoPrograWeb_Front\src\Img\pelicula_placeholder.jpg"}
                             />
                             <div className="botones-overlay">
                                 <Link to={"/pelicula/" + pelicula.path} style={{ textDecoration: 'none' }}>

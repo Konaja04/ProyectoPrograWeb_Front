@@ -1,26 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
+import { Avatar, Popover, Button, AppBar, Box } from '@mui/material';
+import { Toolbar, Typography, IconButton, Drawer, List } from '@mui/material';
+import { Divider, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import StarIcon from '@mui/icons-material/Star';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import logo from '../Img/logo.png'
 import { useNavigate } from "react-router-dom";
-import Popover from '@mui/material/Popover';
-import Button from '@mui/material/Button';
-import { Avatar } from '@mui/material';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 export default function ButtonAppBar() {
@@ -80,7 +66,7 @@ export default function ButtonAppBar() {
                 <Divider />
                 {['Películas', 'Salas'].map((text, index) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton component={Link} to={text == 'Películas' ? '/peliculas/1' : `/${text.toLowerCase()}`}>
+                        <ListItemButton component={Link} to={text === 'Películas' ? '/peliculas/1' : `/${text.toLowerCase()}`}>
                             <ListItemIcon>
                                 <StarIcon />
                             </ListItemIcon>

@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap"
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import '../../Peliculas_Item/PeliculasItemPage.css'
 import { Grid } from "@mui/material";
 import Carousel from 'react-material-ui-carousel';

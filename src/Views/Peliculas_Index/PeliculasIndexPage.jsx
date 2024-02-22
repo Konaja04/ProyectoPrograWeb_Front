@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import Navbar from "../../common/Navbar";
-import CardView from "../../common/CardView";
+import CardView from "./Components/CardView";
 
 const PeliculasIndexPage = () => {
     const { page } = useParams();

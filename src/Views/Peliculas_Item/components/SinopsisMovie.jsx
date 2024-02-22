@@ -1,13 +1,14 @@
 import { Container } from "react-bootstrap"
 import * as React from 'react';
 import Rating from '@mui/material/Rating';
+import placeholderImage from '../../../Img/pelicula_placeholder.jpg';
 
 const SinopsisMovie = (props) => {
     const pelicula = props.pelicula
     return <Container>
         <div id="sinopsis-imagen" className="row flex-column flex-lg-row">
             <div className="col d-flex justify-content-center align-items-center">
-                <img className="image-principal" src={pelicula.thumbnail} style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                <img className="image-principal" src={pelicula.thumbnail || placeholderImage} style={{ maxWidth: '100%', maxHeight: '100%' }} />
             </div>
             <div className="col">
                 <div className="card-body">
