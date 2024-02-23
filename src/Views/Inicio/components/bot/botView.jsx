@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Container, Box, Typography, TextField, Button, Link as MuiLink, IconButton } from '@mui/material';
+import { Container, Box, Typography, TextField, Button, Link as MuiLink, IconButton, Avatar } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
+import CloseIcon from '@mui/icons-material/Close';
+import SendIcon from '@mui/icons-material/Send';
 
 const initialMessages = [];
 
 const BotView = () => {
     const [messages, setMessages] = useState(initialMessages);
     const [inputText, setInputText] = useState('');
+    const [isTyping, setIsTyping] = useState(false);
+    const [isClosed, setIsClosed] = useState(false);
     const messagesEndRef = useRef(null);
 
     const scrollToBottom = () => {
@@ -22,6 +26,7 @@ const BotView = () => {
     };
 
     const enviarMensaje = async () => {
+        setIsTyping(true);
         const mensaje = {
             text: inputText,
             user_name: "Kohji"
@@ -32,6 +37,7 @@ const BotView = () => {
         });
         const data = await response.json();
         console.log(data);
+        setIsTyping(false);
         data.forEach(mensaje => {
             const newMessage = { author: 'bot', text: mensaje.body };
             setMessages((prevMessages) => [...prevMessages, newMessage]);
@@ -43,32 +49,84 @@ const BotView = () => {
         if (inputText.trim() !== '') {
             const userMessage = { author: 'user', text: inputText };
             setMessages([...messages, userMessage]);
-
             enviarMensaje(inputText);
             setInputText('');
         }
     };
 
+
+    const handleClose = () => {
+        setIsClosed(true);
+    };
+
+    if (isClosed) {
+        return null;
+    }
     return (
-        <Container width="300px">
-            <Box height="500px" overflow="auto" mb={2} p={2}>
+        <Container style={{ padding: 0, borderRadius: "40px" }}>
+
+
+            <Box
+                height="110px"
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                p={2}
+
+            >
+                <Avatar src="https://th.bing.com/th/id/R.3c231f5962d9921a2994ffee2b1d09bb?rik=ucqVj9EiHGohYw&riu=http%3a%2f%2fwww.ofuxico.com.br%2fimg%2fupload%2fnoticias%2f2012%2f08%2f09%2f146109_36.jpg&ehk=9LKFBLd1n1Lt6CG3Gn%2fwee9GJsCwfVaMlJtSyyKIbkY%3d&risl=&pid=ImgRaw&r=0"
+                    style={{ marginLeft: "15px", width: '70px', height: '70px' }} />
+                <h4 className='bot-name'> ChatYanne</h4>
+
+
+                <IconButton onClick={handleClose}>
+                    <CloseIcon />
+                </IconButton>
+            </Box>
+
+            <Box
+                paddingTop={2}
+                height="580px"
+                width="470px"
+                bgcolor="#f0f0f0"
+                overflow="auto"
+            >
                 {messages.map((message, index) => (
                     <Message key={index} author={message.author} text={message.text} />
                 ))}
                 <div ref={messagesEndRef} />
             </Box>
-            <Box display="flex" alignItems="center">
+
+
+            <Box p={2} display="flex" alignItems="center" width="100%">
                 <TextField
-                    label="Escribe un mensaje..."
-                    variant="outlined"
+                    label="Escribe tu mensaje aquí"
+                    variant="standard"
                     fullWidth
                     value={inputText}
                     onChange={handleInputChange}
                     onKeyPress={(event) => event.key === 'Enter' && handleSendMessage()}
+                    sx={{
+                        marginBottom: "10px",
+                        borderBottom: 'none',
+                        '& .MuiInput-underline:before': {
+                            borderBottom: 'none',
+                        },
+                        '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+                            borderBottom: 'none',
+                        },
+                        '& .MuiInput-underline:after': {
+                            borderBottom: 'none',
+                        },
+                    }}
                 />
-                <Button variant="contained" color="primary" onClick={handleSendMessage} sx={{ ml: 1 }}>
-                    Enviar
-                </Button>
+                <IconButton
+                    style={{ color: inputText.trim() === '' ? 'grey' : '#FA7525' }}
+                    onClick={handleSendMessage}
+                    disabled={inputText.trim() === ''}
+                >
+                    <SendIcon />
+                </IconButton>
             </Box>
         </Container>
     );
@@ -102,24 +160,26 @@ const Message = ({ author, text }) => {
     return (
         <Box
             p={2}
-            mb={1}
-            borderRadius={5}
-            width="60%"
+            margin={2}
+            borderRadius="40px"
+            width="fit-content"
             bgcolor={author === 'bot' ? 'primary.main' : 'info.light'}
-            color={author === 'bot' ? 'primary.contrastText' : 'textPrimary'}
-            boxShadow={3}
             sx={{
-                marginLeft: author === 'bot' ? '0%' : 'auto',
-                marginRight: author === 'bot' ? 'auto' : '0%',
                 wordWrap: 'break-word',
-                textAlign: 'left',
+                textAlign: author === 'user' ? 'right' : 'left',
+                marginLeft: author === 'user' ? 'auto' : 'unset',
+                borderTopLeftRadius: '22px',
+                borderTopRightRadius: '22px',
+                borderBottomLeftRadius: author === 'user' ? '22px' : '5px',
+                borderBottomRightRadius: author === 'user' ? '5px' : '22px',
+                color: author === 'user' ? 'white' : 'black',
+                backgroundColor: author === 'user' ? '#FA7525' : 'white',
             }}
         >
-            <Typography variant="body1" component="div" style={{ fontSize: '1rem' }}>
+            <Typography style={{ fontSize: '1rem' }}>
                 {renderTextWithLinks(text)}
             </Typography>
-        </Box>
+        </Box >
     );
 };
-
 export default BotView;

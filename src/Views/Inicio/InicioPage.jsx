@@ -1,6 +1,6 @@
 import './InicioPage.css';
 import { Link } from 'react-router-dom';
-import { TextField, Container, Box, Popover } from '@mui/material';
+import { TextField, Container, Box, Popover, Avatar } from '@mui/material';
 import { useEffect, useState } from "react";
 import CustomCarousel from './components/CustomCarousel';
 import BotView from './components/bot/botView';
@@ -64,9 +64,15 @@ const InicioPage = () => {
             </Container>
             <Container>
                 <div className="fixed-button">
-                    <button className="btn-round btn-primary fw-bold" onClick={handleClick}>
-                        <img src='https://th.bing.com/th/id/R.3c231f5962d9921a2994ffee2b1d09bb?rik=ucqVj9EiHGohYw&riu=http%3a%2f%2fwww.ofuxico.com.br%2fimg%2fupload%2fnoticias%2f2012%2f08%2f09%2f146109_36.jpg&ehk=9LKFBLd1n1Lt6CG3Gn%2fwee9GJsCwfVaMlJtSyyKIbkY%3d&risl=&pid=ImgRaw&r=0'></img>
-                    </button>
+
+                    <Avatar
+                        style={{ height: "70px", width: "70px" }}
+                        onClick={handleClick}
+                        className="avatar-container"
+                        src='https://th.bing.com/th/id/R.3c231f5962d9921a2994ffee2b1d09bb?rik=ucqVj9EiHGohYw&riu=http%3a%2f%2fwww.ofuxico.com.br%2fimg%2fupload%2fnoticias%2f2012%2f08%2f09%2f146109_36.jpg&ehk=9LKFBLd1n1Lt6CG3Gn%2fwee9GJsCwfVaMlJtSyyKIbkY%3d&risl=&pid=ImgRaw&r=0'>
+
+                    </Avatar>
+
                     <Popover
                         id={id}
                         open={open}
@@ -80,8 +86,13 @@ const InicioPage = () => {
                             vertical: 'bottom',
                             horizontal: 'right',
                         }}
+                        PaperProps={{
+                            sx: {
+                                borderRadius: '15px',
+                            }
+                        }}
                     >
-                        <BotView />
+                        <BotView onClose={handleClose} />
                     </Popover>
                 </div>
             </Container>

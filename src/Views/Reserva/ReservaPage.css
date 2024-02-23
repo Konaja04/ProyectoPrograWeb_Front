@@ -1,6 +1,8 @@
 body {
     margin: 0px;
     background-color: white;
+    padding-right: 0px !important;
+    overflow: visible !important;
 }
 
 .image-logo-ubicacion {
