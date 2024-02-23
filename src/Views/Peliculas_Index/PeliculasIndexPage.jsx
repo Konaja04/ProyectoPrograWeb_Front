@@ -8,6 +8,7 @@ import {
 import { Link, useParams, useNavigate } from "react-router-dom";
 import Navbar from "../../common/Navbar";
 import CardView from "./Components/CardView";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const PeliculasIndexPage = () => {
     const { page } = useParams();
@@ -16,6 +17,7 @@ const PeliculasIndexPage = () => {
     const [peliculas, setDataPeliculas] = useState([]);
     const [paginas, setPaginas] = useState();
     const [busqueda, setBusqueda] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
     const handleChange = (event, value) => {
@@ -27,8 +29,9 @@ const PeliculasIndexPage = () => {
     };
 
     const obtenerPeliculas = async () => {
+        setIsLoading(true);
         const response = await fetch(
-            "https://raw.githubusercontent.com/ulima-pw/data-20240/main/peliculas_limpio.json"
+            "http://127.0.0.1:8000/salas_cine/ver-peliculas"
         );
         const data = await response.json();
 
@@ -47,6 +50,7 @@ const PeliculasIndexPage = () => {
                 Math.min((pagina + 1) * num_pelis, filteredPeliculas.length)
             )
         );
+        setIsLoading(false);
     };
 
     useEffect(() => {
@@ -58,42 +62,48 @@ const PeliculasIndexPage = () => {
             <Navbar />
             <Container sx={{ py: 8 }} maxWidth="md">
                 <h1>Películas</h1>
-                <Grid>
-                    <TextField
-                        variant="standard"
-                        margin="normal"
-                        fullWidth
-                        placeholder="Busca por título"
-                        style={{ marginBottom: "60px" }}
-                        value={busqueda}
-                        onChange={handleSearchChange}
-                    />
-                </Grid>
-                <Grid container spacing={4}>
-                    {peliculas.map((pelicula) => (
-                        <Grid item key={pelicula.id} xs={12} sm={6} md={4}>
-                            <Link
-                                to={"/pelicula/" + pelicula.path}
-                                style={{ textDecoration: "none" }}
-                            >
-                                <CardView
-                                    data={pelicula}
-                                    type="pelicula"
-                                    imageHeight="150%"
-                                />
-                            </Link>
+                {isLoading ?
+                    <CircularProgress />
+                    :
+                    <>
+                        <Grid>
+                            <TextField
+                                variant="standard"
+                                margin="normal"
+                                fullWidth
+                                placeholder="Busca por título"
+                                style={{ marginBottom: "60px" }}
+                                value={busqueda}
+                                onChange={handleSearchChange}
+                            />
                         </Grid>
-                    ))}
-                </Grid>
-                <Grid justifyContent="center" display="flex" margin="30px">
-                    <Pagination
-                        count={paginas}
-                        page={pagina + 1}
-                        onChange={handleChange}
-                        showFirstButton
-                        showLastButton
-                    />
-                </Grid>
+                        <Grid container spacing={4}>
+                            {peliculas.map((pelicula) => (
+                                <Grid item key={pelicula.id} xs={12} sm={6} md={4}>
+                                    <Link
+                                        to={"/pelicula/" + pelicula.path}
+                                        style={{ textDecoration: "none" }}
+                                    >
+                                        <CardView
+                                            data={pelicula}
+                                            type="pelicula"
+                                            imageHeight="150%"
+                                        />
+                                    </Link>
+                                </Grid>
+                            ))}
+                        </Grid>
+                        <Grid justifyContent="center" display="flex" margin="30px">
+                            <Pagination
+                                count={paginas}
+                                page={pagina + 1}
+                                onChange={handleChange}
+                                showFirstButton
+                                showLastButton
+                            />
+                        </Grid>
+                    </>
+                }
             </Container>
         </div>
     );
