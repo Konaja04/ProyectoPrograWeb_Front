@@ -38,7 +38,7 @@ const router = createBrowserRouter([
         element: <SalasItemPage />
     },
     {
-        path: "/reserva/:sala_ID/:peli_id/:horario",
+        path: "/reserva/:funcion_id",
         element: <ReservaPage />
     },
 

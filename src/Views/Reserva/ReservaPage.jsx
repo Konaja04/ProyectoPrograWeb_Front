@@ -11,8 +11,6 @@ import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
 //Icons
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
-
-
 //Pasos
 import UsuarioStep from './components/UsuarioStep';
 import EntradasStep from './components/EntradasStep';
@@ -28,31 +26,47 @@ const clientId = "AWDCMzDPFw-IKStz4P6NM9DKSvQUoFaXScky6_gLaA7DLdrf7nUP0iCGJistG-
 const steps = ['USUARIO', 'ENTRADAS', 'ASIENTOS', 'PAGO'];
 
 
+
 const ReservaPage = () => {
+
+    const { funcion_id } = useParams();
+
+
+    const [sala, setDataSala] = useState({})
+    const [peli, setDataPeli] = useState({})
+    const [ventana, setDataVentana] = useState({})
+
+
+    const navigate = useNavigate()
+
+
 
     const obtenerData = async () => {
 
-        const responseSalas = await fetch("https://raw.githubusercontent.com/ulima-pw/data-20240/main/salasv2.json")
-        const responsePelis = await fetch("https://raw.githubusercontent.com/ulima-pw/data-20240/main/peliculas_limpio.json")
-        const dataSalas = await responseSalas.json()
-        const dataPelis = await responsePelis.json()
-        setDataSala(dataSalas.filter((sala) => {
-            return sala.ID == sala_ID
-        })[0])
-        setDataPeli(dataPelis.filter((peli) => {
-            return peli.id == peli_id
-        })[0])
+        const response = await fetch(`http://127.0.0.1:8000/salas_cine/verificar-funcion/${funcion_id}`);
+        const data = await response.json()
+
+        if (data.msg === "") {
+            setDataSala(data.data.sala)
+            setDataPeli(data.data.pelicula)
+            setDataVentana(data.data.ventana)
+        } else {
+            navigate(-1)
+        }
+
+
 
     }
+
+
     const name = sessionStorage.getItem("NOMBRE");
     const lastname = sessionStorage.getItem("APELLIDO");
     const username = sessionStorage.getItem("CORREO");
 
+    const [cantidadAsientosSeleccionados, setCantidadAsientosSeleccionados] = useState(0);
 
-    const { sala_ID, peli_id, horario } = useParams();
     const [openModal, setOpenModal] = useState(false);
 
-    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         nombre: name || '',
@@ -67,9 +81,6 @@ const ReservaPage = () => {
             return formData.cantidad && !formData.cantidadError;
         }
     };
-    const [sala, setDataSala] = useState({})
-    const [peli, setDataPeli] = useState({})
-    const [cantidadAsientosSeleccionados, setCantidadAsientosSeleccionados] = useState(0);
 
 
     const handleInputChange = (e) => {
@@ -244,7 +255,7 @@ const ReservaPage = () => {
                                 <div>
                                     <h5>Horario</h5>
                                     <p>
-                                        {`${horario.toString()} ` + 'pm'}
+                                        {`${ventana.hora}`}
                                     </p>
                                 </div>
                             </div>

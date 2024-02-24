@@ -7,8 +7,9 @@ import Carousel from 'react-material-ui-carousel';
 const ListaSalaDisponible = ({ salas, pelicula }) => {
     const navigate = useNavigate();
 
-    const realizarReserva = (sala, hour) => {
-        navigate(`/reserva/${sala.ID}/${pelicula.id}/${hour}`);
+
+    const realizarReserva = (funcion_id) => {
+        navigate(`/reserva/${funcion_id}`);
     }
 
     const salasAgrupadas = salas.reduce((rows, sala, index) => {
@@ -39,13 +40,14 @@ const ListaSalaDisponible = ({ salas, pelicula }) => {
                                         </p>
                                     </div>
                                     <div className="sala-times">
+
                                         {sala.available_times.map((available_times, index) => (
                                             <button
                                                 key={index}
                                                 className="btn-sala-A"
-                                                onClick={() => realizarReserva(sala, available_times)}
+                                                onClick={() => realizarReserva(available_times.funcion_id)}
                                             >
-                                                {available_times}
+                                                {available_times.hora}
                                             </button>
                                         ))}
                                     </div>
