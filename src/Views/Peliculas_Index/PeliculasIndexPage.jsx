@@ -5,11 +5,11 @@ import {
     TextField,
     Pagination,
     Box,
+    CircularProgress
 } from "@mui/material";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import Navbar from "../../common/Navbar";
 import CardView from "./Components/CardView";
-import CircularProgress from '@mui/material/CircularProgress';
 
 const PeliculasIndexPage = () => {
     const { page } = useParams();

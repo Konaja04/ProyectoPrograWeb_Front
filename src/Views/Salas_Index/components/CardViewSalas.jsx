@@ -19,7 +19,7 @@ const CardViewSalas = ({ data }) => {
                         variant="h7"
                         component="h7"
                     >
-                        {data.secondAddress || ("No disponible")}
+                        {data.second_address || ("No disponible")}
                     </Typography>
                 </Typography>
                 <Typography gutterBottom variant="h5" component="h2">
