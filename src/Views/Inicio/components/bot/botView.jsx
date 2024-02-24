@@ -29,7 +29,7 @@ const BotView = () => {
         setIsTyping(true);
         const mensaje = {
             text: inputText,
-            user_name: "Kohji"
+            user_name: sessionStorage.getItem("NOMBRE")
         };
         const response = await fetch("http://127.0.0.1:8000/bot/mensaje", {
             method: "post",

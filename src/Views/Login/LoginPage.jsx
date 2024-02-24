@@ -6,57 +6,88 @@ import { useNavigate } from "react-router-dom"
 import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
-    const [username, setUser] = useState("")
+    const [codigo, setCodigo] = useState("")
     const [password, setPw] = useState("")
-
-
     const [loginError, setLoginError] = useState(false)
-    const [dataUsers, setDataUsers] = useState([])
+    //const [dataUsers, setDataUsers] = useState([])
 
-    const getUsersHTTP = async () => {
-        const response = await fetch("http://localhost:3000/data_json/users.json")
-        const data = await response.json()
-        setDataUsers(data)
-    }
+    // const getUsersHTTP = async () => {
+    //     const response = await fetch("http://localhost:3000/data_json/users.json")
+    //     const data = await response.json()
+    //     setDataUsers(data)
+    // }
 
     const navigate = useNavigate()
 
     const userOnChangeHandler = (event) => {
-        setUser(event.target.value)
+        setCodigo(event.target.value)
     }
 
     const pwOnChangeHandler = (event) => {
         setPw(event.target.value)
     }
 
-    const loginOnClick = () => {
-        const user = dataUsers.find((usuario) => {
-            return usuario.username === username && usuario.password === password;
-        });
+    const loginOnClick = async () => {
+        // const user = dataUsers.find((usuario) => {
+        //     return usuario.username === username && usuario.password === password;
+        // });
 
-        if (user) {
-            // Hay por lo menos un usuario
-            const { username, name, lastname, img, codigo } = user;
-            console.log("bien");
-            sessionStorage.setItem("name", name);
-            sessionStorage.setItem("lastname", lastname);
-            sessionStorage.setItem("username", username);
-            sessionStorage.setItem("codigo", codigo);
-            sessionStorage.setItem("img", img);
+        // if (user) {
+        //     // Hay por lo menos un usuario
+        //     const { username, name, lastname, img, codigo } = user;
+        //     console.log("bien");
+        //     sessionStorage.setItem("name", name);
+        //     sessionStorage.setItem("lastname", lastname);
+        //     sessionStorage.setItem("username", username);
+        //     sessionStorage.setItem("codigo", codigo);
+        //     sessionStorage.setItem("img", img);
+
+        //     navigate("/inicio", {
+        //         state: {
+        //             username: username
+        //         }
+        //     });
+        // } else {
+        //     console.log("pocho");
+        //     setLoginError(true);
+        // }
+
+        const dataUsername = {
+            codigo: codigo,
+            password: password
+        }
+
+        const response = await fetch("http://localhost:8000/salas_cine/login-json", {
+            method: "post",
+            body: JSON.stringify(dataUsername)
+        })
+        const data = await response.json()
+
+        if (data.msg === "") {
+            // Login correcto
+            // Almacenando en localStorage
+            sessionStorage.setItem("CODIGO", codigo)
+            sessionStorage.setItem("NOMBRE", data.names)
+            sessionStorage.setItem("APELLIDO", data.last_names)
+            sessionStorage.setItem("IMG", data.img)
 
             navigate("/inicio", {
                 state: {
-                    username: username
+                    codigo: codigo
                 }
-            });
+            })
         } else {
-            console.log("pocho");
-            setLoginError(true);
+            // Login incorrecto
+            setLoginError(true)
         }
     }
 
     useEffect(() => {
-        getUsersHTTP()
+        // getUsersHTTP()
+        if (sessionStorage.getItem("CODIGO") !== null) {
+            navigate("/inicio")
+            return
+        }
     }, [])
 
     return (
@@ -76,7 +107,7 @@ const LoginPage = () => {
                                         margin="normal"
                                         fullWidth
                                         autoFocus
-                                        value={username}
+                                        value={codigo}
                                         onChange={userOnChangeHandler} />
                                 </div>
                                 <div className="row form-group">

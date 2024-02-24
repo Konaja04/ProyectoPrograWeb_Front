@@ -16,9 +16,9 @@ export default function ButtonAppBar() {
     const [state, setState] = React.useState({
         left: false,
     });
-    const name = sessionStorage.getItem("name");
-    const lastname = sessionStorage.getItem("lastname");
-    const img = sessionStorage.getItem("img");
+    const name = sessionStorage.getItem("NOMBRE");
+    const lastname = sessionStorage.getItem("APELLIDO");
+    const img = sessionStorage.getItem("IMG");
 
     const [anchorEl, setAnchorEl] = useState(null);
 
