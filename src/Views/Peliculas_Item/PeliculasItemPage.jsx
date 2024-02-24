@@ -24,21 +24,32 @@ const PeliculasItemPage = () => {
     const { path } = useParams();
     const [pelicula, setDataPelicula] = useState({})
     const [salas, setDataSalas] = useState([])
+
+    // const obtenerData = async () => {
+
+    //     const responseSalas = await fetch("http://localhost:3000/data_json/salas_data.json")
+    //     const responsePelis = await fetch("https://raw.githubusercontent.com/ulima-pw/data-20240/main/peliculas_limpio.json")
+    //     const dataSalas = await responseSalas.json()
+    //     const dataPelis = await responsePelis.json()
+    //     setDataPelicula(dataPelis.filter((pelicula) => {
+    //         return pelicula.path == path
+    //     })[0])
+    //     setDataSalas(obtenerSalasRandom(dataSalas, 8))
+
+    // }
     const obtenerData = async () => {
 
-        const responseSalas = await fetch("http://localhost:3000/data_json/salas_data.json")
-        const responsePelis = await fetch("https://raw.githubusercontent.com/ulima-pw/data-20240/main/peliculas_limpio.json")
-        const dataSalas = await responseSalas.json()
-        const dataPelis = await responsePelis.json()
-        setDataPelicula(dataPelis.filter((pelicula) => {
-            return pelicula.path == path
-        })[0])
-        setDataSalas(obtenerSalasRandom(dataSalas, 8))
+        const responsePelis = await fetch(`http://127.0.0.1:8000/salas_cine/ver-pelicula/${path}`);
+        const dataPelis = await responsePelis.json();
 
-    }
+        setDataPelicula(dataPelis);
+
+    };
+
     useEffect(() => {
-        obtenerData()
-    }, [])
+        obtenerData();
+    }, []);
+
     useEffect(() => {
         const loadDisqus = () => {
             if (window.DISQUS) {
@@ -69,29 +80,31 @@ const PeliculasItemPage = () => {
     }, []);
 
 
-    return <div>
-        <NavBar />
-        <div id="main-content">
-            <div className="container">
-                <h1 className="mt-4">Películas</h1>
-                <hr />
-                <div className='second-content'>
-                    <h1>{pelicula.title}</h1>
-                    <div id="first-part">
-                        <AccessTimeFilledIcon className="icon-time" />
-                        <p class="image-logo-ubicacion">{pelicula.year}</p>
+    return (
+        <div>
+            <NavBar />
+            <div id="main-content">
+                <div className="container">
+                    <h1 className="mt-4">Películas</h1>
+                    <hr />
+                    <div className='second-content'>
+                        <h1>{pelicula.title}</h1>
+                        <div id="first-part">
+                            <AccessTimeFilledIcon className="icon-time" />
+                            <p class="image-logo-ubicacion">{pelicula.year}</p>
+
+                        </div>
+                        <SinopsisMovie pelicula={pelicula} />
+                        <ListaSalaDisponible salas={salas} pelicula={pelicula} />
+                        < div id="disqus_thread" ></div >
+
 
                     </div>
-                    <SinopsisMovie pelicula={pelicula} />
-                    <ListaSalaDisponible salas={salas} pelicula={pelicula} />
-                    < div id="disqus_thread" ></div >
-
-
                 </div>
             </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-    </div>
+    );
 }
 
 export default PeliculasItemPage
