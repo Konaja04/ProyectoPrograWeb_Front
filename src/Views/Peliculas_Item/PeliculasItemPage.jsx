@@ -41,9 +41,11 @@ const PeliculasItemPage = () => {
 
         const responsePelis = await fetch(`http://127.0.0.1:8000/salas_cine/ver-pelicula/${path}`);
         const dataPelis = await responsePelis.json();
-
         setDataPelicula(dataPelis);
 
+        const responseSalas = await fetch(`http://127.0.0.1:8000/salas_cine/obtener_salas_disponibles/${pelicula.id}`);
+        const dataSalas = await responseSalas.json();
+        setDataSalas(dataSalas.salas_disponibles);
     };
 
     useEffect(() => {
