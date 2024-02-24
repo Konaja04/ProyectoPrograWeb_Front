@@ -1,15 +1,33 @@
 import './InicioPage.css';
 import { Link } from 'react-router-dom';
-import { TextField, Container, Box, Popover, Avatar } from '@mui/material';
+import { TextField, Container, Box, Popover, Avatar, Typography } from '@mui/material';
 import { useEffect, useState } from "react";
 import CustomCarousel from './components/CustomCarousel';
 import BotView from './components/bot/botView';
 import Cartelera from './components/Cartelera';
 import PeliculasRecomendadas from './components/PeliculasRecomendadas';
+import { Button, Modal } from 'react-bootstrap';
+import SearchModal from './components/SearchModal';
+
 const InicioPage = () => {
 
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
 
     const [anchorEl, setAnchorEl] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
+
+    const handleOpenModal = () => setOpenModal(true);
+    const handleCloseModal = () => setOpenModal(false);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -29,7 +47,6 @@ const InicioPage = () => {
         const response = await fetch("http://localhost:3000/data_json/peliculas_data.json");
         const data = await response.json();
         setPeliculas(data);
-
     }
 
     useEffect(() => {
@@ -37,6 +54,7 @@ const InicioPage = () => {
     }, []);
 
     const peliculasActuales = peliculas.slice(0, 6);
+
     return (
         <Box>
             <CustomCarousel peliculas={peliculasActuales} />
@@ -44,13 +62,17 @@ const InicioPage = () => {
                 <div className="mt-5">
                     <h6 className="text-start">Búsqueda</h6>
                     <div className="d-flex flex-column align-items-center">
-                        <TextField
-                            variant="standard"
-                            margin="normal"
-                            fullWidth
-                            placeholder="Busca por título, actores, actrices, género, etc"
-                            style={{ marginBottom: '60px' }}
-                        />
+                        <Button variant="outlined" onClick={handleOpenModal}>Busca por titulo, actores, generos lo que quieras</Button>
+                        <Modal
+                            show={openModal} // Utilizamos el prop show para controlar la visibilidad del modal
+                            onHide={handleCloseModal} // Utilizamos el prop onHide para manejar el cierre del modal
+                            centered // Centramos el modal
+                        >
+                            <Modal.Body>
+
+                                <SearchModal />
+                            </Modal.Body>
+                        </Modal>
                     </div>
                 </div>
                 <div className="d-flex justify-content-center w-100 flex-wrap mt-5">
@@ -102,4 +124,4 @@ const InicioPage = () => {
         </Box >
     );
 }
-export default InicioPage
+export default InicioPage;
