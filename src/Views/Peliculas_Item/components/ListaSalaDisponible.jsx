@@ -39,13 +39,13 @@ const ListaSalaDisponible = ({ salas, pelicula }) => {
                                         </p>
                                     </div>
                                     <div className="sala-times">
-                                        {sala.hour.map((hour, index) => (
+                                        {sala.available_times.map((available_times, index) => (
                                             <button
                                                 key={index}
                                                 className="btn-sala-A"
-                                                onClick={() => realizarReserva(sala, hour)}
+                                                onClick={() => realizarReserva(sala, available_times)}
                                             >
-                                                {hour}
+                                                {available_times}
                                             </button>
                                         ))}
                                     </div>
