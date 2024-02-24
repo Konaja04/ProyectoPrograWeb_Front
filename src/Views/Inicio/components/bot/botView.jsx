@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Box, Typography, TextField, Button, Link as MuiLink, IconButton, Avatar } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
-import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 
 const initialMessages = [];
@@ -10,7 +9,7 @@ const BotView = () => {
     const [messages, setMessages] = useState(initialMessages);
     const [inputText, setInputText] = useState('');
     const [isTyping, setIsTyping] = useState(false);
-    const [isClosed, setIsClosed] = useState(false);
+    const [isSendingMessage, setIsSendingMessage] = useState(false);
     const messagesEndRef = useRef(null);
 
     const scrollToBottom = () => {
@@ -26,7 +25,12 @@ const BotView = () => {
     };
 
     const enviarMensaje = async () => {
+        setIsSendingMessage(true);
         setIsTyping(true);
+
+
+        await new Promise(resolve => setTimeout(resolve, 500));
+
         const mensaje = {
             text: inputText,
             user_name: sessionStorage.getItem("NOMBRE")
@@ -38,9 +42,12 @@ const BotView = () => {
         const data = await response.json();
         console.log(data);
         setIsTyping(false);
+        setIsSendingMessage(false);
         data.forEach(mensaje => {
             const newMessage = { author: 'bot', text: mensaje.body };
-            setMessages((prevMessages) => [...prevMessages, newMessage]);
+            setTimeout(() => {
+                setMessages(prevMessages => [...prevMessages, newMessage]);
+            }, 500);
         });
     };
 
@@ -54,14 +61,6 @@ const BotView = () => {
         }
     };
 
-
-    const handleClose = () => {
-        setIsClosed(true);
-    };
-
-    if (isClosed) {
-        return null;
-    }
     return (
         <Container style={{ padding: 0, borderRadius: "40px" }}>
 
@@ -77,12 +76,8 @@ const BotView = () => {
                 <Avatar src="https://th.bing.com/th/id/R.3c231f5962d9921a2994ffee2b1d09bb?rik=ucqVj9EiHGohYw&riu=http%3a%2f%2fwww.ofuxico.com.br%2fimg%2fupload%2fnoticias%2f2012%2f08%2f09%2f146109_36.jpg&ehk=9LKFBLd1n1Lt6CG3Gn%2fwee9GJsCwfVaMlJtSyyKIbkY%3d&risl=&pid=ImgRaw&r=0"
                     style={{ marginLeft: "15px", width: '70px', height: '70px' }} />
                 <h4 className='bot-name'> ChatYanne</h4>
-
-
-                <IconButton onClick={handleClose}>
-                    <CloseIcon />
-                </IconButton>
             </Box>
+
 
             <Box
                 paddingTop={2}
@@ -92,8 +87,21 @@ const BotView = () => {
                 overflow="auto"
             >
                 {messages.map((message, index) => (
-                    <Message key={index} author={message.author} text={message.text} />
+                    <Message key={index} author={message.author} text={message.text} isTyping={isTyping} />
+
                 ))}
+                {isSendingMessage && (
+                    <Box
+                        p={2}
+                        margin={2}
+                        borderRadius="22px"
+                        borderBottomLeftRadius="5px"
+                        width="fit-content"
+                        bgcolor="white">
+
+                        <Typography style={{ fontSize: '1rem' }}>Escribiendo...</Typography>
+                    </Box>
+                )}
                 <div ref={messagesEndRef} />
             </Box>
 
@@ -132,8 +140,7 @@ const BotView = () => {
     );
 };
 
-const Message = ({ author, text }) => {
-
+const Message = ({ author, text, isTyping }) => {
     const renderTextWithLinks = (text) => {
         if (typeof text !== 'string') {
             text = text.toString()
@@ -157,6 +164,7 @@ const Message = ({ author, text }) => {
             return <span key={index}>{word} </span>;
         });
     };
+
     return (
         <Box
             p={2}
@@ -167,19 +175,20 @@ const Message = ({ author, text }) => {
             sx={{
                 wordWrap: 'break-word',
                 textAlign: author === 'user' ? 'right' : 'left',
-                marginLeft: author === 'user' ? 'auto' : 'unset',
+                marginLeft: author === 'user' ? 'auto' : '15px',
                 borderTopLeftRadius: '22px',
                 borderTopRightRadius: '22px',
                 borderBottomLeftRadius: author === 'user' ? '22px' : '5px',
                 borderBottomRightRadius: author === 'user' ? '5px' : '22px',
                 color: author === 'user' ? 'white' : 'black',
                 backgroundColor: author === 'user' ? '#FA7525' : 'white',
+                position: 'relative',
             }}
         >
             <Typography style={{ fontSize: '1rem' }}>
                 {renderTextWithLinks(text)}
             </Typography>
-        </Box >
+        </Box>
     );
 };
 export default BotView;
