@@ -4,6 +4,7 @@ import {
     Grid,
     TextField,
     Pagination,
+    Box,
 } from "@mui/material";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import Navbar from "../../common/Navbar";
@@ -73,7 +74,22 @@ const PeliculasIndexPage = () => {
             <Container sx={{ py: 8 }} maxWidth="md">
                 <h1>Películas</h1>
                 {isLoading ?
-                    <CircularProgress />
+                    <>
+                        <Grid>
+                            <TextField
+                                variant="standard"
+                                margin="normal"
+                                fullWidth
+                                placeholder="Busca por título"
+                                style={{ marginBottom: "60px" }}
+                                value={busqueda}
+                                onChange={handleSearchChange}
+                            />
+                        </Grid>
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh' }}>
+                            <CircularProgress />
+                        </div>
+                    </>
                     :
                     <>
                         <Grid>
