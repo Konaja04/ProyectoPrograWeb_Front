@@ -36,7 +36,7 @@ const PeliculasIndexPage = () => {
         );
         const data = await response.json();
         setDataPeliculasTotal(data)
-        setDataPeliculas(data)
+        paginar(data)
         setIsLoading(false);
     }
     const filtraPelis = () => {
@@ -47,16 +47,18 @@ const PeliculasIndexPage = () => {
             pelicula.year.toString().toLowerCase().includes(busqueda.toLowerCase())
         )
         ) : peliculasTotal;
-        setPaginas(Math.ceil(filteredPeliculas.length / num_pelis));
+        paginar(filteredPeliculas)
+    }
+    const paginar = (data) => {
+        setPaginas(Math.ceil(data.length / num_pelis));
 
         setDataPeliculas(
-            filteredPeliculas.slice(
+            data.slice(
                 pagina * num_pelis,
-                Math.min((pagina + 1) * num_pelis, filteredPeliculas.length)
+                Math.min((pagina + 1) * num_pelis, data.length)
             )
         );
     }
-
 
     useEffect(() => {
         obtenerPeliculas();
