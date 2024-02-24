@@ -7,50 +7,38 @@ import SinopsisMovie from './components/SinopsisMovie';
 import ListaSalaDisponible from './components/ListaSalaDisponible';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 
-const obtenerSalasRandom = (lista, cantidad) => {
-    const salasClon = lista.slice();
-    cantidad = Math.min(cantidad, salasClon.length);
-    const salasRandom = [];
 
-    for (let i = 0; i < cantidad; i++) {
-        const indiceRandom = Math.floor(Math.random() * salasClon.length);
-        const salaseleccionada = salasClon.splice(indiceRandom, 1)[0];
-        salasRandom.push(salaseleccionada);
-    }
-
-    return salasRandom;
-}
 const PeliculasItemPage = () => {
     const { path } = useParams();
     const [pelicula, setDataPelicula] = useState({})
     const [salas, setDataSalas] = useState([])
 
-    // const obtenerData = async () => {
 
-    //     const responseSalas = await fetch("http://localhost:3000/data_json/salas_data.json")
-    //     const responsePelis = await fetch("https://raw.githubusercontent.com/ulima-pw/data-20240/main/peliculas_limpio.json")
-    //     const dataSalas = await responseSalas.json()
-    //     const dataPelis = await responsePelis.json()
-    //     setDataPelicula(dataPelis.filter((pelicula) => {
-    //         return pelicula.path == path
-    //     })[0])
-    //     setDataSalas(obtenerSalasRandom(dataSalas, 8))
-
-    // }
     const obtenerData = async () => {
 
         const responsePelis = await fetch(`http://127.0.0.1:8000/salas_cine/ver-pelicula/${path}`);
         const dataPelis = await responsePelis.json();
         setDataPelicula(dataPelis);
 
-        const responseSalas = await fetch(`http://127.0.0.1:8000/salas_cine/obtener_salas_disponibles/${pelicula.id}`);
-        const dataSalas = await responseSalas.json();
-        setDataSalas(dataSalas.salas_disponibles);
     };
 
     useEffect(() => {
         obtenerData();
-    }, []);
+    }, [path]);
+
+    useEffect(() => {
+
+        const obtenerSalas = async () => {
+
+            const responseSalas = await fetch(`http://127.0.0.1:8000/salas_cine/obtener-salas-disponibles/${pelicula.id}/`);
+            const dataSalas = await responseSalas.json();
+            setDataSalas(dataSalas);
+
+        };
+        obtenerSalas();
+
+    }, [pelicula]);
+
 
     useEffect(() => {
         const loadDisqus = () => {
@@ -97,7 +85,9 @@ const PeliculasItemPage = () => {
 
                         </div>
                         <SinopsisMovie pelicula={pelicula} />
+
                         <ListaSalaDisponible salas={salas} pelicula={pelicula} />
+
                         < div id="disqus_thread" ></div >
 
 
