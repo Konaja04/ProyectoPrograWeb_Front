@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../../common/Navbar'
 import { Modal, Box } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 //Linea Paso-Paso
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -44,15 +44,15 @@ const ReservaPage = () => {
         })[0])
 
     }
-    const name = sessionStorage.getItem("name");
-    const lastname = sessionStorage.getItem("lastname");
-    const username = sessionStorage.getItem("username");
+    const name = sessionStorage.getItem("NOMBRE");
+    const lastname = sessionStorage.getItem("APELLIDO");
+    const username = sessionStorage.getItem("CORREO");
 
 
     const { sala_ID, peli_id, horario } = useParams();
     const [openModal, setOpenModal] = useState(false);
 
-
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         nombre: name || '',
@@ -93,6 +93,7 @@ const ReservaPage = () => {
     };
     const handleCloseModal = () => {
         setOpenModal(false); //cierra el resultado
+        navigate("/inicio")
     };
 
     useEffect(() => {
@@ -352,7 +353,7 @@ const ReservaPage = () => {
                                                         <Typography variant="body1" id="modal-modal-description" gutterBottom>
                                                             <strong>Nombre:</strong> {formData.nombre} <br />
                                                             <strong>Apellido:</strong> {formData.apellido} <br />
-                                                            <strong>Código:</strong> {formData.codigo} <br />
+                                                            <strong>Correo:</strong> {formData.codigo} <br />
                                                             <strong>Cantidad:</strong> {formData.cantidad} pases<br />
                                                             <strong>Asientos seleccionados:</strong> {asientosSeleccionados.join(', ')}
                                                         </Typography>

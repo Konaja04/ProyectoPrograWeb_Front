@@ -70,6 +70,7 @@ const LoginPage = () => {
             sessionStorage.setItem("NOMBRE", data.names)
             sessionStorage.setItem("APELLIDO", data.last_names)
             sessionStorage.setItem("IMG", data.img)
+            sessionStorage.setItem("CORREO", data.mail)
 
             navigate("/inicio", {
                 state: {

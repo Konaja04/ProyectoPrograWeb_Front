@@ -93,7 +93,7 @@ const UsuarioStep = ({
                                     required
                                     fullWidth
                                     id="codigo"
-                                    label="Código"
+                                    label="Correo"
                                     name="codigo"
                                     autoComplete="codigo"
                                     autoFocus
