@@ -4,12 +4,19 @@ import '../../Peliculas_Item/PeliculasItemPage.css'
 import { Grid } from "@mui/material";
 import Carousel from 'react-material-ui-carousel';
 
-const ListaSalaDisponible = (props) => {
+const ListaSalaDisponible = ({ salas, pelicula }) => {
     const navigate = useNavigate();
 
-    const realizarReserva = (sala, horario) => {
-        navigate("/reserva/" + sala.ID + "/" + props.pelicula.id + "/" + horario)
+    const realizarReserva = (sala, hour) => {
+        navigate(`/reserva/${sala.ID}/${pelicula.id}/${hour}`);
     }
+
+    const salasAgrupadas = salas.reduce((rows, sala, index) => {
+        if (index % 3 === 0) rows.push([]);
+        rows[rows.length - 1].push(sala);
+        return rows;
+    }, []);
+
     return (
         <Container sx={{ py: 12 }} maxWidth="md">
             <h1 id="title-salas">Salas Disponibles</h1>
@@ -19,42 +26,36 @@ const ListaSalaDisponible = (props) => {
                 animation="slide"
                 indicators={false}
             >
-                {props.salas.reduce((rows, sala, index) => {
-                    if (index % 3 === 0) rows.push([]);
-                    rows[rows.length - 1].push(
-
-                        <Grid key={index} item xs={12} sm={6} md={4}>
-                            <div className="sala-container">
-                                <img className="img-salas-dispo" src={sala.img} alt={sala.name} />
-                                <div className="sala-info">
-                                    <label className="sala-A-1">{sala.name}</label>
-                                    <p className="sala-A-2" style={{ textAlign: 'justify' }}>
-                                        {sala.description != null ? sala.description.slice(0, 150) : "No disponible"}
-                                    </p>
+                {salasAgrupadas.map((row, rowIndex) => (
+                    <Grid key={rowIndex} container spacing={4}>
+                        {row.map((sala, salaIndex) => (
+                            <Grid key={salaIndex} item xs={12} sm={6} md={4}>
+                                <div className="sala-container">
+                                    <img className="img-salas-dispo" src={sala.img} alt={sala.name} />
+                                    <div className="sala-info">
+                                        <label className="sala-A-1">{sala.name}</label>
+                                        <p className="sala-A-2" style={{ textAlign: 'justify' }}>
+                                            {sala.description != null ? sala.description.slice(0, 150) : "No disponible"}
+                                        </p>
+                                    </div>
+                                    <div className="sala-times">
+                                        {sala.available_times.map((available_times, index) => (
+                                            <button
+                                                key={index}
+                                                className="btn-sala-A"
+                                                onClick={() => realizarReserva(sala, available_times)}
+                                            >
+                                                {available_times}
+                                            </button>
+                                        ))}
+                                    </div>
                                 </div>
-                                <div className="sala-times">
-                                    {sala.available_times.map((available_time, index) => (
-                                        <button
-                                            key={index}
-                                            className="btn-sala-A"
-                                            onClick={() => realizarReserva(sala, available_time)}
-                                        >
-                                            {available_time}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        </Grid>
-                    );
-                    return rows;
-                }, []).map((row, index) => (
-                    <Grid key={index} container spacing={4}>
-                        {row}
+                            </Grid>
+                        ))}
                     </Grid>
                 ))}
             </Carousel>
-        </Container >
+        </Container>
     );
 }
-
 export default ListaSalaDisponible
