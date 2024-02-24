@@ -15,6 +15,7 @@ const PeliculasIndexPage = () => {
     const pagina = parseInt(page, 10) - 1;
     const num_pelis = 30;
     const [peliculas, setDataPeliculas] = useState([]);
+    const [peliculasTotal, setDataPeliculasTotal] = useState([]);
     const [paginas, setPaginas] = useState();
     const [busqueda, setBusqueda] = useState("");
     const [isLoading, setIsLoading] = useState(true);
@@ -34,27 +35,34 @@ const PeliculasIndexPage = () => {
             "http://127.0.0.1:8000/salas_cine/ver-peliculas"
         );
         const data = await response.json();
-
-
-        const filteredPeliculas = busqueda ? data.filter((pelicula) =>
+        setDataPeliculasTotal(data)
+        setDataPeliculas(data)
+        setIsLoading(false);
+    }
+    const filtraPelis = () => {
+        const filteredPeliculas = busqueda ? peliculasTotal.filter((pelicula) =>
         (
             pelicula.title.toLowerCase().includes(busqueda.toLowerCase()) ||
             pelicula.genres.map((genero) => (genero.toLowerCase())).includes(busqueda.toLowerCase()) ||
             pelicula.year.toString().toLowerCase().includes(busqueda.toLowerCase())
         )
-        ) : data;
+        ) : peliculasTotal;
         setPaginas(Math.ceil(filteredPeliculas.length / num_pelis));
+
         setDataPeliculas(
             filteredPeliculas.slice(
                 pagina * num_pelis,
                 Math.min((pagina + 1) * num_pelis, filteredPeliculas.length)
             )
         );
-        setIsLoading(false);
-    };
+    }
+
 
     useEffect(() => {
         obtenerPeliculas();
+    }, []);
+    useEffect(() => {
+        filtraPelis();
     }, [pagina, busqueda]);
 
     return (
