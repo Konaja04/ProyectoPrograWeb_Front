@@ -87,8 +87,23 @@ const ReservaPage = () => {
             setFormData({ ...formData, [name]: value, [`${name}Error`]: '' });
         }
     };
-
+    const enviarCorreo = async () => {
+        const dataReserva = {
+            nombre: formData.nombre,
+            apellido: formData.apellido,
+            correo: formData.codigo,
+            cantidad: formData.cantidad,
+            sala: sala.description,
+            peli: peli.title
+        }
+        console.log(dataReserva)
+        const response = await fetch("http://localhost:8000/salas_cine/enviar-correo", {
+            method: "post",
+            body: JSON.stringify(dataReserva)
+        })
+    }
     const handleFormSubmit = () => {
+        enviarCorreo()
         setOpenModal(true);
     };
     const handleCloseModal = () => {
