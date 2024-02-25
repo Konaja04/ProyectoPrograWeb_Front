@@ -1,7 +1,7 @@
 import '../ReservaPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Box, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const AsientosStep = ({
     activeStep,
@@ -10,10 +10,33 @@ const AsientosStep = ({
     handleBack,
     handleNext,
     asientos,
-    esAsientoReservado,
     cambiarEstadoAsiento,
-    todosAsientosSelec
+    todosAsientosSelec,
+    FUNCION_ID
 }) => {
+
+    const [asientosReservados, setAsientosReservados] = useState([]);
+
+
+    useEffect(() => {
+        const fetchAsientosReservados = async () => {
+            try {
+                const response = await fetch(`http://localhost:8000/salas_cine/obtener-reservas/${FUNCION_ID}`);
+                const data = await response.json();
+                setAsientosReservados(data);
+            } catch (error) {
+                console.error('Error al obtener los asientos reservados:', error);
+            }
+        };
+
+        fetchAsientosReservados();
+    }, []);
+
+    const esAsientoReservado = (fila, columna) => {
+        const nombreAsiento = `${String.fromCharCode(65 + fila)}${columna + 1}`;
+        const asientosReservadosIndividuales = asientosReservados.flatMap(reserva => reserva.asientos.split(','));
+        return asientosReservadosIndividuales.includes(nombreAsiento);
+    };
     return (
 
         <div className='col-md-12 d-flex flex-column align-items-center'>
@@ -50,12 +73,13 @@ const AsientosStep = ({
                                                             variant="outlined"
                                                             id="asiento-disponible"
                                                             style={{
-                                                                backgroundColor: esAsientoReservado(rowIndex, colIndex) ? 'red' : (asientos[rowIndex][colIndex] === 'disponible' ? 'gray' : '#5C8374'),
+                                                                backgroundColor: esAsientoReservado(rowIndex, colIndex) ? '#D04848' : (asientos[rowIndex][colIndex] === 'disponible' ? 'gray' : '#5C8374'),
                                                                 border: 'none',
                                                                 borderTopLeftRadius: '10px',
                                                                 borderTopRightRadius: '10px',
                                                             }}
                                                             onClick={() => cambiarEstadoAsiento(rowIndex, colIndex)}
+                                                            disabled={esAsientoReservado(rowIndex, colIndex)}
                                                         >
                                                             {String.fromCharCode(65 + rowIndex) + (colIndex + 1)}
                                                         </Button>

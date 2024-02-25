@@ -1,7 +1,7 @@
 import './ReservaPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../../common/Navbar'
-import { Modal, Box } from '@mui/material';
+import { Modal, Box, CircularProgress } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 //Linea Paso-Paso
@@ -29,12 +29,15 @@ const steps = ['USUARIO', 'ENTRADAS', 'ASIENTOS', 'PAGO'];
 
 const ReservaPage = () => {
 
+
+
     const { funcion_id } = useParams();
 
 
     const [sala, setDataSala] = useState({})
     const [peli, setDataPeli] = useState({})
     const [ventana, setDataVentana] = useState({})
+    const [isLoading, setIsLoading] = useState(true);
 
 
     const navigate = useNavigate()
@@ -54,7 +57,7 @@ const ReservaPage = () => {
             navigate(-1)
         }
 
-
+        setIsLoading(false)
 
     }
 
@@ -232,47 +235,60 @@ const ReservaPage = () => {
         <NavBar />
         <div>
             <div className="container">
-                <h1 className="mt-4">Reserva</h1>
+                <h1 className="title-peliculas" style={{ paddingTop: "25px" }}>Reserva</h1>
                 <hr />
                 <div>
+
+
                     <div className="row flex-column flex-lg-row">
 
                         <div className="col info-container" style={{ flex: '30%' }}>
-                            <h4 style={{ display: 'flex', justifyContent: 'center' }}>
-                                {`${peli.title}`}
-                            </h4>
-                            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                {
-                                    (peli.genres != null ? peli.genres : []).map((genero) => (
+                            {isLoading ?
+                                <>
+                                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh' }}>
+                                        <CircularProgress />
+                                    </div>
+                                </>
+                                :
+                                <>
+                                    <h4 style={{ display: 'flex', justifyContent: 'center' }}>
+                                        {`${peli.title}`}
+                                    </h4>
+                                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                        {
+                                            (peli.genres != null ? peli.genres : []).map((genero) => (
 
-                                        <label className="type-pelicula" style={{ marginleft: '0px', marginTop: '15px' }}>
-                                            {genero}
-                                        </label>
-                                    ))
-                                }
-                            </div>
-                            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                <img className="image-principal-reserva " src={peli.thumbnail} />
+                                                <label className="type-pelicula" style={{ marginleft: '0px', marginTop: '15px' }}>
+                                                    {genero}
+                                                </label>
+                                            ))
+                                        }
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <img className="image-principal-reserva " src={peli.thumbnail} />
 
-                            </div>
-                            <div>
-                                <div>
-                                    <h5>Sala</h5>
-                                    <p>
-                                        {`${sala.description} `}
-                                    </p>
-                                    <p>
-                                        {`${sala.address} `}
-                                    </p>
-                                </div>
-                                <hr />
-                                <div>
-                                    <h5>Horario</h5>
-                                    <p>
-                                        {`${ventana.hora}`}
-                                    </p>
-                                </div>
-                            </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <h5>Sala</h5>
+                                            <p>
+                                                {`${sala.description} `}
+                                            </p>
+                                            <p>
+                                                {`${sala.address} `}
+                                            </p>
+                                        </div>
+                                        <hr />
+                                        <div>
+                                            <h5>Horario</h5>
+                                            <p>
+                                                {`${ventana.hora}`}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </>
+
+                            }
                         </div>
 
 
@@ -345,6 +361,7 @@ const ReservaPage = () => {
                                     esAsientoReservado={esAsientoReservado}
                                     cambiarEstadoAsiento={cambiarEstadoAsiento}
                                     todosAsientosSelec={todosAsientosSelec}
+                                    FUNCION_ID={funcion_id}
                                 />
 
                             )}
