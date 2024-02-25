@@ -26,7 +26,9 @@ const LoginPage = () => {
     const pwOnChangeHandler = (event) => {
         setPw(event.target.value)
     }
-
+    const navigateOlvidarContraseña = () => {
+        navigate('/recuperar-password')
+    }
     const loginOnClick = async () => {
         // const user = dataUsers.find((usuario) => {
         //     return usuario.username === username && usuario.password === password;
@@ -141,7 +143,7 @@ const LoginPage = () => {
                                 </div>
                             </form>
                             <div className="text-center" style={{ fontSize: '14px', marginTop: '10px' }}>
-                                <Button variant="text">¿Olvido su contraseña?</Button>
+                                <Button variant="text" onClick={navigateOlvidarContraseña}>¿Olvido su contraseña?</Button>
                             </div>
                         </div>
                     </div>

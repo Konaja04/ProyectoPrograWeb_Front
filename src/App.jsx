@@ -7,7 +7,7 @@ import SalasIndexPage from "./Views/Salas_Index/SalasIndexPage"
 import PeliculasItemPage from "./Views/Peliculas_Item/PeliculasItemPage"
 import SalasItemPage from "./Views/Salas_Item/SalasItemPage"
 import ReservaPage from "./Views/Reserva/ReservaPage"
-
+import RecuperarPassword from './Views/RecuperarPassword/RecuperarPassword';
 const router = createBrowserRouter([
     {
         path: "/",
@@ -40,6 +40,10 @@ const router = createBrowserRouter([
     {
         path: "/reserva/:funcion_id",
         element: <ReservaPage />
+    },
+    {
+        path: "/recuperar-password",
+        element: <RecuperarPassword />
     },
 
 ])
