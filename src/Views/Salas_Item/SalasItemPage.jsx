@@ -15,7 +15,7 @@ const SalasItemPage = () => {
 
     const obtenerData = async () => {
 
-        const responseSalas = await fetch(`http://127.0.0.1:8000/peliculas_cine/ver-sala/${path}`);
+        const responseSalas = await fetch(`http://127.0.0.1:8000/salas_cine/ver-sala/${path}`);
         const dataSalas = await responseSalas.json();
         setDataSalas(dataSalas);
 
@@ -29,7 +29,7 @@ const SalasItemPage = () => {
 
         const obtenerPelis = async () => {
 
-            const responsePelis = await fetch(`http://127.0.0.1:8000/peliculas_cine/obtener-peliculas-disponibles/${salas.id}/`);
+            const responsePelis = await fetch(`http://127.0.0.1:8000/salas_cine/obtener-peliculas-disponibles/${salas.id}/`);
             const dataPelis = await responsePelis.json();
             setDataPelicula(dataPelis);
 
@@ -48,9 +48,9 @@ const SalasItemPage = () => {
                     <hr />
                     <div id="first-part">
                         <FmdGoodIcon className="icon-time" />
-                        <p className="image-logo-ubicacion">{`${salas.secondAddress}`}</p>
+                        <p className="image-logo-ubicacion">{`${salas.second_address}`}</p>
                     </div>
-                    <HistoriaSala />
+                    <HistoriaSala sala={salas} />
                     <ListaPeliculasDisponible />
                 </div>
             </div>
