@@ -144,12 +144,6 @@ export default function ButtonAppBar() {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Salas de cine ULima
                     </Typography>
-                    <StarIcon sx={{ mr: 2 }} />
-                    <StarIcon sx={{ mr: 2 }} />
-                    <StarIcon sx={{ mr: 2 }} />
-                    <StarIcon sx={{ mr: 2 }} />
-                    <StarIcon sx={{ mr: 2 }} />
-
                 </Toolbar>
             </AppBar>
             <Drawer

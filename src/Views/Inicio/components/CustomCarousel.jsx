@@ -47,9 +47,10 @@ const CustomCarousel = ({ peliculas }) => {
                                     }}
                                 >
                                     <Link to={"/pelicula/" + pelicula.path}>
-                                        <Button variant="contained" style={{ backgroundColor: 'transparent', color: 'white', border: '3px solid white', borderRadius: '10px' }}>
+                                        <button variant="contained" className='botones-overlay-comprar'
+                                        >
                                             Comprar Tickets
-                                        </Button>
+                                        </button>
                                     </Link>
                                 </Box>
 
