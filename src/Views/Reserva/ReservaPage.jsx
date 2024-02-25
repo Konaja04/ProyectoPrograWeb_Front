@@ -86,7 +86,9 @@ const ReservaPage = () => {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         if (name === 'cantidad') {
-            if (parseInt(value) > 10) {
+            if (parseInt(value) === 0) {
+                setFormData({ ...formData, [name]: value, [`${name}Error`]: 'La cantidad mínima permitida es 1' });
+            } else if (parseInt(value) > 10) {
                 setFormData({ ...formData, [name]: value, [`${name}Error`]: 'La cantidad máxima permitida es 10' });
             } else {
                 setFormData({ ...formData, [name]: value, [`${name}Error`]: '' });
