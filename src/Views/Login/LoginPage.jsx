@@ -140,7 +140,7 @@ const LoginPage = () => {
                                     </Link>
                                 </div>
                             </form>
-                            <div>
+                            <div className="text-center" style={{ fontSize: '14px', marginTop: '10px' }}>
                                 <Button variant="text">¿Olvido su contraseña?</Button>
                             </div>
                         </div>

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
+import { Grid } from '@mui/material';
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({
@@ -15,8 +16,8 @@ const RegisterPage = () => {
         img: ''
     });
     const [passwordsMatch, setPasswordsMatch] = useState(true); // Estado para verificar si las contraseñas coinciden
-    const [registrationError, setRegistrationError] = useState(false); // Estado para manejar el error de registro
-    const [registrationError2, setRegistrationError2] = useState(false);
+    const [registrationError, setRegistrationError] = useState(false); // Estado para error de registro
+    const [registrationError2, setRegistrationError2] = useState(false); // Estado para error de formato de codgio
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -57,9 +58,6 @@ const RegisterPage = () => {
         try {
             const response = await fetch("http://localhost:8000/salas_cine/register", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
                 body: JSON.stringify({
                     codigo: formData.codigo,
                     password: formData.password,
@@ -93,121 +91,116 @@ const RegisterPage = () => {
                 <div className='row w-50 justify-content-center'>
                     <div className='col-md-8 formulario'>
                         <form onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="nombre"
-                                    label="Nombre"
-                                    name="nombre"
-                                    autoComplete="nombre"
-                                    autoFocus
-                                    value={formData.nombre}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="apellidos"
-                                    label="Apellidos"
-                                    name="apellidos"
-                                    autoComplete="apellidos"
-                                    value={formData.apellidos}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="codigo"
-                                    label="Código"
-                                    name="codigo"
-                                    autoComplete="codigo"
-                                    value={formData.codigo}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="correo"
-                                    label="Correo"
-                                    name="correo"
-                                    autoComplete="correo"
-                                    value={formData.correo}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="password"
-                                    label="Contraseña"
-                                    name="password"
-                                    autoComplete="new-password"
-                                    type="password"
-                                    value={formData.password}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="confirmed_password"
-                                    label="Confirmar Contraseña"
-                                    name="confirmed_password"
-                                    autoComplete="new-password"
-                                    type="password"
-                                    value={formData.confirmed_password}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <TextField
-                                    margin="normal"
-                                    fullWidth
-                                    id="img"
-                                    label="Imagen"
-                                    name="img"
-                                    autoComplete="img"
-                                    value={formData.img}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            {/* Alerta si las contraseñas no coinciden */}
+                            <Grid container spacing={2}>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
+                                        required
+                                        id="nombre"
+                                        label="Nombre"
+                                        name="nombre"
+                                        autoComplete="nombre"
+                                        autoFocus
+                                        value={formData.nombre}
+                                        onChange={handleChange}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
+                                        required
+                                        id="apellidos"
+                                        label="Apellidos"
+                                        name="apellidos"
+                                        autoComplete="apellidos"
+                                        value={formData.apellidos}
+                                        onChange={handleChange}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
+                                        required
+                                        id="codigo"
+                                        label="Código"
+                                        name="codigo"
+                                        autoComplete="codigo"
+                                        value={formData.codigo}
+                                        onChange={handleChange}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
+                                        required
+                                        id="correo"
+                                        label="Correo"
+                                        name="correo"
+                                        autoComplete="correo"
+                                        value={formData.correo}
+                                        onChange={handleChange}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
+                                        required
+                                        id="password"
+                                        label="Contraseña"
+                                        name="password"
+                                        autoComplete="new-password"
+                                        type="password"
+                                        value={formData.password}
+                                        onChange={handleChange}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <TextField
+                                        fullWidth
+                                        required
+                                        id="confirmed_password"
+                                        label="Confirmar Contraseña"
+                                        name="confirmed_password"
+                                        autoComplete="new-password"
+                                        type="password"
+                                        value={formData.confirmed_password}
+                                        onChange={handleChange}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        fullWidth
+                                        id="img"
+                                        label="Imagen"
+                                        name="img"
+                                        autoComplete="img"
+                                        value={formData.img}
+                                        onChange={handleChange}
+                                    />
+                                </Grid>
+                            </Grid>
+                            {/* Alerta si contraseñas no coinciden */}
                             {!passwordsMatch && (
                                 <Alert severity="error" sx={{ mb: 2 }}>
                                     Las contraseñas no coinciden.
                                 </Alert>
                             )}
-                            {/* Alerta si hay un error de registro */}
+                            {/* Alerta si hay error de código */}
                             {registrationError && (
                                 <Alert severity="error" sx={{ mb: 2 }}>
                                     Verifique que el código tenga exactamente 8 dígitos.
                                 </Alert>
                             )}
-                            {/* Alerta si hay un error de registro */}
+                            {/* Alerta si hay un error de correo */}
                             {registrationError2 && (
                                 <Alert severity="error" sx={{ mb: 2 }}>
                                     Verifique que el correo tenga el formato 'codigo@aloe.ulima.edu.pe'
                                 </Alert>
                             )}
-                            <Button type="submit" variant="contained" style={{ width: '100%', backgroundColor: '#FA7525', color: 'white' }}>
+                            <Button type="submit" variant="contained" style={{ width: '100%', backgroundColor: '#FA7525', color: 'white', marginTop: '15px' }}>
                                 Registrarse
                             </Button>
-                            <div>
+                            <div className="text-center" style={{ fontSize: '14px', marginTop: '10px' }}>
                                 ¿Ya se encuentra registrado? <Link to={"/"}>Log in</Link>
                             </div>
                         </form>
