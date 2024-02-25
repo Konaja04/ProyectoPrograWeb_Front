@@ -29,7 +29,7 @@ const SinopsisMovie = (props) => {
                     }
 
                     <Rating
-                        style={{ paddingLeft: "200px" }}
+                        style={{ paddingLeft: "120px" }}
                         name="simple-controlled"
                         value={userRating !== null ? userRating : pelicula.rating}
                         onChange={handleRatingChange}
