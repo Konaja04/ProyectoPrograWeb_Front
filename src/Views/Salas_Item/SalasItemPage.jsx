@@ -51,7 +51,7 @@ const SalasItemPage = () => {
                         <p className="image-logo-ubicacion">{`${salas.second_address}`}</p>
                     </div>
                     <HistoriaSala sala={salas} />
-                    <ListaPeliculasDisponible />
+                    <ListaPeliculasDisponible pelicula={pelicula} />
                 </div>
             </div>
         </div>
