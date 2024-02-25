@@ -140,6 +140,9 @@ const LoginPage = () => {
                                     </Link>
                                 </div>
                             </form>
+                            <div>
+                                <Button variant="text">¿Olvido su contraseña?</Button>
+                            </div>
                         </div>
                     </div>
                     {

@@ -1,10 +1,75 @@
-
-import './RegisterPage.css';
-import { Link } from 'react-router-dom';
-
-import Button, { ButtonProps } from '@mui/material/Button';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
+
 const RegisterPage = () => {
+    const [formData, setFormData] = useState({
+        nombre: '',
+        apellidos: '',
+        codigo: '',
+        correo: '',
+        password: '',
+        confirmed_password: '',
+        img: ''
+    });
+    const [passwordsMatch, setPasswordsMatch] = useState(true); // Estado para verificar si las contraseñas coinciden
+    const [registrationError, setRegistrationError] = useState(false); // Estado para manejar el error de registro
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // Verifica si las contraseñas coinciden
+        if (formData.password !== formData.confirmed_password) {
+            setPasswordsMatch(false); // Actualiza el estado para mostrar la alerta
+            return; // Detiene la ejecución de la función
+        }
+
+        // Si las contraseñas coinciden y todos los campos están completos, procede con el registro
+        await registrarUsuario();
+    };
+
+    const registrarUsuario = async () => {
+        try {
+            const response = await fetch("http://localhost:8000/salas_cine/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    codigo: formData.codigo,
+                    password: formData.password,
+                    names: formData.nombre,
+                    last_names: formData.apellidos,
+                    email: formData.correo,
+                    img: formData.img
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.msg === "") {
+                console.log("Usuario registrado exitosamente");
+                navigate('/');
+            } else {
+                console.error("Error al registrar usuario:", data.msg);
+                setRegistrationError(true); // Muestra la alerta de error de registro
+            }
+        } catch (error) {
+            console.error("Error al realizar la solicitud:", error);
+        }
+    };
+
     return (
         <div className='container-fluid vertical-center-container register-page' style={{ backgroundColor: '#f8ccb4' }}>
             <div className='col-md-12 d-flex flex-column align-items-center justify-content-center vh-100'>
@@ -13,7 +78,7 @@ const RegisterPage = () => {
                 </div>
                 <div className='row w-50 justify-content-center'>
                     <div className='col-md-8 formulario'>
-                        <form className=''>
+                        <form onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <TextField
                                     margin="normal"
@@ -22,8 +87,10 @@ const RegisterPage = () => {
                                     id="nombre"
                                     label="Nombre"
                                     name="nombre"
-                                    autoComplete="nombre    "
+                                    autoComplete="nombre"
                                     autoFocus
+                                    value={formData.nombre}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="form-group">
@@ -35,10 +102,24 @@ const RegisterPage = () => {
                                     label="Apellidos"
                                     name="apellidos"
                                     autoComplete="apellidos"
-                                    autoFocus
+                                    value={formData.apellidos}
+                                    onChange={handleChange}
                                 />
                             </div>
-                            <div className="inputCorreo-group">
+                            <div className="form-group">
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="codigo"
+                                    label="Código"
+                                    name="codigo"
+                                    autoComplete="codigo"
+                                    value={formData.codigo}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="form-group">
                                 <TextField
                                     margin="normal"
                                     required
@@ -47,7 +128,8 @@ const RegisterPage = () => {
                                     label="Correo"
                                     name="correo"
                                     autoComplete="correo"
-                                    autoFocus
+                                    value={formData.correo}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="form-group">
@@ -58,8 +140,10 @@ const RegisterPage = () => {
                                     id="password"
                                     label="Contraseña"
                                     name="password"
-                                    autoComplete="password"
-                                    autoFocus
+                                    autoComplete="new-password"
+                                    type="password"
+                                    value={formData.password}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="form-group">
@@ -70,25 +154,47 @@ const RegisterPage = () => {
                                     id="confirmed_password"
                                     label="Confirmar Contraseña"
                                     name="confirmed_password"
-                                    autoComplete="confirmed_password"
-                                    autoFocus
+                                    autoComplete="new-password"
+                                    type="password"
+                                    value={formData.confirmed_password}
+                                    onChange={handleChange}
                                 />
                             </div>
-                            <Link
-                                to={"/inicio"}
-                            >
-                                <Button variant="contained" style={{ width: '100%', backgroundColor: '#FA7525', color: 'white' }}>
-                                    Ingresar
-                                </Button>
-                            </Link>
+                            <div className="form-group">
+                                <TextField
+                                    margin="normal"
+                                    fullWidth
+                                    id="img"
+                                    label="Imagen"
+                                    name="img"
+                                    autoComplete="img"
+                                    value={formData.img}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            {/* Alerta si las contraseñas no coinciden */}
+                            {!passwordsMatch && (
+                                <Alert severity="error" sx={{ mb: 2 }}>
+                                    Las contraseñas no coinciden.
+                                </Alert>
+                            )}
+                            {/* Alerta si hay un error de registro */}
+                            {registrationError && (
+                                <Alert severity="error" sx={{ mb: 2 }}>
+                                    Debe llenar los campos requeridos.
+                                </Alert>
+                            )}
+                            <Button type="submit" variant="contained" style={{ width: '100%', backgroundColor: '#FA7525', color: 'white' }}>
+                                Registrarse
+                            </Button>
+                            <div>
+                                ¿Ya se encuentra registrado? <Link to={"/"}>Log in</Link>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
-
-
         </div>
-
     );
 };
 
