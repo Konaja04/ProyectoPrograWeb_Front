@@ -8,7 +8,7 @@ import PeliculasItemPage from "./Views/Peliculas_Item/PeliculasItemPage"
 import SalasItemPage from "./Views/Salas_Item/SalasItemPage"
 import ReservaPage from "./Views/Reserva/ReservaPage"
 import ReservaUserPage from "./Views/Reserva_user/ReservaUserPage"
-
+import RecuperarPassword from './Views/RecuperarPassword/RecuperarPassword';
 const router = createBrowserRouter([
     {
         path: "/",
@@ -46,7 +46,10 @@ const router = createBrowserRouter([
         path: "/reservas/",
         element: <ReservaUserPage />
     },
-
+    {
+        path: "/recuperar-password",
+        element: <RecuperarPassword />
+    }
 
 ])
 const App = () => {
