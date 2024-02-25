@@ -16,6 +16,7 @@ const RegisterPage = () => {
     });
     const [passwordsMatch, setPasswordsMatch] = useState(true); // Estado para verificar si las contraseñas coinciden
     const [registrationError, setRegistrationError] = useState(false); // Estado para manejar el error de registro
+    const [registrationError2, setRegistrationError2] = useState(false);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -32,6 +33,19 @@ const RegisterPage = () => {
         // Verifica si las contraseñas coinciden
         if (formData.password !== formData.confirmed_password) {
             setPasswordsMatch(false); // Actualiza el estado para mostrar la alerta
+            return; // Detiene la ejecución de la función
+        }
+
+        // Verifica si el campo 'codigo' tiene exactamente 8 dígitos
+        if (formData.codigo.length !== 8 || isNaN(formData.codigo)) {
+            setRegistrationError(true); // Muestra la alerta de error
+            return; // Detiene la ejecución de la función
+        }
+
+        // Verifica si el correo tiene el formato adecuado
+        const correoPattern = /^[a-zA-Z0-9._%+-]+@aloe.ulima.edu.pe$/;
+        if (!correoPattern.test(formData.correo)) {
+            setRegistrationError2(true); // Muestra la alerta de error
             return; // Detiene la ejecución de la función
         }
 
@@ -181,7 +195,13 @@ const RegisterPage = () => {
                             {/* Alerta si hay un error de registro */}
                             {registrationError && (
                                 <Alert severity="error" sx={{ mb: 2 }}>
-                                    Debe llenar los campos requeridos.
+                                    Verifique que el código tenga exactamente 8 dígitos.
+                                </Alert>
+                            )}
+                            {/* Alerta si hay un error de registro */}
+                            {registrationError2 && (
+                                <Alert severity="error" sx={{ mb: 2 }}>
+                                    Verifique que el correo tenga el formato 'codigo@aloe.ulima.edu.pe'
                                 </Alert>
                             )}
                             <Button type="submit" variant="contained" style={{ width: '100%', backgroundColor: '#FA7525', color: 'white' }}>
