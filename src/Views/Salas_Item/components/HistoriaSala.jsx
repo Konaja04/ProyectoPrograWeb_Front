@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import ListaPeliculaDisponible from "./ListaPeliculasDisponible";
 import * as React from 'react';
-import '../Views/Salas_Item/SalasItemPage.css'
+import '../../Salas_Item/SalasItemPage.css'
 
 
 const HistoriaSala = (props) => {

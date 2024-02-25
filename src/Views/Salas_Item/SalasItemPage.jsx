@@ -3,22 +3,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../../common/Navbar'
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import HistoriaSala from '../../common/HistoriaSala';
-import ListaPeliculasDisponible from '../../common/ListaPeliculasDisponible';
+import HistoriaSala from './components/HistoriaSala';
+import ListaPeliculasDisponible from './components/ListaPeliculasDisponible';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 
 
 const SalasItemPage = () => {
     const { path } = useParams();
-    const [pelicula, setDataPelicula] = useState({})
-    const [salas, setDataSalas] = useState([])
+    const [sala, setDataSala] = useState([])
+    const [pelicula, setDataPelicula] = useState([])
 
     const obtenerData = async () => {
 
-        const responseSalas = await fetch(`http://127.0.0.1:8000/salas_cine/ver-sala/${path}`);
-        const dataSalas = await responseSalas.json();
-        setDataSalas(dataSalas);
 
+        const responseSala = await fetch(`http://127.0.0.1:8000/salas_cine/ver-sala/${path}`);
+        const dataSala = await responseSala.json();
+        setDataSala(dataSala);
     };
 
     useEffect(() => {
@@ -29,14 +29,15 @@ const SalasItemPage = () => {
 
         const obtenerPelis = async () => {
 
-            const responsePelis = await fetch(`http://127.0.0.1:8000/salas_cine/obtener-peliculas-disponibles/${salas.id}/`);
+            const responsePelis = await fetch(`http://127.0.0.1:8000/salas_cine/obtener_peliculas_disponibles/${sala.id}/`);
             const dataPelis = await responsePelis.json();
             setDataPelicula(dataPelis);
+            console.log(dataPelis)
 
         };
         obtenerPelis();
 
-    }, [pelicula]);
+    }, [sala]);
 
 
     return <div>
@@ -44,14 +45,14 @@ const SalasItemPage = () => {
         <div id="main-content">
             <div className="container pt-3">
                 <div id="second-content">
-                    <h1>{`Cine ${salas.name}`}</h1>
+                    <h1>{`Cine ${sala.name}`}</h1>
                     <hr />
                     <div id="first-part">
                         <FmdGoodIcon className="icon-time" />
-                        <p className="image-logo-ubicacion">{`${salas.second_address}`}</p>
+                        <p className="image-logo-ubicacion">{`${sala.second_address}`}</p>
                     </div>
-                    <HistoriaSala sala={salas} />
-                    <ListaPeliculasDisponible pelicula={pelicula} />
+                    <HistoriaSala sala={sala} />
+                    <ListaPeliculasDisponible peliculas={pelicula} />
                 </div>
             </div>
         </div>
