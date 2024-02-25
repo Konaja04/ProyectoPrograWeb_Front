@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Typography, Box, Button } from '@mui/material';
 import Carousel from 'react-material-ui-carousel';
 import { Link } from 'react-router-dom';
+import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
 
 const CustomCarousel = ({ peliculas }) => {
     return (
@@ -35,6 +36,8 @@ const CustomCarousel = ({ peliculas }) => {
                                     width: '100%',
                                     padding: '40px',
                                     textAlign: 'left',
+                                    color: '#fff',
+
                                 }}
                             >
                                 {pelicula.title || 'Título'}
@@ -46,12 +49,19 @@ const CustomCarousel = ({ peliculas }) => {
                                         paddingRight: '40px',
                                     }}
                                 >
-                                    <Link to={"/pelicula/" + pelicula.path}>
-                                        <button variant="contained" className='botones-overlay-comprar'
+
+
+
+                                    <Link to={"/pelicula/" + pelicula.path} style={{ textDecoration: "none" }}>
+                                        <button variant="contained" className='botones-overlay-detalles'
                                         >
-                                            Comprar Tickets
+                                            < ConfirmationNumberOutlinedIcon fontSize="large" /> Comprar
                                         </button>
                                     </Link>
+                                </Box>
+                                <Box id="extract-carrusel">
+                                    {pelicula.extract != null ? pelicula.extract.slice(0, 100) + "..." : "No disponible"}
+
                                 </Box>
 
                             </Typography>

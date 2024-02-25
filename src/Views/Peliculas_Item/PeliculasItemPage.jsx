@@ -6,12 +6,13 @@ import { useEffect, useState } from "react";
 import SinopsisMovie from './components/SinopsisMovie';
 import ListaSalaDisponible from './components/ListaSalaDisponible';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
-
+import { CircularProgress } from "@mui/material";
 
 const PeliculasItemPage = () => {
     const { path } = useParams();
     const [pelicula, setDataPelicula] = useState({})
     const [salas, setDataSalas] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
 
 
     const obtenerData = async () => {
@@ -33,6 +34,7 @@ const PeliculasItemPage = () => {
             const responseSalas = await fetch(`http://127.0.0.1:8000/salas_cine/obtener-salas-disponibles/${pelicula.id}/`);
             const dataSalas = await responseSalas.json();
             setDataSalas(dataSalas);
+            setIsLoading(false)
 
         };
         obtenerSalas();
@@ -84,10 +86,20 @@ const PeliculasItemPage = () => {
                             <p class="image-logo-ubicacion">{pelicula.year}</p>
 
                         </div>
+
                         <SinopsisMovie pelicula={pelicula} />
 
-                        <ListaSalaDisponible salas={salas} pelicula={pelicula} />
-
+                        {isLoading ?
+                            <>
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh', color: 'rgb(250, 117, 37)' }}>
+                                    <CircularProgress />
+                                </div>
+                            </>
+                            :
+                            <>
+                                <ListaSalaDisponible salas={salas} pelicula={pelicula} />
+                            </>
+                        }
                         < div id="disqus_thread" ></div >
 
 

@@ -1,8 +1,9 @@
-import { Box, CircularProgress, Grid, TextField } from "@mui/material";
+import { Box, CircularProgress, Grid, TextField, InputAdornment } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PeliculaSearchItem from "./PeliculaSearchItem";
 import SalaSearchItem from "./SalaSearchItem";
+import SearchIcon from '@mui/icons-material/Search';
 
 const SearchModal = () => {
     const [peliculasTotal, setPeliculasTotal] = useState([]);
@@ -74,18 +75,26 @@ const SearchModal = () => {
 
     return (
         <>
-            <Grid>
+            <Grid id="buscar-container-inicio">
                 <TextField
                     variant="standard"
                     margin="normal"
                     fullWidth
                     placeholder="Busca peliculas por titulo, genero, año y salas de cine"
-                    style={{ marginBottom: "60px" }}
                     value={busqueda}
                     onChange={handleSearchChange}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <SearchIcon />
+                            </InputAdornment>
+                        ),
+                        disableUnderline: true
+                    }} style={{ marginLeft: "15px" }}
+
                 />
             </Grid>
-            <Box>
+            <Box id="resultado-container" style={{ display: (peliculas.length > 0 || salas.length > 0) ? 'block' : 'none' }}>
                 {isLoading ? (
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh' }}>
                         <CircularProgress />
@@ -94,7 +103,7 @@ const SearchModal = () => {
                     <Box
                         paddingTop={2}
                         height="400px"
-                        width="470px"
+                        width="920px"
                         overflow="auto"
                     >
                         {peliculas.map((pelicula) => (

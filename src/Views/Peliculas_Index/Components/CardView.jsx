@@ -1,10 +1,17 @@
 
+import '../../Peliculas_Index/PeliculasIndexPage.css'
+
+
 import React, { useState } from 'react';
 
 import { Typography, Card, CardMedia, CardActions, CardContent, Chip, Link } from '@mui/material/';
 const CardView = ({ data }) => {
+
+
+
+
     return (
-        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+        <Card id="animation-card" sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <CardMedia
                 component="div"
                 sx={{

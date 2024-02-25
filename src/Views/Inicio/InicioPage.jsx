@@ -78,9 +78,9 @@ const InicioPage = () => {
                             </Grid>
                             <Divider orientation="vertical" flexItem className="dividerInicio" />
 
-                            <Grid item xs={4} lg={1.5} display="flex" justifyContent="right" alignItems="center">
+                            <Grid item xs={1} lg={1.5} display="flex" justifyContent="right" alignItems="center">
                                 <Button variant="outlined" onClick={handleOpenModal} className="buttonInicio">
-                                    <SearchIcon />
+                                    <SearchIcon fontSize="large" />
                                 </Button>
                             </Grid>
                         </Grid>
@@ -91,8 +91,10 @@ const InicioPage = () => {
                             show={openModal}
                             onHide={handleCloseModal}
                             centered
+                            dialogClassName="custom-modal custom-modal-dialog"
+
                         >
-                            <Modal.Body>
+                            <Modal.Body >
 
                                 <SearchModal />
                             </Modal.Body>
@@ -108,7 +110,6 @@ const InicioPage = () => {
                         onClick={handleClick}
                         className="avatar-container"
                         src='https://th.bing.com/th/id/R.3c231f5962d9921a2994ffee2b1d09bb?rik=ucqVj9EiHGohYw&riu=http%3a%2f%2fwww.ofuxico.com.br%2fimg%2fupload%2fnoticias%2f2012%2f08%2f09%2f146109_36.jpg&ehk=9LKFBLd1n1Lt6CG3Gn%2fwee9GJsCwfVaMlJtSyyKIbkY%3d&risl=&pid=ImgRaw&r=0'
-                    // src='
                     />
 
                     <Popover

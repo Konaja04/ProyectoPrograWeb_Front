@@ -11,6 +11,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import Navbar from "../../common/Navbar";
 import CardView from "./Components/CardView";
 import SearchIcon from '@mui/icons-material/Search';
+import './PeliculasIndexPage.css';
 
 const PeliculasIndexPage = () => {
     const { page } = useParams();

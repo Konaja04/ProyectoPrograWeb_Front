@@ -51,10 +51,9 @@
 }
 
 .btn-sala-A {
-    border-radius: 4px;
+    border-radius: 8px;
     background: #fbf8ff;
-    border: 2px solid #9747FF;
-    border-style: dotted;
+    border: 2px solid rgb(250, 117, 37);
 
     font-size: 0.85em;
     font-weight: 400;
@@ -62,12 +61,12 @@
     letter-spacing: 0.4000000059604645px;
     text-align: center;
 
-    color: #9747FF;
+    color: rgb(250, 117, 37);
     margin-top: 20px;
     margin-bottom: 15px;
     margin-right: 4px;
-    width: 80px;
-    height: 28px;
+    width: 85px;
+    height: 35px;
 }
 
 .image-principal-salas {

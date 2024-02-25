@@ -5,20 +5,22 @@ import { Box, Typography } from '@mui/material';
 
 const ReservaItemCard = ({ reserva }) => {
     return <>
+
         <Box display="flex" alignItems="center" mt={2}>
-            <Typography variant="h6">{`Pelicula: ${reserva.funcion.pelicula.title}`}</Typography>
-            <Box ml={2}>
+            <Typography variant="h6"> <b>Pelicula: </b> {`${reserva.funcion.pelicula.title}`}</Typography>
+            <Box ml={1}>
                 <Typography variant="h6">{`(${reserva.funcion.pelicula.year})`}</Typography>
             </Box>
         </Box>
         <hr />
         <Box display="flex" alignItems="center">
             <img src={`${reserva.funcion.pelicula.thumbnail}`}
-                style={{ width: '140px', height: '120px', marginRight: '20px', borderRadius: '10px' }} />
+                style={{ width: '80px', height: '120px', marginRight: '20px', borderRadius: '10px' }}
+            />
             <Box>
-                <Typography variant="h6">{`Fecha: ${reserva.funcion.ventana.fecha}`}</Typography>
-                <Typography variant="h6">{`Horario: ${reserva.funcion.ventana.hora}`}</Typography>
-                <Typography variant="h6">{`Entradas: ${reserva.asientos}`}</Typography>
+                <Typography variant="h6"><b>Fecha: </b>{`${reserva.funcion.ventana.fecha}`}</Typography>
+                <Typography variant="h6"><b>Horario: </b>{`${reserva.funcion.ventana.hora}`}</Typography>
+                <Typography variant="h6"><b>Entrada(s): </b>{`${reserva.asientos}`}</Typography>
 
             </Box>
         </Box>

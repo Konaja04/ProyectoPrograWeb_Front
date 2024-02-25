@@ -1,12 +1,14 @@
 import { Container } from "react-bootstrap"
 import { useNavigate } from "react-router-dom";
 import '../../Peliculas_Item/PeliculasItemPage.css'
-import { Grid } from "@mui/material";
+import { Grid, CircularProgress, Skeleton } from "@mui/material";
 import Carousel from 'react-material-ui-carousel';
+import ChairIcon from '@mui/icons-material/Chair';
+import { useEffect, useState } from "react";
+
 
 const ListaSalaDisponible = ({ salas, pelicula }) => {
     const navigate = useNavigate();
-
 
     const realizarReserva = (funcion_id) => {
         navigate(`/reserva/${funcion_id}`);
@@ -22,6 +24,7 @@ const ListaSalaDisponible = ({ salas, pelicula }) => {
         <Container sx={{ py: 12 }} maxWidth="md">
             <h1 className="title-sub-peliculas">Salas Disponibles</h1>
             <hr />
+
             <Carousel
                 autoPlay={false}
                 animation="slide"
@@ -48,6 +51,8 @@ const ListaSalaDisponible = ({ salas, pelicula }) => {
                                                 onClick={() => realizarReserva(available_times.funcion_id)}
                                             >
                                                 {available_times.hora}
+                                                <ChairIcon style={{ paddingLeft: "5px" }} />
+
                                             </button>
                                         ))}
                                     </div>
@@ -57,6 +62,7 @@ const ListaSalaDisponible = ({ salas, pelicula }) => {
                     </Grid>
                 ))}
             </Carousel>
+
         </Container>
     );
 }
