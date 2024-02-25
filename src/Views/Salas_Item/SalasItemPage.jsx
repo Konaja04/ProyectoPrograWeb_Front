@@ -3,26 +3,42 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../../common/Navbar'
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import HistoriaSala from '../../common/HistoriaSala';
-import ListaPeliculasDisponible from '../../common/ListaPeliculasDisponible';
+import HistoriaSala from './components/HistoriaSala';
+import ListaPeliculasDisponible from './components/ListaPeliculasDisponible';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 
 
 const SalasItemPage = () => {
     const { path } = useParams();
-    const [sala, setDataSala] = useState({})
+    const [sala, setDataSala] = useState([])
+    const [pelicula, setDataPelicula] = useState([])
 
-    const obtenerSala = async () => {
+    const obtenerData = async () => {
 
-        const response = await fetch("https://raw.githubusercontent.com/ulima-pw/data-20240/main/salasv2.json")
-        const data = await response.json()
-        setDataSala(data.filter((sala) => {
-            return sala.path === path
-        })[0])
-    }
+
+        const responseSala = await fetch(`http://127.0.0.1:8000/salas_cine/ver-sala/${path}`);
+        const dataSala = await responseSala.json();
+        setDataSala(dataSala);
+    };
+
     useEffect(() => {
-        obtenerSala()
-    },)
+        obtenerData();
+    }, [path]);
+
+    useEffect(() => {
+
+        const obtenerPelis = async () => {
+
+            const responsePelis = await fetch(`http://127.0.0.1:8000/salas_cine/obtener_peliculas_disponibles/${sala.id}/`);
+            const dataPelis = await responsePelis.json();
+            setDataPelicula(dataPelis);
+            console.log(dataPelis)
+
+        };
+        obtenerPelis();
+
+    }, [sala]);
+
 
     return <div>
         <NavBar />
@@ -33,10 +49,10 @@ const SalasItemPage = () => {
                     <hr />
                     <div id="first-part">
                         <FmdGoodIcon className="icon-time" />
-                        <p className="image-logo-ubicacion">{`${sala.secondAddress}`}</p>
+                        <p className="image-logo-ubicacion">{`${sala.second_address}`}</p>
                     </div>
-                    <HistoriaSala />
-                    <ListaPeliculasDisponible />
+                    <HistoriaSala sala={sala} />
+                    <ListaPeliculasDisponible peliculas={pelicula} />
                 </div>
             </div>
         </div>
