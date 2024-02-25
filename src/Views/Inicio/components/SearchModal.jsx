@@ -50,7 +50,7 @@ const SearchModal = () => {
             pelicula.genres.map((genero) => (genero.toLowerCase())).includes(busqueda.toLowerCase()) ||
             pelicula.year.toString().toLowerCase().includes(busqueda.toLowerCase())
         )
-        ) : peliculasTotal;
+        ) : [];
         setPeliculas(filteredPeliculas);
     }
 
@@ -58,10 +58,8 @@ const SearchModal = () => {
         const filteredSalas = busqueda ? salasTotal.filter((sala) =>
         (sala.name.toLowerCase().includes(busqueda.toLowerCase()) ||
             sala.second_address.toLowerCase().includes(busqueda.toLowerCase()))
-        ) : salasTotal;
-        setDataSalas(
-            filteredSalas
-        )
+        ) : [];
+        setDataSalas(filteredSalas);
     }
 
     useEffect(() => {

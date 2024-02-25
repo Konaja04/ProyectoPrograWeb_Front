@@ -23,7 +23,7 @@ const PagoStep = ({
 
                 <div className='col-md-12 formulario'>
                     <h5>
-                        2. PAGO
+                        4. PAGO
                     </h5>
                     <h6 style={{ color: 'gray' }}>
                         Realiza el pago.

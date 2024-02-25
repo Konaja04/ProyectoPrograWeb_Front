@@ -75,10 +75,10 @@ const PeliculasItemPage = () => {
             <NavBar />
             <div id="main-content">
                 <div className="container">
-                    <h1 className="mt-4">Películas</h1>
+                    <h1 className="title-primer-peliculas">Películas</h1>
                     <hr />
                     <div className='second-content'>
-                        <h1>{pelicula.title}</h1>
+                        <h1 className='title-pelicula-detalle'>{pelicula.title}</h1>
                         <div id="first-part">
                             <AccessTimeFilledIcon className="icon-time" />
                             <p class="image-logo-ubicacion">{pelicula.year}</p>

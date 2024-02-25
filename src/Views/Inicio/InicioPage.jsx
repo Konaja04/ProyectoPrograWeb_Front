@@ -1,6 +1,6 @@
 import './InicioPage.css';
 import { Link } from 'react-router-dom';
-import { TextField, Container, Box, Popover, Avatar, Typography } from '@mui/material';
+import { TextField, Container, Box, Popover, Avatar, Typography, Grid, Divider } from '@mui/material';
 import { useEffect, useState } from "react";
 import CustomCarousel from './components/CustomCarousel';
 import BotView from './components/bot/botView';
@@ -8,6 +8,7 @@ import Cartelera from './components/Cartelera';
 import PeliculasRecomendadas from './components/PeliculasRecomendadas';
 import { Button, Modal } from 'react-bootstrap';
 import SearchModal from './components/SearchModal';
+import SearchIcon from '@mui/icons-material/Search';
 
 const InicioPage = () => {
 
@@ -59,14 +60,37 @@ const InicioPage = () => {
         <Box>
             <CustomCarousel peliculas={peliculasActuales} />
             <Container style={{ marginTop: '100px' }}>
-                <div className="mt-5">
-                    <h6 className="text-start">Búsqueda</h6>
+                <div>
+                    <Box className="col inicio-container">
+                        <Grid container>
+
+                            <Grid item xs={4} lg={5} className="grid-item" display="flex" justifyContent="center" alignItems="center">
+                                <Link to="/peliculas/1" className="buttonInicio">
+                                    PELÍCULAS
+                                </Link>
+                            </Grid>
+                            <Divider orientation="vertical" flexItem className="dividerInicio" />
+
+                            <Grid item xs={4} lg={5} className="grid-item" display="flex" justifyContent="center" alignItems="center">
+                                <Link to="/salas" className="buttonInicio">
+                                    SALAS
+                                </Link>
+                            </Grid>
+                            <Divider orientation="vertical" flexItem className="dividerInicio" />
+
+                            <Grid item xs={4} lg={1.5} display="flex" justifyContent="right" alignItems="center">
+                                <Button variant="outlined" onClick={handleOpenModal} className="buttonInicio">
+                                    <SearchIcon />
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Box>
+
                     <div className="d-flex flex-column align-items-center">
-                        <Button variant="outlined" onClick={handleOpenModal}>Busca por titulo, actores, generos lo que quieras</Button>
                         <Modal
-                            show={openModal} // Utilizamos el prop show para controlar la visibilidad del modal
-                            onHide={handleCloseModal} // Utilizamos el prop onHide para manejar el cierre del modal
-                            centered // Centramos el modal
+                            show={openModal}
+                            onHide={handleCloseModal}
+                            centered
                         >
                             <Modal.Body>
 
@@ -74,14 +98,6 @@ const InicioPage = () => {
                             </Modal.Body>
                         </Modal>
                     </div>
-                </div>
-                <div className="d-flex justify-content-center w-100 flex-wrap mt-5">
-                    <Link to="/peliculas/1" className="btn btn-primary my-1 fw-bold" id="btn-movie">
-                        PELÍCULAS
-                    </Link>
-                    <Link to="/salas" className="btn btn-primary my-1 fw-bold" id="btn-hall">
-                        SALAS
-                    </Link>
                 </div>
             </Container>
             <Container>

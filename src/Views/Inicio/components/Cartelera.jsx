@@ -43,8 +43,7 @@ const Cartelera = () => {
     }, [])
 
     return <Container sx={{ py: 12 }} style={{ marginTop: '160px' }} maxWidth="md">
-        <h1 id="title-pelicuas">En cartelera</h1>
-        <hr />
+        <h1 id="title-peliculas">En cartelera</h1>
         <Carousel
             autoPlay={false}
             animation="slide"

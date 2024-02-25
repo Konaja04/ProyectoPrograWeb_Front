@@ -6,6 +6,7 @@ import { Grid } from "@mui/material";
 import Carousel from 'react-material-ui-carousel';
 import { Link } from 'react-router-dom';
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
+
 const obtenerPeliculasRandom = (lista, cantidad) => {
     const peliculasClon = lista.slice();
     cantidad = Math.min(cantidad, peliculasClon.length);
@@ -42,8 +43,7 @@ const PeliculasRecomendadas = () => {
     }, [])
 
     return <Container sx={{ py: 12 }} maxWidth="md">
-        <h1 id="title-pelicuas">Recomendados</h1>
-        <hr />
+        <h1 id="title-peliculas">Recomendados</h1>
         <Carousel
             autoPlay={false}
             animation="slide"

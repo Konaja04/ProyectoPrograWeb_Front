@@ -2,10 +2,17 @@
 import './SalasIndexPage.css';
 import Navbar from '../../common/Navbar';
 import CardViewSalas from './components/CardViewSalas';
-import Grid from '@mui/material/Grid';
-import { Container, TextField, CircularProgress } from '@mui/material/';
+import {
+    Container,
+    Grid,
+    TextField,
+    Pagination,
+    Box,
+    CircularProgress, InputAdornment
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
+import SearchIcon from '@mui/icons-material/Search';
 
 const SalasIndexPage = () => {
 
@@ -50,18 +57,26 @@ const SalasIndexPage = () => {
         <div className='salas-page'>
             <Navbar />
             <Container sx={{ py: 8 }} maxWidth="md">
-                <h1>Salas disponibles</h1>
+                <h1 id="title-peliculas">Salas disponibles</h1>
                 {isLoading ?
                     <>
-                        <Grid>
+                        <Grid id="buscar-container">
                             <TextField
                                 variant="standard"
                                 margin="normal"
                                 fullWidth
                                 placeholder="Busca por título"
-                                style={{ marginBottom: "60px" }}
                                 value={busqueda}
                                 onChange={handleSearchChange}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SearchIcon />
+                                        </InputAdornment>
+                                    ),
+                                    disableUnderline: true
+                                }} style={{ marginLeft: "15px" }}
+
                             />
                         </Grid>
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh' }}>
@@ -70,15 +85,23 @@ const SalasIndexPage = () => {
                     </>
                     :
                     <>
-                        <Grid>
+                        <Grid id="buscar-container">
                             <TextField
                                 variant="standard"
                                 margin="normal"
                                 fullWidth
-                                placeholder="Busca por sala"
-                                style={{ marginBottom: "60px" }}
+                                placeholder="Busca por título"
                                 value={busqueda}
                                 onChange={handleSearchChange}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SearchIcon />
+                                        </InputAdornment>
+                                    ),
+                                    disableUnderline: true
+                                }} style={{ marginLeft: "15px" }}
+
                             />
                         </Grid>
                         <Grid container spacing={4}>

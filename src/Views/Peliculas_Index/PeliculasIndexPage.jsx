@@ -5,11 +5,12 @@ import {
     TextField,
     Pagination,
     Box,
-    CircularProgress
+    CircularProgress, InputAdornment
 } from "@mui/material";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import Navbar from "../../common/Navbar";
 import CardView from "./Components/CardView";
+import SearchIcon from '@mui/icons-material/Search';
 
 const PeliculasIndexPage = () => {
     const { page } = useParams();
@@ -72,18 +73,26 @@ const PeliculasIndexPage = () => {
         <div className="peliculas-page">
             <Navbar />
             <Container sx={{ py: 8 }} maxWidth="md">
-                <h1>Películas</h1>
+                <h1 id="title-peliculas">Películas</h1>
                 {isLoading ?
                     <>
-                        <Grid>
+                        <Grid id="buscar-container">
                             <TextField
                                 variant="standard"
                                 margin="normal"
                                 fullWidth
-                                placeholder="Busca por título"
-                                style={{ marginBottom: "60px" }}
+                                placeholder="Buscar..."
                                 value={busqueda}
                                 onChange={handleSearchChange}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SearchIcon />
+                                        </InputAdornment>
+                                    ),
+                                    disableUnderline: true
+                                }} style={{ marginLeft: "15px" }}
+
                             />
                         </Grid>
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh' }}>
@@ -92,15 +101,24 @@ const PeliculasIndexPage = () => {
                     </>
                     :
                     <>
-                        <Grid>
+                        <Grid id="buscar-container">
                             <TextField
                                 variant="standard"
                                 margin="normal"
                                 fullWidth
-                                placeholder="Busca por título"
-                                style={{ marginBottom: "60px" }}
+                                placeholder="Buscar..."
                                 value={busqueda}
                                 onChange={handleSearchChange}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SearchIcon />
+                                        </InputAdornment>
+                                    ),
+                                    disableUnderline: true
+                                }}
+                                style={{ marginLeft: "15px" }}
+
                             />
                         </Grid>
                         <Grid container spacing={4}>

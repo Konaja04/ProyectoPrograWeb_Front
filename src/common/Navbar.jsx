@@ -8,7 +8,7 @@ import StarIcon from '@mui/icons-material/Star';
 import logo from '../Img/logo.png'
 import { useNavigate } from "react-router-dom";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-
+import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 export default function ButtonAppBar() {
 
     const navigate = useNavigate()
@@ -97,13 +97,27 @@ export default function ButtonAppBar() {
                         }}
                     >
                         <Box sx={{ p: 2 }} >
+                            <BookmarkAddedIcon />
+                            <Link to="/reservas/">
+                                <Button sx={{
+                                    width: '210px',
+                                    height: '20px',
+                                    color: 'black',
+                                    textTransform: 'none'
+                                }}>Mis reservas
+                                </Button>
+                            </Link>
+
+                        </Box>
+                        <Box sx={{ p: 2 }} >
                             <ExitToAppIcon />
                             <Button sx={{
                                 width: '210px',
                                 height: '20px',
                                 color: 'black',
                                 textTransform: 'none'
-                            }} onClick={logoutOnClick}>Cerrar sesión</Button>
+                            }} onClick={logoutOnClick}>Cerrar sesión
+                            </Button>
                         </Box>
                     </Popover>
                 </Box >

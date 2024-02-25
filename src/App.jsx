@@ -7,6 +7,7 @@ import SalasIndexPage from "./Views/Salas_Index/SalasIndexPage"
 import PeliculasItemPage from "./Views/Peliculas_Item/PeliculasItemPage"
 import SalasItemPage from "./Views/Salas_Item/SalasItemPage"
 import ReservaPage from "./Views/Reserva/ReservaPage"
+import ReservaUserPage from "./Views/Reserva_user/ReservaUserPage"
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,11 @@ const router = createBrowserRouter([
         path: "/reserva/:funcion_id",
         element: <ReservaPage />
     },
+    {
+        path: "/reservas/",
+        element: <ReservaUserPage />
+    },
+
 
 ])
 const App = () => {

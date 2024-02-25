@@ -20,7 +20,7 @@ const ListaSalaDisponible = ({ salas, pelicula }) => {
 
     return (
         <Container sx={{ py: 12 }} maxWidth="md">
-            <h1 id="title-salas">Salas Disponibles</h1>
+            <h1 className="title-sub-peliculas">Salas Disponibles</h1>
             <hr />
             <Carousel
                 autoPlay={false}
