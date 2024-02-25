@@ -4,10 +4,29 @@ import { Box, Container, Grid, Typography, Divider, Avatar } from '@mui/material
 
 //Icons
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import { useEffect, useState } from 'react';
+import ReservaItemCard from './components/ReservaItemCard';
 
 
 const ReservaUserPage = () => {
 
+    const [reservas, setDataReservas] = useState([])
+    const traerReservas = async () => {
+        const datausuario = {
+            email: sessionStorage.getItem("CORREO")
+        }
+        const response = await fetch('http://localhost:8000/salas_cine/verReservas', {
+            method: "post",
+            body: JSON.stringify(datausuario)
+        })
+
+        const data = await response.json()
+        console.log()
+        setDataReservas(data.reservas)
+    }
+    useEffect(() => {
+        traerReservas()
+    }, [])
     return (
         <div>
             <NavBar />
@@ -18,13 +37,15 @@ const ReservaUserPage = () => {
                         <Box className="col info-container" mt={2} p={2}>
                             <Typography variant="h4" align="center">Usuario</Typography>
                             <Box display="flex" justifyContent="center" mt={2}>
-                                <Avatar src="https://th.bing.com/th/id/R.3c231f5962d9921a2994ffee2b1d09bb?rik=ucqVj9EiHGohYw&riu=http%3a%2f%2fwww.ofuxico.com.br%2fimg%2fupload%2fnoticias%2f2012%2f08%2f09%2f146109_36.jpg&ehk=9LKFBLd1n1Lt6CG3Gn%2fwee9GJsCwfVaMlJtSyyKIbkY%3d&risl=&pid=ImgRaw&r=0"
-                                    style={{ width: '120px', height: '120px' }} />
+                                <Avatar
+                                    src={sessionStorage.getItem("IMG")}
+                                    style={{ width: '120px', height: '120px' }}
+                                />
                             </Box>
                             <Box mt={6} mb={60}>
-                                <Typography mt={2} variant="h5">Nombre:</Typography>
-                                <Typography mt={2} variant="h5">Apellido:</Typography>
-                                <Typography mt={2} variant="h5">Correo:</Typography>
+                                <Typography mt={2} variant="h5">{`Nombre: ${sessionStorage.getItem("NOMBRE")}`}</Typography>
+                                <Typography mt={2} variant="h5">{`Apellido: ${sessionStorage.getItem("APELLIDO")}`}</Typography>
+                                <Typography mt={2} variant="h5">{`Correo: ${sessionStorage.getItem("CORREO")}`}</Typography>
                             </Box>
                         </Box>
                     </Grid>
@@ -32,51 +53,17 @@ const ReservaUserPage = () => {
                         <Box className="col info-container" mt={2} p={2}>
                             <Typography variant="h4" align="center">Mis reservas</Typography>
                         </Box>
-
-                        <Box className="col info-container" mt={2} p={2}>
-                            <Box display="flex" alignItems="center" mt={2}>
-                                <Typography variant="h6">Nombre pelicula:</Typography>
-                                <Box ml={2}>
-                                    <Typography variant="h6">Si hay mas datos:</Typography>
+                        {
+                            reservas.map((reserva, index) => (
+                                < Box key={index} className="col info-container" mt={2} p={2} >
+                                    <ReservaItemCard reserva={reserva} />
                                 </Box>
-                            </Box>
-                            <hr />
-                            <Box display="flex" alignItems="center">
-                                <img src="https://th.bing.com/th/id/R.3c231f5962d9921a2994ffee2b1d09bb?rik=ucqVj9EiHGohYw&riu=http%3a%2f%2fwww.ofuxico.com.br%2fimg%2fupload%2fnoticias%2f2012%2f08%2f09%2f146109_36.jpg&ehk=9LKFBLd1n1Lt6CG3Gn%2fwee9GJsCwfVaMlJtSyyKIbkY%3d&risl=&pid=ImgRaw&r=0"
-                                    style={{ width: '140px', height: '120px', marginRight: '20px', borderRadius: '10px' }} />
-                                <Box>
-                                    <Typography variant="h6">Fecha:</Typography>
-                                    <Typography variant="h6">Horario:</Typography>
-                                    <Typography variant="h6">Entradas:</Typography>
-
-                                </Box>
-                            </Box>
-                        </Box>
-
-                        <Box className="col info-container" mt={2} p={2}>
-                            <Box display="flex" alignItems="center" mt={2}>
-                                <Typography variant="h6">Nombre pelicula:</Typography>
-                                <Box ml={2}>
-                                    <Typography variant="h6">Si hay mas datos:</Typography>
-                                </Box>
-                            </Box>
-                            <hr />
-                            <Box display="flex" alignItems="center">
-                                <img src="https://th.bing.com/th/id/R.3c231f5962d9921a2994ffee2b1d09bb?rik=ucqVj9EiHGohYw&riu=http%3a%2f%2fwww.ofuxico.com.br%2fimg%2fupload%2fnoticias%2f2012%2f08%2f09%2f146109_36.jpg&ehk=9LKFBLd1n1Lt6CG3Gn%2fwee9GJsCwfVaMlJtSyyKIbkY%3d&risl=&pid=ImgRaw&r=0"
-                                    style={{ width: '140px', height: '120px', marginRight: '20px', borderRadius: '10px' }} />
-                                <Box>
-                                    <Typography variant="h6">Fecha:</Typography>
-                                    <Typography variant="h6">Horario:</Typography>
-                                    <Typography variant="h6">Entradas:</Typography>
-
-                                </Box>
-                            </Box>
-                        </Box>
-
+                            ))
+                        }
                     </Grid>
                 </Grid>
             </Container>
-        </div>
+        </div >
     );
 }
 

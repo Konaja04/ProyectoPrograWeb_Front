@@ -113,8 +113,20 @@ const ReservaPage = () => {
             body: JSON.stringify(dataReserva)
         })
     }
+    const guardarReserva = async () => {
+        const dataReserva = {
+            funcion_id: funcion_id,
+            usuario: formData.codigo,
+            asientos: asientosSeleccionados.join(', ')
+        }
+        const response = await fetch("http://localhost:8000/salas_cine/guardarReserva", {
+            method: "post",
+            body: JSON.stringify(dataReserva)
+        })
+    }
     const handleFormSubmit = () => {
         enviarCorreo()
+        guardarReserva()
         setOpenModal(true);
     };
     const handleCloseModal = () => {
