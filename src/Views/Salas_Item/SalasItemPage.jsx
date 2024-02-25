@@ -10,30 +10,45 @@ import FmdGoodIcon from '@mui/icons-material/FmdGood';
 
 const SalasItemPage = () => {
     const { path } = useParams();
-    const [sala, setDataSala] = useState({})
+    const [pelicula, setDataPelicula] = useState({})
+    const [salas, setDataSalas] = useState([])
 
-    const obtenerSala = async () => {
+    const obtenerData = async () => {
 
-        const response = await fetch("https://raw.githubusercontent.com/ulima-pw/data-20240/main/salasv2.json")
-        const data = await response.json()
-        setDataSala(data.filter((sala) => {
-            return sala.path === path
-        })[0])
-    }
+        const responseSalas = await fetch(`http://127.0.0.1:8000/peliculas_cine/ver-sala/${path}`);
+        const dataSalas = await responseSalas.json();
+        setDataSalas(dataSalas);
+
+    };
+
     useEffect(() => {
-        obtenerSala()
-    },)
+        obtenerData();
+    }, [path]);
+
+    useEffect(() => {
+
+        const obtenerPelis = async () => {
+
+            const responsePelis = await fetch(`http://127.0.0.1:8000/peliculas_cine/obtener-peliculas-disponibles/${salas.id}/`);
+            const dataPelis = await responsePelis.json();
+            setDataPelicula(dataPelis);
+
+        };
+        obtenerPelis();
+
+    }, [pelicula]);
+
 
     return <div>
         <NavBar />
         <div id="main-content">
             <div className="container pt-3">
                 <div id="second-content">
-                    <h1>{`Cine ${sala.name}`}</h1>
+                    <h1>{`Cine ${salas.name}`}</h1>
                     <hr />
                     <div id="first-part">
                         <FmdGoodIcon className="icon-time" />
-                        <p className="image-logo-ubicacion">{`${sala.secondAddress}`}</p>
+                        <p className="image-logo-ubicacion">{`${salas.secondAddress}`}</p>
                     </div>
                     <HistoriaSala />
                     <ListaPeliculasDisponible />
