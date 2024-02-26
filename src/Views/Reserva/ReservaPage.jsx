@@ -88,6 +88,13 @@ const ReservaPage = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
+
+        // Validar si es número negativo o decimal
+        if (value !== "" && !/^\d+$/.test(value)) {
+            setFormData({ ...formData, [name]: value, [`${name}Error`]: 'El valor debe ser un número entero positivo' });
+            return;
+        }
+
         if (name === 'cantidad') {
             if (parseInt(value) === 0) {
                 setFormData({ ...formData, [name]: value, [`${name}Error`]: 'La cantidad mínima permitida es 1' });
@@ -279,6 +286,12 @@ const ReservaPage = () => {
                                             </p>
                                         </div>
                                         <hr />
+                                        <div>
+                                            <h5>Fecha</h5>
+                                            <p>
+                                                {`${ventana.fecha}`}
+                                            </p>
+                                        </div>
                                         <div>
                                             <h5>Horario</h5>
                                             <p>

@@ -3,7 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
-import { Grid } from '@mui/material';
+import { Grid, InputAdornment } from '@mui/material';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import PersonIcon from '@mui/icons-material/Person';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
+import ImageIcon from '@mui/icons-material/Image';
+
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({
@@ -85,12 +91,24 @@ const RegisterPage = () => {
     return (
         <div className='container-fluid vertical-center-container register-page' style={{ backgroundColor: '#f8ccb4' }}>
             <div className='col-md-12 d-flex flex-column align-items-center justify-content-center vh-100'>
-                <div className='row w-100'>
-                    <h1 className='col text-center text-login'>SALAS DE CINE ULIMA</h1>
-                </div>
+
                 <div className='row w-50 justify-content-center'>
-                    <div className='col-md-8 formulario'>
-                        <form onSubmit={handleSubmit}>
+                    <div className='col-md-8 formulario-registro'>
+                        <h4 className='titulo-login'>Bienvenido a salas de cine ULIMA</h4>
+                        <p className='descripcion-login'>Para unirte a nuestra comunidad por favor Inicia Sesión con tus datos</p>
+                        <div className="form-group">
+                            <div className="text-center" style={{ fontSize: '14px', marginTop: '10px' }}>
+                                ¿Ya se encuentra registrado? <Link to={"/"}>Log in</Link>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div className='col-md-8 formulario-login'>
+                        <h4 className='titulo-register '>Crear una Cuenta</h4>
+
+                        <form className='form-register' onSubmit={handleSubmit}>
                             <Grid container spacing={2}>
                                 <Grid item xs={6}>
                                     <TextField
@@ -103,6 +121,13 @@ const RegisterPage = () => {
                                         autoFocus
                                         value={formData.nombre}
                                         onChange={handleChange}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <PersonIcon />
+                                                </InputAdornment>
+                                            )
+                                        }}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -115,6 +140,13 @@ const RegisterPage = () => {
                                         autoComplete="apellidos"
                                         value={formData.apellidos}
                                         onChange={handleChange}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <PersonIcon />
+                                                </InputAdornment>
+                                            )
+                                        }}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -127,6 +159,13 @@ const RegisterPage = () => {
                                         autoComplete="codigo"
                                         value={formData.codigo}
                                         onChange={handleChange}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <ContactMailIcon />
+                                                </InputAdornment>
+                                            )
+                                        }}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -139,6 +178,13 @@ const RegisterPage = () => {
                                         autoComplete="correo"
                                         value={formData.correo}
                                         onChange={handleChange}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <MailOutlineIcon />
+                                                </InputAdornment>
+                                            )
+                                        }}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -152,6 +198,13 @@ const RegisterPage = () => {
                                         type="password"
                                         value={formData.password}
                                         onChange={handleChange}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <LockOpenIcon />
+                                                </InputAdornment>
+                                            )
+                                        }}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -165,17 +218,31 @@ const RegisterPage = () => {
                                         type="password"
                                         value={formData.confirmed_password}
                                         onChange={handleChange}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <LockOpenIcon />
+                                                </InputAdornment>
+                                            )
+                                        }}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
                                         fullWidth
                                         id="img"
-                                        label="Imagen"
+                                        label="Imagen URL"
                                         name="img"
                                         autoComplete="img"
                                         value={formData.img}
                                         onChange={handleChange}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <ImageIcon />
+                                                </InputAdornment>
+                                            )
+                                        }}
                                     />
                                 </Grid>
                             </Grid>
@@ -197,13 +264,11 @@ const RegisterPage = () => {
                                     Verifique que el correo tenga el formato 'codigo@aloe.ulima.edu.pe'
                                 </Alert>
                             )}
-                            <Button type="submit" variant="contained" style={{ width: '100%', backgroundColor: '#FA7525', color: 'white', marginTop: '15px' }}>
-                                Registrarse
-                            </Button>
-                            <div className="text-center" style={{ fontSize: '14px', marginTop: '10px' }}>
-                                ¿Ya se encuentra registrado? <Link to={"/"}>Log in</Link>
-                            </div>
                         </form>
+                        <Button type="submit" variant="contained" style={{ marginTop: "30px", backgroundColor: '#FA7525', color: 'white', borderRadius: "18px" }}
+                        >
+                            Registrarse
+                        </Button>
                     </div>
                 </div>
             </div>

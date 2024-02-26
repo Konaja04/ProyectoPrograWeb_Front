@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 import React, { useState } from 'react';
 import Rating from '@mui/material/Rating';
 import placeholderImage from '../../../Img/pelicula_placeholder.jpg';
-
+import PersonIcon from '@mui/icons-material/Person';
 const SinopsisMovie = (props) => {
     const pelicula = props.pelicula
 
@@ -21,6 +21,9 @@ const SinopsisMovie = (props) => {
                 <div className="info-container">
                     <h2 className="title-sub-peliculas" >Sinopsis</h2>
                     <p className="card-text" style={{ textAlign: 'justify' }}>{pelicula.extract}</p>
+                    <h2 className="title-sub-elenco" >Elenco <PersonIcon /></h2>
+                    <p className="card-text" style={{ textAlign: 'justify' }}>{pelicula.cast ? pelicula.cast.join(', ') : ''}</p>
+
                     {
                         (pelicula.genres != null ? pelicula.genres : []).map((genero) => (
 
@@ -33,6 +36,7 @@ const SinopsisMovie = (props) => {
                         name="simple-controlled"
                         value={userRating !== null ? userRating : pelicula.rating}
                         onChange={handleRatingChange}
+
                     />
                 </div>
             </div>

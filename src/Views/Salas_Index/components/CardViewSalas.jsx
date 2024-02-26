@@ -3,7 +3,7 @@ const CardViewSalas = ({ data }) => {
 
     return (
 
-        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+        <Card id="animation-card" sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <CardMedia
                 component="div"
                 sx={{

@@ -1,15 +1,29 @@
-.text-login {
-    font-size: 85px;
+.formulario-login {
+    background-color: rgb(249, 249, 249);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 700px;
+    width: 60%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    color: black;
-    font-family: 'Road Rage', sans-serif;
 }
 
-.formulario {
-    box-shadow: 0px 0px 10px rgb(0, 0, 0, 0.3);
-    border-radius: 10px;
+.formulario-registro {
+    background-color: #ffc89e;
     padding: 20px;
-    background-color: white;
+    width: 40%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
 }
 
 .form-group {
@@ -25,7 +39,7 @@
     border-width: 1px;
     border-style: solid;
     border-color: #FA7525;
-    border-radius: 1px;
+    border-radius: 20px;
     padding: 10px;
     font-size: 12px;
     width: 100%;
@@ -50,4 +64,48 @@
     text-decoration: none;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Road+Rage&display=swap')
+.titulo-login {
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.titulo-register {
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+
+.descripcion-login {
+    padding-bottom: 20px;
+    font-size: 20px;
+}
+
+.form-login {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-login .MuiTextField-root {
+    width: 100%;
+    border-radius: 18px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.form-login .MuiOutlinedInput-notchedOutline {
+    border: none;
+}
+
+.form-register .MuiTextField-root {
+    width: 100%;
+    border-radius: 18px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.form-register .MuiOutlinedInput-notchedOutline {
+    border: none;
+}
+
+.css-mhc70k-MuiGrid-root {
+    justify-content: center;
+}

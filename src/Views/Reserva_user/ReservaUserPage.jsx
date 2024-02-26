@@ -3,7 +3,6 @@ import NavBar from '../../common/Navbar'
 import { Box, Container, Grid, Typography, Divider, Avatar, CircularProgress } from '@mui/material';
 
 //Icons
-import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { useEffect, useState } from 'react';
 import ReservaItemCard from './components/ReservaItemCard';
 

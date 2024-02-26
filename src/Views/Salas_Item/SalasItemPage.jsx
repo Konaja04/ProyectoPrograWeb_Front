@@ -52,12 +52,6 @@ const SalasItemPage = () => {
                     <h1 className="title-primer-peliculas">Salas</h1>
                     <hr />
                     <div className='second-content'>
-                        <h1 className='title-pelicula-detalle'>{sala.name}</h1>
-                        <div id="first-part">
-                            <FmdGoodIcon className="icon-time" />
-                            <p className="image-logo-ubicacion">{`${sala.second_address}`}</p>
-                        </div>
-
                         {isLoading ?
                             <>
                                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh', color: 'rgb(250, 117, 37)' }}>
@@ -66,6 +60,13 @@ const SalasItemPage = () => {
                             </>
                             :
                             <>
+                                <h1 className='title-pelicula-detalle'>{sala.name}</h1>
+                                <div id="first-part">
+                                    <FmdGoodIcon className="icon-time" />
+                                    <p className="image-logo-ubicacion">{`${sala.second_address}`}</p>
+                                </div>
+
+
                                 <HistoriaSala sala={sala} />
 
                             </>

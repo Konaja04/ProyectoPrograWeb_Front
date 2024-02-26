@@ -1,6 +1,7 @@
-import { Grid, Button, TextField, Alert } from '@mui/material';
+import { Grid, Button, TextField, Alert, InputAdornment, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 const InicioSolicitud = (props) => {
     const [correo, setCorreo] = useState("");
@@ -55,69 +56,92 @@ const InicioSolicitud = (props) => {
     }, []);
 
     return (
-        <div className='col-md-8 formulario'>
-            <form onSubmit={handleSubmit}>
-                <Grid container spacing={2}>
-                    {!showCodeInput ? (
-                        <>
-                            <Grid item xs={12}>
-                                <TextField
-                                    label="Correo Electrónico"
-                                    variant="outlined"
-                                    fullWidth
-                                    value={correo}
-                                    onChange={(e) => setCorreo(e.target.value)}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={EnviarCodigo}
-                                    style={{ width: '100%', backgroundColor: '#FA7525', color: 'white', marginTop: '15px' }}
-                                >
-                                    Enviar Código
-                                </Button>
-                            </Grid>
-                            <Grid item xs={12}>
-                                {emailError && (
-                                    <Alert severity="error" sx={{ mb: 2 }}>
-                                        Por favor, introduce un correo electrónico válido.
-                                    </Alert>
-                                )}
-                            </Grid>
+        <div className='row w-100 justify-content-center'>
+            <div className='col-md-8 formulario-registro'>
+                <h4 className='titulo-login'>¿No recuerdas tu contraseña?</h4>
+                <p className='descripcion-login'>Para recuperar el acceso por favor coloque su correo electrónico.</p>
+                <div className="form-group">
+                    <div className="text-center" style={{ fontSize: '14px', marginTop: '10px' }}>
+                        ¿Ya se encuentra registrado? <Link to={"/"}>Log in</Link>
+                    </div>
+                </div>
 
-                        </>
-                    ) : (
-                        <>
-                            {Array.from({ length: 5 }).map((_, index) => (
-                                <Grid item xs={2} key={index}>
+            </div>
+            <div className='col-md-8 formulario-login'>
+                <h4 className='titulo-register '>Restablecer la contraseña</h4>
+
+                <form className='form-register' onSubmit={handleSubmit}>
+                    <Grid container spacing={2}>
+                        {!showCodeInput ? (
+                            <>
+                                <Grid item xs={12}>
                                     <TextField
+                                        label="Correo Electrónico"
                                         variant="outlined"
-                                        inputProps={{ maxLength: 1 }}
-                                        value={inputCodes[index]}
-                                        onChange={(e) => handleInputChange(e, index)}
+                                        fullWidth
+                                        value={correo}
+                                        onChange={(e) => setCorreo(e.target.value)}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <MailOutlineIcon />
+                                                </InputAdornment>
+                                            )
+                                        }}
                                     />
                                 </Grid>
-                            ))}
-                        </>
+                                <Grid item xs={12}>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={EnviarCodigo}
+                                        style={{ backgroundColor: '#FA7525', color: 'white', marginTop: '15px', borderRadius: "18px" }}
+                                    >
+                                        Enviar Código
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    {emailError && (
+                                        <Alert severity="error" sx={{ mb: 2 }}>
+                                            Por favor, introduce un correo electrónico válido.
+                                        </Alert>
+                                    )}
+                                </Grid>
+
+                            </>
+                        ) : (
+                            <>
+                                {Array.from({ length: 5 }).map((_, index) => (
+                                    <Grid item xs={2} key={index}>
+                                        <Box display="flex" justifyContent="center">
+                                            <TextField
+                                                variant="outlined"
+                                                inputProps={{ maxLength: 1 }}
+                                                value={inputCodes[index]}
+                                                onChange={(e) => handleInputChange(e, index)}
+                                            />
+                                        </Box>
+                                    </Grid>
+                                ))}
+                            </>
+                        )}
+                    </Grid>
+                    {!codeMatch && (
+                        <Alert severity="error" sx={{ mb: 2 }}>
+                            El codigo introducido es incorrecto
+                        </Alert>
                     )}
-                </Grid>
-                {!codeMatch && (
-                    <Alert severity="error" sx={{ mb: 2 }}>
-                        El codigo introducido es incorrecto
-                    </Alert>
-                )}
-                {showCodeInput && (
-                    <Button type="submit" variant="contained" style={{ width: '100%', backgroundColor: '#FA7525', color: 'white', marginTop: '15px' }}>
-                        Verificar Código
-                    </Button>
-                )}
-                <div className="text-center" style={{ fontSize: '14px', marginTop: '10px' }}>
-                    ¿Ya se encuentra registrado? <Link to={"/"}>Log in</Link>
-                </div>
-            </form>
+
+                    {showCodeInput && (
+                        <Button type="submit" variant="contained" style={{ backgroundColor: '#FA7525', color: 'white', marginTop: '15px', borderRadius: "18px" }}>
+                            Verificar Código
+                        </Button>
+                    )}
+
+                </form>
+            </div >
         </div >
+
     );
 };
 

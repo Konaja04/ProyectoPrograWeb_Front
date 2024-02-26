@@ -55,6 +55,21 @@ h4 {
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.135);
 }
 
+.leyenda {
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #ebebeb;
+    font-size: 1.455em;
+}
+
+.leyenda-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: #747474;
+    align-items: center;
+}
 
 .boton1 {
     font-size: 0.8em;

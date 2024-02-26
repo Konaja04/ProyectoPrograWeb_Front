@@ -251,3 +251,9 @@
     min-width: 1000px;
     width: 1000px;
 }
+
+.css-udib3j-MuiCardMedia-root {
+    width: 9% !important;
+    min-width: 5% !important;
+    border-radius: 8px;
+}
