@@ -18,7 +18,7 @@ const SinopsisMovie = (props) => {
                 <img className="image-principal" src={pelicula.thumbnail || placeholderImage} style={{ maxWidth: '100%', maxHeight: '100%' }} />
             </div>
             <div className="col">
-                <div className="info-container ">
+                <div className="info-container">
                     <h2 className="title-sub-peliculas" >Sinopsis</h2>
                     <p className="card-text" style={{ textAlign: 'justify' }}>{pelicula.extract}</p>
                     {

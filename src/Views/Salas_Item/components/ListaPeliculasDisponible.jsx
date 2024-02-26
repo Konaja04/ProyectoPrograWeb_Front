@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import "../../Peliculas_Item/PeliculasItemPage.css"
 import { Grid } from "@mui/material";
 import Carousel from 'react-material-ui-carousel';
+import ChairIcon from '@mui/icons-material/Chair';
 
 
 const ListaPeliculaDisponible = ({ peliculas }) => {
@@ -24,7 +25,7 @@ const ListaPeliculaDisponible = ({ peliculas }) => {
 
     return (
         <Container sx={{ py: 12 }} maxWidth="md">
-            <h1 id="title-pelicuas">Funciones Disponibles</h1>
+            <h1 className="title-primer-peliculas">Funciones Disponibles</h1>
             <hr />
             <Carousel
                 autoPlay={false}
@@ -54,6 +55,7 @@ const ListaPeliculaDisponible = ({ peliculas }) => {
                                                 onClick={() => realizarReserva(available_times.funcion_id)}
                                             >
                                                 {available_times.hora}
+                                                <ChairIcon style={{ paddingLeft: "5px" }} />
                                             </button>
                                         ))}
                                     </div>

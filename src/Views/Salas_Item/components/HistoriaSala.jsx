@@ -14,8 +14,8 @@ const HistoriaSala = (props) => {
                 <img className="image-principal-salas" src={sala.img} />
             </div>
             <div className="col">
-                <div className="card-body-salas">
-                    <h2 className="card-title">Historia</h2>
+                <div className="info-container-sala">
+                    <h2 className="title-sub-peliculas">Historia</h2>
                     <p className="card-text" style={{ textAlign: 'justify' }}>{sala.description}</p>
                     {
                         (sala.formats != null ? sala.formats : []).map((formatos) => (

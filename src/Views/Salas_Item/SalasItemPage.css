@@ -41,7 +41,6 @@
 
 .sala-A-2 {
     padding-top: 15px;
-    width: 520px;
     height: 48px;
     font-size: 16px;
     font-weight: 400;
@@ -72,7 +71,7 @@
 .image-principal-salas {
     margin-top: 30px;
     margin-bottom: 30px;
-    width: 100%;
+    width: auto;
     height: auto;
     max-height: 100%;
     border-radius: 4px;
@@ -106,4 +105,15 @@
     margin-top: 30px;
     padding-bottom: 40px;
     border-radius: 4px;
+}
+
+.info-container-sala {
+    background-color: #fafafa;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.135);
+    transition: box-shadow 0.3s ease;
+    margin-bottom: 40px;
+    margin-top: 30px;
+    padding: 20px;
+
 }

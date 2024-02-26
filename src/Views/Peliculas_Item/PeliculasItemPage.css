@@ -98,13 +98,12 @@
 
 .peliculas-container {
     position: relative;
-    padding: 50px;
+    padding: 20px;
     background-color: #fafafa;
     border-radius: 10px;
-    padding-bottom: 20px;
     margin: 15px;
     height: 400px;
-    padding-top: 60%;
+    padding-top: 220px;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.135);
     box-sizing: border-box;
 }
