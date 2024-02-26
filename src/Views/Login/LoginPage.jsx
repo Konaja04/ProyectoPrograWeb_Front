@@ -63,6 +63,7 @@ const LoginPage = () => {
         if (data.msg === "") {
             // Login correcto
             // Almacenando en localStorage
+            sessionStorage.setItem("USER_ID", data.id)
             sessionStorage.setItem("CODIGO", codigo)
             sessionStorage.setItem("NOMBRE", data.names)
             sessionStorage.setItem("APELLIDO", data.last_names)
