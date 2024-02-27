@@ -4,11 +4,13 @@ import { Avatar, Popover, Button, AppBar, Box } from '@mui/material';
 import { Toolbar, Typography, IconButton, Drawer, List } from '@mui/material';
 import { Divider, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import StarIcon from '@mui/icons-material/Star';
 import logo from '../Img/logo.png'
 import { useNavigate } from "react-router-dom";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
+import MovieIcon from '@mui/icons-material/Movie';
+import ChairIcon from '@mui/icons-material/Chair';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import PersonIcon from '@mui/icons-material/Person';
 export default function ButtonAppBar() {
 
     const navigate = useNavigate()
@@ -64,22 +66,28 @@ export default function ButtonAppBar() {
             </Link>
             <List>
                 <Divider />
-                {['Películas', 'Salas'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton component={Link} to={text === 'Películas' ? '/peliculas/1' : `/${text.toLowerCase()}`}>
-                            <ListItemIcon>
-                                <StarIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+
+                <ListItemButton component={Link} to={'/peliculas/1'}>
+                    <ListItemIcon>
+                        <MovieIcon />
+                    </ListItemIcon>
+                    <ListItemText > Películas</ListItemText>
+
+                </ListItemButton>
+                <ListItemButton component={Link} to={'/salas'}>
+                    <ListItemIcon>
+                        <ChairIcon />
+                    </ListItemIcon>
+                    <ListItemText > Salas</ListItemText>
+                </ListItemButton>
                 <Box sx={{ width: 300, position: 'fixed', bottom: 0, marginBottom: '15px' }}>
 
                     <ListItem disablePadding>
                         <ListItemButton onClick={handleClick}>
                             <Avatar alt={name} src={`${img}`} style={{ width: '40px', height: '40px', marginRight: '10px' }} />
                             <ListItemText primary={`${name} ${lastname}`} />
+                            <MoreVertIcon />
+
                         </ListItemButton>
                     </ListItem>
                     <Popover
@@ -97,17 +105,16 @@ export default function ButtonAppBar() {
                         }}
                     >
                         <Box sx={{ p: 2 }} >
-                            <BookmarkAddedIcon />
+                            <PersonIcon />
                             <Link to="/reservas/">
                                 <Button sx={{
                                     width: '210px',
                                     height: '20px',
                                     color: 'black',
                                     textTransform: 'none'
-                                }}>Mis reservas
+                                }}>Mi cuenta
                                 </Button>
                             </Link>
-
                         </Box>
                         <Box sx={{ p: 2 }} >
                             <ExitToAppIcon />
@@ -141,9 +148,14 @@ export default function ButtonAppBar() {
                     >
                         <MenuIcon />
                     </IconButton>
+                    <img style={{ width: "160px" }} src="https://admision.ulima.edu.pe/wp-content/uploads/2023/03/ulima-logo-blanco-1-1024x253.png?v=1.0" alt="" />
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Salas de cine ULima
                     </Typography>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <ListItemText primary={`${name} ${lastname}`} />
+
+                        <Avatar alt={name} src={`${img}`} style={{ width: '40px', height: '40px', marginLeft: '20px' }} />
+                    </div>
                 </Toolbar>
             </AppBar>
             <Drawer

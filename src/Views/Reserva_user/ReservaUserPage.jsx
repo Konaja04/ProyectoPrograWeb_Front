@@ -1,16 +1,21 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../../common/Navbar'
-import { Box, Container, Grid, Typography, Divider, Avatar, CircularProgress } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Box, Container, Grid, Typography, Divider, Avatar, CircularProgress, Button } from '@mui/material';
 
 //Icons
 import { useEffect, useState } from 'react';
 import ReservaItemCard from './components/ReservaItemCard';
+import CambiarContrasena from './components/CambiarContrasena';
 
-
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
+import PasswordIcon from '@mui/icons-material/Password';
 const ReservaUserPage = () => {
 
     const [reservas, setDataReservas] = useState([])
     const [isLoading, setIsLoading] = useState(true);
+    const [showReservas, setShowReservas] = useState(true);
 
     const traerReservas = async () => {
         const datausuario = {
@@ -29,6 +34,17 @@ const ReservaUserPage = () => {
     useEffect(() => {
         traerReservas()
     }, [])
+
+    const handleClickReservas = () => {
+        setShowReservas(true);
+    }
+
+    const handleClickCambiarContrasena = () => {
+        setShowReservas(false);
+    }
+
+
+
     return (
         <div>
             <NavBar />
@@ -44,36 +60,69 @@ const ReservaUserPage = () => {
                                     style={{ width: '120px', height: '120px' }}
                                 />
                             </Box>
-                            <Box mt={6} mb={60}>
+                            <Box mt={6} mb={30}>
                                 <Typography mt={2} variant="h6"><b>Nombre: </b>{`${sessionStorage.getItem("NOMBRE")}`}</Typography>
                                 <Typography mt={2} variant="h6"><b>Apellido: </b>{`${sessionStorage.getItem("APELLIDO")}`}</Typography>
                                 <Typography mt={2} variant="h6"><b>Correo: </b>{`${sessionStorage.getItem("CORREO")}`}</Typography>
                             </Box>
+                            <Box mt={6}>
+                                <Box sx={{ p: 2 }} >
+                                    <BookmarkAddedIcon />
+                                    <Button sx={{
+                                        width: '300px',
+                                        height: '40px',
+                                        color: 'black',
+                                    }} onClick={handleClickReservas}
+                                    >Mis reservas
+                                    </Button>
+                                </Box>
+                                <Box sx={{ p: 2 }} >
+                                    <PasswordIcon />
+                                    <Button sx={{
+                                        width: '300px',
+                                        height: '40px',
+                                        color: 'black',
+                                    }} onClick={handleClickCambiarContrasena}>Cambiar Contraseña
+                                    </Button>
+                                </Box>
+                                <Box sx={{ p: 2 }} >
+                                    <ExitToAppIcon />
+                                    <Link to="/inicio/">
+                                        <Button sx={{
+                                            width: '300px',
+                                            height: '40px',
+                                            color: 'black',
+                                        }}>Cerrar Sesión
+                                        </Button>
+                                    </Link>
+                                </Box>
+                            </Box>
                         </Box>
                     </Grid>
+
+
                     <Grid item xs={12} lg={7.5}>
                         <Box className="col info-container" mt={2} p={2}>
-                            <Typography variant="h4" align="center"><b>Mis reservas</b></Typography>
+                            <Typography variant="h4" align="center"><b>Mi cuenta</b></Typography>
                         </Box>
 
-                        {isLoading ?
-                            <>
+
+                        {showReservas ? (
+                            isLoading ? (
                                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh' }}>
                                     <CircularProgress />
                                 </div>
-                            </>
-                            :
-                            <>
-                                {
-                                    reservas.map((reserva, index) => (
-                                        < Box key={index} className="col info-container" mt={2} p={2} >
-                                            <ReservaItemCard reserva={reserva} />
-                                        </Box>
-                                    ))
-                                }
+                            ) : (
 
-                            </>
-                        }
+                                reservas.map((reserva, index) => (
+                                    <Box key={index} className="col info-container" mt={2} p={2}>
+                                        <ReservaItemCard reserva={reserva} />
+                                    </Box>
+                                ))
+                            )
+                        ) : (
+                            <CambiarContrasena />
+                        )}
                     </Grid>
                 </Grid>
             </Container>
