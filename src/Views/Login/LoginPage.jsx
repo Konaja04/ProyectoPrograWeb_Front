@@ -64,6 +64,7 @@ const LoginPage = () => {
             // Login correcto
             // Almacenando en localStorage
             sessionStorage.setItem("CODIGO", codigo)
+            sessionStorage.setItem("ID", data.id,)
             sessionStorage.setItem("NOMBRE", data.names)
             sessionStorage.setItem("APELLIDO", data.last_names)
             sessionStorage.setItem("IMG", data.img)

@@ -1,41 +1,21 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap"
-import { useNavigate, useParams } from "react-router-dom";
 import '../../Peliculas_Item/PeliculasItemPage.css'
 import { Grid } from "@mui/material";
 import Carousel from 'react-material-ui-carousel';
 import { Link } from 'react-router-dom';
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
 
-const obtenerPeliculasRandom = (lista, cantidad) => {
-    const peliculasClon = lista.slice();
-    cantidad = Math.min(cantidad, peliculasClon.length);
-    const peliculasRandom = [];
 
-    for (let i = 0; i < cantidad; i++) {
-        const indiceRandom = Math.floor(Math.random() * peliculasClon.length);
-        const peliculaSeleccionada = peliculasClon.splice(indiceRandom, 1)[0];
-        peliculasRandom.push(peliculaSeleccionada);
-    }
-
-    return peliculasRandom;
-}
 
 const PeliculasRecomendadas = () => {
-    const { path } = useParams();
-    const [sala, setDataSala] = useState({})
     const [pelis, setDataPelis] = useState([])
-
     const obtenerSala = async () => {
-
-        const response = await fetch("https://raw.githubusercontent.com/ulima-pw/data-20240/main/salasv2.json")
-        const responsePelis = await fetch("https://raw.githubusercontent.com/ulima-pw/data-20240/main/peliculas_limpio.json")
+        const user_id = sessionStorage.getItem('ID')
+        console.log(user_id)
+        const response = await fetch(`http://127.0.0.1:8000/salas_cine/getRecomendaciones/${user_id}`)
         const data = await response.json()
-        const dataPelis = await responsePelis.json()
-        setDataSala(data.filter((sala) => {
-            return sala.path == path
-        })[0])
-        setDataPelis(obtenerPeliculasRandom(dataPelis, 12))
+        setDataPelis(data)
 
     }
     useEffect(() => {
