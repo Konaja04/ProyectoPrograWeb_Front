@@ -114,12 +114,22 @@ const ReservaUserPage = () => {
                                 </div>
                             ) : (
 
-                                reservas.map((reserva, index) => (
-                                    <Box key={index} className="col info-container" mt={2} p={2}>
-                                        <ReservaItemCard reserva={reserva} />
+                                <div>
+                                    <Box
+                                        height="750px"
+                                        overflow="auto"
+                                        className="col info-container" mt={2} p={2}>
+                                        <Typography variant="h5" align="left" marginLeft="15px"><b>Mis reservas</b></Typography>
+                                        <hr />
+                                        {reservas && reservas.map((reserva, index) => (
+                                            <Box key={index} className="col info-container-card" mt={2} p={2}>
+                                                <ReservaItemCard reserva={reserva} />
+                                            </Box>
+                                        ))}
                                     </Box>
-                                ))
+                                </div>
                             )
+
                         ) : (
                             <CambiarContrasena />
                         )}
