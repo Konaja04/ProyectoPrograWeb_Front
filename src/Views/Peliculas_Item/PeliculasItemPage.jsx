@@ -9,11 +9,15 @@ import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import { CircularProgress } from "@mui/material";
 
 const PeliculasItemPage = () => {
+
+
+
     const { path } = useParams();
     const [pelicula, setDataPelicula] = useState({})
     const [salas, setDataSalas] = useState([])
     const [isLoading, setIsLoading] = useState(true);
 
+    const user_id = sessionStorage.getItem("USER_ID");
 
     const obtenerData = async () => {
 
@@ -41,6 +45,17 @@ const PeliculasItemPage = () => {
 
     }, [pelicula]);
 
+    const guardarCalificacion = async () => {
+        const dataCalificacion = {
+            pelicula_id: pelicula.id,
+            usuario_id: user_id,
+            calificacion: calificacion
+        }
+        const response = await fetch("http://localhost:8000/salas_cine/guardarCalificacion", {
+            method: "post",
+            body: JSON.stringify(dataCalificacion)
+        })
+    }
 
     useEffect(() => {
         const loadDisqus = () => {
@@ -87,7 +102,10 @@ const PeliculasItemPage = () => {
 
                         </div>
 
-                        <SinopsisMovie pelicula={pelicula} />
+                        <SinopsisMovie
+                            pelicula={pelicula}
+                            guardarCalificacion={guardarCalificacion}
+                        />
 
                         {isLoading ?
                             <>

@@ -10,6 +10,8 @@ const SinopsisMovie = (props) => {
 
     const handleRatingChange = (event, newValue) => {
         setUserRating(newValue);
+        props.guardarCalificacion(newValue);
+
     };
 
     return <Container>
