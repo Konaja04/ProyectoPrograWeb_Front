@@ -6,7 +6,7 @@ import { Box, Typography } from '@mui/material';
 const ReservaItemCard = ({ reserva }) => {
     return <>
 
-        <Box display="flex" alignItems="center" mt={2}>
+        <Box display="flex" alignItems="center">
             <Typography variant="h6"> <b>Pelicula: </b> {`${reserva.funcion.pelicula.title}`}</Typography>
             <Box ml={1}>
                 <Typography variant="h6">{`(${reserva.funcion.pelicula.year})`}</Typography>
