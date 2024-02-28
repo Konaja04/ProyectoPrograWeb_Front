@@ -12,7 +12,7 @@ import Navbar from "../../common/Navbar";
 import CardView from "./Components/CardView";
 import SearchIcon from '@mui/icons-material/Search';
 import './PeliculasIndexPage.css';
-
+import Cartelera from '../../common/Cartelera'
 const PeliculasIndexPage = () => {
     const { page } = useParams();
     const pagina = parseInt(page, 10) - 1;
@@ -73,6 +73,9 @@ const PeliculasIndexPage = () => {
     return (
         <div className="peliculas-page">
             <Navbar />
+            <Container>
+                <Cartelera />
+            </Container>
             <Container sx={{ py: 8 }} maxWidth="md">
                 <h1 id="title-peliculas">Películas</h1>
                 {isLoading ?

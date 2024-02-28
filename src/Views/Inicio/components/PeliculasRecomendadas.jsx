@@ -83,8 +83,6 @@ const PeliculasRecomendadas = () => {
 
     </Container >
 
-
-
 }
 
 export default PeliculasRecomendadas

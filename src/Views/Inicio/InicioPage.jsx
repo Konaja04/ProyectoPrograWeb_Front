@@ -4,11 +4,12 @@ import { TextField, Container, Box, Popover, Avatar, Typography, Grid, Divider }
 import { useEffect, useState } from "react";
 import CustomCarousel from './components/CustomCarousel';
 import BotView from './components/bot/botView';
-import Cartelera from './components/Cartelera';
+import Cartelera from './../../common/Cartelera';
 import PeliculasRecomendadas from './components/PeliculasRecomendadas';
 import { Button, Modal } from 'react-bootstrap';
 import SearchModal from './components/SearchModal';
 import SearchIcon from '@mui/icons-material/Search';
+import TopPeliculasView from './components/TopPeliculasView';
 
 const InicioPage = () => {
 
@@ -138,6 +139,7 @@ const InicioPage = () => {
 
             <Cartelera />
             <PeliculasRecomendadas />
+            <TopPeliculasView />
         </Box >
     );
 }
