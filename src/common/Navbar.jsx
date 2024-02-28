@@ -78,7 +78,7 @@ export default function ButtonAppBar() {
                     <ListItemIcon>
                         <ChairIcon />
                     </ListItemIcon>
-                    <ListItemText > Salas</ListItemText>
+                    <ListItemText  > Salas</ListItemText>
                 </ListItemButton>
                 <Box sx={{ width: 300, position: 'fixed', bottom: 0, marginBottom: '15px' }}>
 
@@ -103,28 +103,28 @@ export default function ButtonAppBar() {
                             vertical: 'bottom',
                             horizontal: 'center',
                         }}
+                        PaperProps={{
+                            sx: {
+                                borderRadius: '12px',
+                                boxShadow: '0px 3px 4px rgba(0, 0, 0, 0.1)',
+                                border: '1px solid #ebebeb',
+                            },
+                        }}
                     >
-                        <Box sx={{ p: 2 }} >
-                            <PersonIcon />
-                            <Link to="/reservas/">
-                                <Button sx={{
-                                    width: '210px',
-                                    height: '20px',
-                                    color: 'black',
-                                    textTransform: 'none'
-                                }}>Mi cuenta
-                                </Button>
-                            </Link>
-                        </Box>
-                        <Box sx={{ p: 2 }} >
-                            <ExitToAppIcon />
-                            <Button sx={{
-                                width: '210px',
-                                height: '20px',
-                                color: 'black',
-                                textTransform: 'none'
-                            }} onClick={logoutOnClick}>Cerrar sesión
-                            </Button>
+                        <Box sx={{ p: 1 }} >
+                            <ListItemButton sx={{ pr: 13.5, pl: 2 }} component={Link} to={'/reservas/'}>
+                                <ListItemIcon>
+                                    <PersonIcon style={{ color: "black" }} />
+                                </ListItemIcon>
+                                <ListItemText > Mi cuenta</ListItemText>
+                            </ListItemButton>
+                            <Divider />
+                            <ListItemButton onClick={logoutOnClick}>
+                                <ListItemIcon>
+                                    <ExitToAppIcon style={{ color: "black" }} />
+                                </ListItemIcon>
+                                <ListItemText > Cerrar sesión</ListItemText>
+                            </ListItemButton>
                         </Box>
                     </Popover>
                 </Box >

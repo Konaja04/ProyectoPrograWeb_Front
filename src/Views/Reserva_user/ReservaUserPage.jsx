@@ -117,15 +117,20 @@ const ReservaUserPage = () => {
                                 <div>
                                     <Box
                                         height="750px"
-                                        overflow="auto"
-                                        className="col info-container" mt={2} p={2}>
-                                        <Typography variant="h5" align="left" marginLeft="15px"><b>Mis reservas</b></Typography>
+
+                                        className="col info-container" mt={2} p={1}>
+                                        <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis reservas</h4>
                                         <hr />
-                                        {reservas && reservas.map((reserva, index) => (
-                                            <Box key={index} className="col info-container-card" mt={2} p={2}>
-                                                <ReservaItemCard reserva={reserva} />
-                                            </Box>
-                                        ))}
+                                        <Box
+                                            height="660px"
+                                            overflow="auto"
+                                        >
+                                            {reservas && reservas.map((reserva, index) => (
+                                                <Box key={index} className="col info-container-card" mt={2} p={2}>
+                                                    <ReservaItemCard reserva={reserva} />
+                                                </Box>
+                                            ))}
+                                        </Box>
                                     </Box>
                                 </div>
                             )

@@ -9,13 +9,14 @@ import LockOpenIcon from '@mui/icons-material/LockOpen'
 const CambiarContrasena = () => {
     return <>
         < Box className="col info-container" mt={2} p={2} >
-            <div className='col-md-8'>
-                <h4>Cambiar contraseña</h4>
+            <div className='col-md-12'>
+                <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Cambiar contraseña</h4>
+                <hr />
 
                 <form className='form-register'>
                     <Grid spacing={2}>
-                        <p style={{ marginTop: "30px" }}>Contraseña actual</p>
-                        <Grid item xs={6} pb={2}>
+                        <h5 style={{ marginTop: "30px", marginBottom: "25px" }}>Contraseña actual</h5>
+                        <Grid item xs={6} pb={3}>
                             <TextField
                                 fullWidth
                                 required
@@ -33,9 +34,9 @@ const CambiarContrasena = () => {
                                 }}
                             />
                         </Grid>
-                        <p style={{ marginTop: "5px" }}>Nueva contraseña</p>
+                        <h5 style={{ marginTop: "5px", marginBottom: "25px" }}>Nueva contraseña</h5>
 
-                        <Grid item xs={6} pb={2}>
+                        <Grid item xs={6} pb={3}>
                             <TextField
                                 fullWidth
                                 required
@@ -53,7 +54,7 @@ const CambiarContrasena = () => {
                                 }}
                             />
                         </Grid>
-                        <Grid item xs={6} pb={2}>
+                        <Grid item xs={6} pb={3}>
                             <TextField
                                 fullWidth
                                 required
@@ -72,10 +73,11 @@ const CambiarContrasena = () => {
                             />
                         </Grid>
                     </Grid>
-
-                    <Button type="submit" variant="contained" style={{ backgroundColor: '#FA7525', color: 'white', marginTop: '15px', borderRadius: "10px", width: "226px" }}>
-                        Cambiar Contraseña
-                    </Button>
+                    <Grid container justifyContent="flex-end">
+                        <Button type="submit" variant="contained" style={{ backgroundColor: '#FA7525', color: 'white', marginTop: '15px', borderRadius: "12px", width: "226px" }}>
+                            Cambiar Contraseña
+                        </Button>
+                    </Grid>
 
                 </form>
             </div>
