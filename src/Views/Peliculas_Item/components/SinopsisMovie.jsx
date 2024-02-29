@@ -119,8 +119,6 @@ const SinopsisMovie = (props) => {
                                 <Skeleton variant="text" width={500} />
                             )}
                         </p>
-                                    <StarIcon className="star"></StarIcon>
-
 
                         <Box pl={2} style={{ display: 'flex', justifyContent: 'space-between' }}>
 
