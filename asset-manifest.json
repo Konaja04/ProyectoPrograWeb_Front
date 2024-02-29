@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Konaja04/ProyectoPrograWeb_Front/static/css/main.953c5445.css",
+    "main.js": "/Konaja04/ProyectoPrograWeb_Front/static/js/main.e2969350.js",
+    "static/media/logo.png": "/Konaja04/ProyectoPrograWeb_Front/static/media/logo.d5052a6e40d91342391d.png",
+    "index.html": "/Konaja04/ProyectoPrograWeb_Front/index.html",
+    "main.953c5445.css.map": "/Konaja04/ProyectoPrograWeb_Front/static/css/main.953c5445.css.map",
+    "main.e2969350.js.map": "/Konaja04/ProyectoPrograWeb_Front/static/js/main.e2969350.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.953c5445.css",
+    "static/js/main.e2969350.js"
+  ]
+}
