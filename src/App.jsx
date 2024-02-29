@@ -9,6 +9,7 @@ import SalasItemPage from "./Views/Salas_Item/SalasItemPage"
 import ReservaPage from "./Views/Reserva/ReservaPage"
 import ReservaUserPage from "./Views/Reserva_user/ReservaUserPage"
 import RecuperarPassword from './Views/RecuperarPassword/RecuperarPassword';
+import ErrorPage from './Views/Error/ErrorPage';
 const router = createBrowserRouter([
     {
         path: "/",
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
     {
         path: "/recuperar-password",
         element: <RecuperarPassword />
+    },
+    {
+        path: "*",
+        element: <ErrorPage />
     }
 
 ])
