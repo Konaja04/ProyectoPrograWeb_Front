@@ -133,7 +133,7 @@ const AsientosStep = ({
                                                                 variant="outlined"
                                                                 id="asiento-disponible"
                                                                 style={{
-                                                                    backgroundColor: esAsientoReservado(rowIndex, colIndex + 6) ? 'red' : (asientos[rowIndex][colIndex + 6] === 'disponible' ? 'gray' : '#5C8374'),
+                                                                    backgroundColor: esAsientoReservado(rowIndex, colIndex + 6) ? '#D04848' : (asientos[rowIndex][colIndex + 6] === 'disponible' ? 'gray' : '#5C8374'),
                                                                     border: 'none',
                                                                     borderTopLeftRadius: '10px',
                                                                     borderTopRightRadius: '10px',

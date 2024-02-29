@@ -47,6 +47,10 @@ const SalasIndexPage = () => {
         )
     }
     useEffect(() => {
+        if (sessionStorage.getItem("USER_ID") == null) {
+            navigate("/")
+            return
+        }
         obtenerSalas()
     }, [])
 

@@ -147,6 +147,10 @@ const ReservaPage = () => {
     };
 
     useEffect(() => {
+        if (sessionStorage.getItem("USER_ID") == null) {
+            navigate("/")
+            return
+        }
         obtenerData()
     }, [])
 

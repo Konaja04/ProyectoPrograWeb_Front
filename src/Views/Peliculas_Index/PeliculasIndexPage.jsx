@@ -64,11 +64,12 @@ const PeliculasIndexPage = () => {
     }
 
     useEffect(() => {
+        if (sessionStorage.getItem("USER_ID") == null) {
+            navigate("/")
+            return
+        }
         obtenerPeliculas();
-        // if (sessionStorage.getItem("USERNAME") == null) {
-        //     navigate("/")
-        //     return
-        // }
+
     }, []);
     useEffect(() => {
         filtraPelis();

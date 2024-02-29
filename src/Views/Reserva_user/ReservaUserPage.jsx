@@ -81,7 +81,10 @@ const ReservaUserPage = () => {
         setShowCambiarContrasena(true);
     }
 
-
+    const logoutOnClick = () => {
+        sessionStorage.clear()
+        navigate("/")
+    }
     return (
         <div>
             <NavBar />
@@ -135,13 +138,12 @@ const ReservaUserPage = () => {
 
                                 <Box sx={{ p: 2 }} >
                                     <ExitToAppIcon />
-                                    <Link to="/inicio/">
-                                        <Button
-                                            sx={{ width: '300px', height: '40px', color: 'black' }}
-                                        >
-                                            Cerrar Sesión
-                                        </Button>
-                                    </Link>
+
+                                    <Button onClick={logoutOnClick}
+                                        sx={{ width: '300px', height: '40px', color: 'black' }}
+                                    >
+                                        Cerrar Sesión
+                                    </Button>
                                 </Box>
                             </Box>
                         </Box>
@@ -159,28 +161,21 @@ const ReservaUserPage = () => {
                                 </div>
                             ) : (
                                 <div>
-                                    {reservas && reservas.length > 0 ? (
-                                        <Box height="750px" className="col info-container" mt={2} p={1}>
-                                            <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis reservas</h4>
-                                            <hr />
-                                            <Box height="660px" overflow="auto">
-                                                {reservas.map((reserva, index) => (
-                                                    <Box key={index} className="col info-container-card" mt={2} p={2}>
-                                                        <ReservaItemCard reserva={reserva} />
-                                                    </Box>
-                                                ))}
-                                            </Box>
+                                    <Box height="750px" className="col info-container" mt={2} p={1}>
+                                        <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis reservas</h4>
+                                        <hr />
+                                        <Box height="660px" overflow="auto">
+                                            {reservas && reservas.map((reserva, index) => (
+                                                <Box key={index} className="col info-container-card" mt={2} p={2}>
+                                                    <ReservaItemCard reserva={reserva} />
+                                                </Box>
+                                            ))}
                                         </Box>
-                                    ) : (
-                                        <Box className="col info-container" mt={2} p={1}>
-                                            <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis reservas</h4>
-                                            <hr />
-                                            <h5 style={{ marginLeft: "15px", marginTop: "10px" }}>No hay reservas disponibles.</h5>
-                                        </Box>
-                                    )}
+                                    </Box>
                                 </div>
                             )
                         ) : null}
+
                         {showCalificaciones ? (
                             isLoading ? (
                                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh' }}>
@@ -193,7 +188,7 @@ const ReservaUserPage = () => {
                                         <hr />
                                         <Box height="660px" overflow="auto">
                                             {calificaciones.map((calificacion, index) => (
-                                                <Box key={index} className="col info-container-card" mt={2} p={2}>
+                                                <Box key={index} className="col" mt={2} p={2}>
                                                     <CalificacionItem pelicula={calificacion} index={index + 1} />
                                                 </Box>
                                             ))}

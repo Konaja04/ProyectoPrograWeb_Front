@@ -53,11 +53,11 @@ const InicioPage = () => {
     }
 
     useEffect(() => {
+        if (sessionStorage.getItem("USER_ID") == null) {
+            navigate("/")
+            return
+        }
         obtenerPeliculas();
-        // if (sessionStorage.getItem("USERNAME") == null) {
-        //     navigate("/")
-        //     return
-        // }
     }, []);
 
     const peliculasActuales = peliculas.slice(0, 6);

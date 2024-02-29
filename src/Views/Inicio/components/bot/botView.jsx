@@ -20,6 +20,8 @@ const BotView = () => {
         scrollToBottom();
     }, [messages]);
 
+
+
     const handleInputChange = (event) => {
         setInputText(event.target.value);
     };
@@ -58,6 +60,7 @@ const BotView = () => {
             setMessages([...messages, userMessage]);
             enviarMensaje(inputText);
             setInputText('');
+            localStorage.setItem("MENSAJES", messages)
         }
     };
 

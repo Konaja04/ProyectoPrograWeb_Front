@@ -112,7 +112,7 @@ export default function ButtonAppBar() {
                         }}
                     >
                         <Box sx={{ p: 1 }} >
-                            <ListItemButton sx={{ pr: 13.5, pl: 2 }} component={Link} to={'/reservas/'}>
+                            <ListItemButton sx={{ pr: 13.5, pl: 2 }} component={Link} to={'/perfil/'}>
                                 <ListItemIcon>
                                     <PersonIcon style={{ color: "black" }} />
                                 </ListItemIcon>

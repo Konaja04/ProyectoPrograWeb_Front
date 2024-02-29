@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element: <ReservaPage />
     },
     {
-        path: "/reservas/",
+        path: "/perfil/",
         element: <ReservaUserPage />
     },
     {

@@ -27,16 +27,6 @@ const PeliculasItemPage = () => {
 
     };
 
-    // useEffect(() => {
-    //     if (sessionStorage.getItem("USERNAME") == null) {
-    //         navigate("/")
-    //         return
-    //     }
-    // }, []);
-
-    useEffect(() => {
-        obtenerData();
-    }, [path]);
 
     useEffect(() => {
 
@@ -54,6 +44,12 @@ const PeliculasItemPage = () => {
 
 
     useEffect(() => {
+        if (sessionStorage.getItem("USER_ID") == null) {
+            navigate("/")
+            return
+        }
+        obtenerData();
+
         const loadDisqus = () => {
             if (window.DISQUS) {
                 window.DISQUS.reset({

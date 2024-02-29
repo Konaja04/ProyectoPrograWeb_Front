@@ -54,6 +54,7 @@ const PagoStep = ({
                                     Cantidad: {formData.cantidad} pases<br />
                                     Asientos seleccionados: {asientosSeleccionados.join(', ')}
                                 </p>
+
                                 <Button
                                     onClick={handleCloseModal}
                                     sx={{ position: 'absolute', bottom: '16px', left: '375px' }}
