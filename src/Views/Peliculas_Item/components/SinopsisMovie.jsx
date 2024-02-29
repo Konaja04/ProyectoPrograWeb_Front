@@ -119,32 +119,46 @@ const SinopsisMovie = (props) => {
                                 <Skeleton variant="text" width={500} />
                             )}
                         </p>
-                        {(pelicula.genres != null ? pelicula.genres : []).map((genero, index) => (
-                            <label key={index} className="type-pelicula">{genero}</label>
-                        ))}
+                                    <StarIcon className="star"></StarIcon>
 
-                        <Box pl={2} style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-                            {isLoading ? (
-                                <div className="stars-loading-container">
-                                    <StarIcon className="star"></StarIcon>
-                                    <StarIcon className="star"></StarIcon>
-                                    <StarIcon className="star"></StarIcon>
-                                    <StarIcon className="star"></StarIcon>
-                                    <StarIcon className="star"></StarIcon>
-                                </div>
 
-                            ) : (
-                                <Rating
-                                    precision={0.5}
-                                    name="simple-controlled"
-                                    value={userRating !== null ? userRating : calificacionPromedio}
-                                    onChange={handleRatingChange}
-                                    readOnly={calificacion !== null || hasRated}
-                                />
-                            )}
-                            {calificacionPromedio !== null && (
-                                <span style={{ marginLeft: 10 }}>{calificacionPromedio}</span>
-                            )}
+                        <Box pl={2} style={{ display: 'flex', justifyContent: 'space-between' }}>
+
+                            <Box style={{ display: 'flex', alignItems: 'center' }}>
+                                {(pelicula.genres != null ? pelicula.genres : []).map((genero, index) => (
+                                    <label key={index} className="type-pelicula">{genero}</label>
+                                ))}
+                            </Box>
+
+                            <Box style={{ display: 'flex', alignItems: 'center' }}>
+                                {isLoading ? (
+                                    <div className="stars-loading-container">
+                                        <StarIcon className="star"></StarIcon>
+                                        <StarIcon className="star"></StarIcon>
+                                        <StarIcon className="star"></StarIcon>
+                                        <StarIcon className="star"></StarIcon>
+                                        <StarIcon className="star"></StarIcon>
+                                        <Skeleton variant="text" width={20} height={30} />
+
+                                    </div>
+
+                                ) : (
+                                    <>
+                                        <Rating
+                                            precision={0.5}
+                                            name="simple-controlled"
+                                            value={userRating !== null ? userRating : calificacionPromedio}
+                                            onChange={handleRatingChange}
+                                            readOnly={calificacion !== null || hasRated}
+                                        />
+                                        {calificacionPromedio !== null && (
+                                            <span style={{ marginLeft: 10 }}>{calificacionPromedio}</span>
+                                        )}
+                                    </>
+                                )}
+
+                            </Box>
+
                         </Box>
                     </div>
                 </div>

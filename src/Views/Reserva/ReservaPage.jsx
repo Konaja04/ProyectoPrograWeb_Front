@@ -87,6 +87,10 @@ const ReservaPage = () => {
 
 
     const handleInputChange = (e) => {
+
+        resetAsientosSeleccionados();
+
+
         const { name, value } = e.target;
 
         // Validar si es número negativo o decimal
@@ -179,7 +183,13 @@ const ReservaPage = () => {
     };
 
     const handleBack = () => {
+        resetAsientosSeleccionados();
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+
+    const resetAsientosSeleccionados = () => {
+        setAsientos(asientos.map(fila => fila.map(asiento => 'disponible')));
+        setCantidadAsientosSeleccionados(0);
     };
 
     const handleReset = () => {
@@ -386,6 +396,8 @@ const ReservaPage = () => {
                                     cambiarEstadoAsiento={cambiarEstadoAsiento}
                                     todosAsientosSelec={todosAsientosSelec}
                                     FUNCION_ID={funcion_id}
+                                    resetAsientosSeleccionados={resetAsientosSeleccionados}
+
                                 />
 
                             )}

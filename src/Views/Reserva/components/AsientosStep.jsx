@@ -11,7 +11,8 @@ const AsientosStep = ({
     asientos,
     cambiarEstadoAsiento,
     todosAsientosSelec,
-    FUNCION_ID
+    FUNCION_ID,
+    resetAsientosSeleccionados
 }) => {
 
     const [asientosReservados, setAsientosReservados] = useState([]);
@@ -45,6 +46,13 @@ const AsientosStep = ({
             </div>
         );
     }
+
+
+    const handleBackWithReset = () => {
+        resetAsientosSeleccionados();
+        handleBack();
+    };
+
     return (
 
         <div className='col-md-12 d-flex flex-column align-items-center'>
@@ -164,7 +172,7 @@ const AsientosStep = ({
                                         <Button
                                             color="inherit"
                                             disabled={activeStep === 0}
-                                            onClick={handleBack}
+                                            onClick={handleBackWithReset}
                                             sx={{ mr: 1 }}
                                         >
                                             Volver

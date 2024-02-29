@@ -12,7 +12,8 @@ const EntradasStep = ({
     handleReset,
     handleBack,
     handleNext,
-    areFieldsFilled, }) => {
+    areFieldsFilled }) => {
+
     return (
 
         <div className='col-md-12 d-flex flex-column align-items-center'>
