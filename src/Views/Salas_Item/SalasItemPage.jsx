@@ -27,12 +27,12 @@ const SalasItemPage = () => {
         setIsLoading(false);
     };
 
-    useEffect(() => {
-        if (sessionStorage.getItem("USERNAME") == null) {
-            navigate("/")
-            return
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (sessionStorage.getItem("USERNAME") == null) {
+    //         navigate("/")
+    //         return
+    //     }
+    // }, []);
 
     useEffect(() => {
         obtenerData();

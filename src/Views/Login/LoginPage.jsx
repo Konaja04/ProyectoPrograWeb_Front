@@ -82,13 +82,13 @@ const LoginPage = () => {
         }
     }
 
-    useEffect(() => {
-        // getUsersHTTP()
-        if (sessionStorage.getItem("CODIGO") !== null) {
-            navigate("/inicio")
-            return
-        }
-    }, [])
+    // useEffect(() => {
+    //     // getUsersHTTP()
+    //     if (sessionStorage.getItem("CODIGO") !== null) {
+    //         navigate("/inicio")
+    //         return
+    //     }
+    // }, [])
 
     return (
         <>

@@ -54,12 +54,12 @@ const SalasIndexPage = () => {
         filtrarSalas()
     }, [busqueda])
 
-    useEffect(() => {
-        if (sessionStorage.getItem("USERNAME") == null) {
-            navigate("/")
-            return
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (sessionStorage.getItem("USERNAME") == null) {
+    //         navigate("/")
+    //         return
+    //     }
+    // }, []);
 
 
     return (

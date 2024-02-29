@@ -9,12 +9,12 @@ const RecuperarPassword = () => {
 
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (sessionStorage.getItem("USERNAME") == null) {
-            navigate("/")
-            return
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (sessionStorage.getItem("USERNAME") == null) {
+    //         navigate("/")
+    //         return
+    //     }
+    // }, []);
 
     return (
         < div className='container-fluid vertical-center-container register-page' style={{ backgroundColor: '#f8ccb4' }

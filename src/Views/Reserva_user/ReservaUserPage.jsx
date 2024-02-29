@@ -37,12 +37,12 @@ const ReservaUserPage = () => {
         setIsLoading(false)
     }
 
-    useEffect(() => {
-        if (sessionStorage.getItem("USERNAME") == null) {
-            navigate("/")
-            return
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (sessionStorage.getItem("USERNAME") == null) {
+    //         navigate("/")
+    //         return
+    //     }
+    // }, []);
 
     useEffect(() => {
         traerReservas()
