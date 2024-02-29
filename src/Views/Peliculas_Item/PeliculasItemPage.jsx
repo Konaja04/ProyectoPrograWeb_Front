@@ -113,7 +113,9 @@ const PeliculasItemPage = () => {
                             </>
                             :
                             <>
-                                <ListaSalaDisponible salas={salas} pelicula={pelicula} />
+                                {salas.length > 0 && !isLoading ? (
+                                    <ListaSalaDisponible salas={salas} pelicula={pelicula} />
+                                ) : null}
                             </>
                         }
                         < div id="disqus_thread" ></div >

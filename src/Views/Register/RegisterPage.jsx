@@ -272,11 +272,12 @@ const RegisterPage = () => {
                                     Verifique que el correo tenga el formato 'codigo@aloe.ulima.edu.pe'
                                 </Alert>
                             )}
+                            <Button type="submit" variant="contained" style={{ marginTop: "30px", backgroundColor: '#FA7525', color: 'white', borderRadius: "18px" }}
+                            >
+                                Registrarse
+                            </Button>
                         </form>
-                        <Button type="submit" variant="contained" style={{ marginTop: "30px", backgroundColor: '#FA7525', color: 'white', borderRadius: "18px" }}
-                        >
-                            Registrarse
-                        </Button>
+
                     </div>
                 </div>
             </div>

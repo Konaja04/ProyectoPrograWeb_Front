@@ -104,25 +104,15 @@ const SinopsisMovie = (props) => {
                                 <StarIcon className="star"></StarIcon>
                                 <StarIcon className="star"></StarIcon>
                             </div>
+
                         ) : (
-                            <>
-                                {calificacion !== null ? (
-                                    <Rating
-                                        precision={0.5}
-                                        name="simple-controlled"
-                                        value={calificacion}
-                                        readOnly
-                                    />
-                                ) : (
-                                    <div className="stars-loading-container">
-                                        <StarIcon className="star"></StarIcon>
-                                        <StarIcon className="star"></StarIcon>
-                                        <StarIcon className="star"></StarIcon>
-                                        <StarIcon className="star"></StarIcon>
-                                        <StarIcon className="star"></StarIcon>
-                                    </div>
-                                )}
-                            </>
+                            <Rating
+                                precision={0.5}
+                                name="simple-controlled"
+                                value={userRating !== null ? userRating : calificacion}
+                                onChange={handleRatingChange}
+                                readOnly={calificacion !== null}
+                            />
                         )}
                     </Box>
                 </div>

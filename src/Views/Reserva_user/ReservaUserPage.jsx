@@ -144,21 +144,28 @@ const ReservaUserPage = () => {
                                 </div>
                             ) : (
                                 <div>
-                                    <Box height="750px" className="col info-container" mt={2} p={1}>
-                                        <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis reservas</h4>
-                                        <hr />
-                                        <Box height="660px" overflow="auto">
-                                            {reservas && reservas.map((reserva, index) => (
-                                                <Box key={index} className="col info-container-card" mt={2} p={2}>
-                                                    <ReservaItemCard reserva={reserva} />
-                                                </Box>
-                                            ))}
+                                    {reservas && reservas.length > 0 ? (
+                                        <Box height="750px" className="col info-container" mt={2} p={1}>
+                                            <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis reservas</h4>
+                                            <hr />
+                                            <Box height="660px" overflow="auto">
+                                                {reservas.map((reserva, index) => (
+                                                    <Box key={index} className="col info-container-card" mt={2} p={2}>
+                                                        <ReservaItemCard reserva={reserva} />
+                                                    </Box>
+                                                ))}
+                                            </Box>
                                         </Box>
-                                    </Box>
+                                    ) : (
+                                        <Box className="col info-container" mt={2} p={1}>
+                                            <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis reservas</h4>
+                                            <hr />
+                                            <h5 style={{ marginLeft: "15px", marginTop: "10px" }}>No hay reservas disponibles.</h5>
+                                        </Box>
+                                    )}
                                 </div>
                             )
                         ) : null}
-
                         {showCalificaciones ? (
                             <div>
                                 <Box height="750px" className="col info-container" mt={2} p={1}>
