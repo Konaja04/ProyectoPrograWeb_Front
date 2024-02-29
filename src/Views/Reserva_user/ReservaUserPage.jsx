@@ -12,11 +12,13 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import PasswordIcon from '@mui/icons-material/Password';
 import StarIcon from '@mui/icons-material/Star';
+import CalificacionItem from './components/CalificacionItem';
 const ReservaUserPage = () => {
 
     const navigate = useNavigate();
 
     const [reservas, setDataReservas] = useState([])
+    const [calificaciones, setDataCalificaciones] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const [showReservas, setShowReservas] = useState(true);
     const [showCalificaciones, setShowCalificaciones] = useState(false);
@@ -36,16 +38,29 @@ const ReservaUserPage = () => {
         setDataReservas(data.reservas)
         setIsLoading(false)
     }
+    const traerCalificaciones = async () => {
+        setIsLoading(true)
+        const datausuario = {
+            user_id: sessionStorage.getItem("USER_ID")
+        }
+        const response = await fetch('http://localhost:8000/salas_cine/calificacionesUsuario', {
+            method: "post",
+            body: JSON.stringify(datausuario)
+        })
 
-    // useEffect(() => {
-    //     if (sessionStorage.getItem("USERNAME") == null) {
-    //         navigate("/")
-    //         return
-    //     }
-    // }, []);
+        const data = await response.json()
+
+        setDataCalificaciones(data)
+        setIsLoading(false)
+    }
 
     useEffect(() => {
+        if (sessionStorage.getItem("USER_ID") == null) {
+            navigate("/")
+            return
+        }
         traerReservas()
+        traerCalificaciones()
     }, [])
 
     const handleClickReservas = () => {
@@ -167,16 +182,25 @@ const ReservaUserPage = () => {
                             )
                         ) : null}
                         {showCalificaciones ? (
-                            <div>
-                                <Box height="750px" className="col info-container" mt={2} p={1}>
-                                    <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis calificaciones</h4>
-                                    <hr />
-                                    <Box height="660px" overflow="auto">
-                                        {/* Aquí deberías renderizar el componente para mostrar las calificaciones del usuario */}
-                                        {/* <CalificacionesItemCard /> */}
+                            isLoading ? (
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh' }}>
+                                    <CircularProgress />
+                                </div>
+                            ) : (
+                                <div>
+                                    <Box height="750px" className="col info-container" mt={2} p={1}>
+                                        <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis calificaciones</h4>
+                                        <hr />
+                                        <Box height="660px" overflow="auto">
+                                            {calificaciones.map((calificacion, index) => (
+                                                <Box key={index} className="col info-container-card" mt={2} p={2}>
+                                                    <CalificacionItem pelicula={calificacion} index={index + 1} />
+                                                </Box>
+                                            ))}
+                                        </Box>
                                     </Box>
-                                </Box>
-                            </div>
+                                </div>
+                            )
                         ) : null}
 
                         {showCambiarContrasena ? <CambiarContrasena /> : null}
