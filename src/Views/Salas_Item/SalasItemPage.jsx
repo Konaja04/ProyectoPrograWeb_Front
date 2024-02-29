@@ -1,7 +1,7 @@
 import './SalasItemPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../../common/Navbar'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import HistoriaSala from './components/HistoriaSala';
 import ListaPeliculasDisponible from './components/ListaPeliculasDisponible';
@@ -10,6 +10,8 @@ import { CircularProgress, Skeleton } from "@mui/material";
 
 
 const SalasItemPage = () => {
+    const navigate = useNavigate();
+
     const { path } = useParams();
     const [sala, setDataSala] = useState([])
     const [pelicula, setDataPelicula] = useState([])
@@ -24,6 +26,13 @@ const SalasItemPage = () => {
         setDataSala(dataSala);
         setIsLoading(false);
     };
+
+    useEffect(() => {
+        if (sessionStorage.getItem("USERNAME") == null) {
+            navigate("/")
+            return
+        }
+    }, []);
 
     useEffect(() => {
         obtenerData();

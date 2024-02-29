@@ -10,7 +10,7 @@ import { CircularProgress, Skeleton } from "@mui/material";
 
 const PeliculasItemPage = () => {
 
-
+    const navigate = useNavigate();
 
     const { path } = useParams();
     const [pelicula, setDataPelicula] = useState({})
@@ -26,6 +26,13 @@ const PeliculasItemPage = () => {
         setIsLoadingPeli(false)
 
     };
+
+    useEffect(() => {
+        if (sessionStorage.getItem("USERNAME") == null) {
+            navigate("/")
+            return
+        }
+    }, []);
 
     useEffect(() => {
         obtenerData();

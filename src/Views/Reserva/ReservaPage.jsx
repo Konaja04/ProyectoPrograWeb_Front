@@ -235,6 +235,13 @@ const ReservaPage = () => {
     };
     const todosAsientosSelec = cantidadAsientosSeleccionados === parseInt(formData.cantidad);
 
+    useEffect(() => {
+        if (sessionStorage.getItem("USERNAME") == null) {
+            navigate("/")
+            return
+        }
+    }, []);
+
 
 
 

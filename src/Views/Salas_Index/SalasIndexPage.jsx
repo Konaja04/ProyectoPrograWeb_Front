@@ -11,10 +11,12 @@ import {
     CircularProgress, InputAdornment
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 
 const SalasIndexPage = () => {
+
+    const navigate = useNavigate();
 
     const [salas, setDataSalas] = useState([])
     const [salasTotal, setDataSalasTotal] = useState([])
@@ -51,6 +53,13 @@ const SalasIndexPage = () => {
     useEffect(() => {
         filtrarSalas()
     }, [busqueda])
+
+    useEffect(() => {
+        if (sessionStorage.getItem("USERNAME") == null) {
+            navigate("/")
+            return
+        }
+    }, []);
 
 
     return (
