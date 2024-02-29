@@ -1,5 +1,5 @@
 import './InicioPage.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TextField, Container, Box, Popover, Avatar, Typography, Grid, Divider } from '@mui/material';
 import { useEffect, useState } from "react";
 import CustomCarousel from './components/CustomCarousel';
@@ -12,6 +12,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import TopPeliculasView from './components/TopPeliculasView';
 
 const InicioPage = () => {
+    const navigate = useNavigate();
 
     const style = {
         position: 'absolute',
@@ -53,6 +54,10 @@ const InicioPage = () => {
 
     useEffect(() => {
         obtenerPeliculas();
+        if (sessionStorage.getItem("USERNAME") == null) {
+            navigate("/")
+            return
+        }
     }, []);
 
     const peliculasActuales = peliculas.slice(0, 6);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -10,8 +10,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import ImageIcon from '@mui/icons-material/Image';
 
-
 const RegisterPage = () => {
+
     const [formData, setFormData] = useState({
         nombre: '',
         apellidos: '',
@@ -87,6 +87,13 @@ const RegisterPage = () => {
             console.error("Error al realizar la solicitud:", error);
         }
     };
+
+    useEffect(() => {
+        if (sessionStorage.getItem("USERNAME") == null) {
+            navigate("/")
+            return
+        }
+    }, []);
 
     return (
         <div className='container-fluid vertical-center-container register-page' style={{ backgroundColor: '#f8ccb4' }}>

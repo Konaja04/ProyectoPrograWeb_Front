@@ -65,6 +65,10 @@ const PeliculasIndexPage = () => {
 
     useEffect(() => {
         obtenerPeliculas();
+        if (sessionStorage.getItem("USERNAME") == null) {
+            navigate("/")
+            return
+        }
     }, []);
     useEffect(() => {
         filtraPelis();

@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../../common/Navbar'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Box, Container, Grid, Typography, Divider, Avatar, CircularProgress, Button } from '@mui/material';
 
 //Icons
@@ -12,6 +12,8 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import PasswordIcon from '@mui/icons-material/Password';
 const ReservaUserPage = () => {
+
+    const navigate = useNavigate();
 
     const [reservas, setDataReservas] = useState([])
     const [isLoading, setIsLoading] = useState(true);
@@ -31,6 +33,14 @@ const ReservaUserPage = () => {
         setDataReservas(data.reservas)
         setIsLoading(false)
     }
+
+    useEffect(() => {
+        if (sessionStorage.getItem("USERNAME") == null) {
+            navigate("/")
+            return
+        }
+    }, []);
+
     useEffect(() => {
         traerReservas()
     }, [])
