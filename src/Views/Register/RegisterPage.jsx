@@ -24,6 +24,7 @@ const RegisterPage = () => {
     const [passwordsMatch, setPasswordsMatch] = useState(true); // Estado para verificar si las contraseñas coinciden
     const [registrationError, setRegistrationError] = useState(false); // Estado para error de registro
     const [registrationError2, setRegistrationError2] = useState(false); // Estado para error de formato de codgio
+    const [registrationErrorBack, setRegistrationErrorBack] = useState(false); // Estado para error de formato de codgio
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -45,6 +46,7 @@ const RegisterPage = () => {
 
         // Verifica si el campo 'codigo' tiene exactamente 8 dígitos
         if (formData.codigo.length !== 8 || isNaN(formData.codigo)) {
+            console.log(formData.codigo.length)
             setRegistrationError(true); // Muestra la alerta de error
             return; // Detiene la ejecución de la función
         }
@@ -80,21 +82,13 @@ const RegisterPage = () => {
                 console.log("Usuario registrado exitosamente");
                 navigate('/');
             } else {
-                console.error("Error al registrar usuario:", data.msg);
-                setRegistrationError(true); // Muestra la alerta de error de registro
+                console.error("Error al registrar usuario:", data.error);
+                setRegistrationErrorBack(true); // Muestra la alerta de error de registro
             }
         } catch (error) {
             console.error("Error al realizar la solicitud:", error);
         }
     };
-
-    // useEffect(() => {
-    //     if (sessionStorage.getItem("USERNAME") == null) {
-    //         navigate("/")
-    //         return
-    //     }
-    // }, []);
-
     return (
 
         <div className='container-fluid vertical-center-container register-page' style={{ backgroundColor: '#f8ccb4' }}>
@@ -270,6 +264,11 @@ const RegisterPage = () => {
                             {registrationError2 && (
                                 <Alert severity="error" sx={{ mb: 2 }}>
                                     Verifique que el correo tenga el formato 'codigo@aloe.ulima.edu.pe'
+                                </Alert>
+                            )}
+                            {registrationErrorBack && (
+                                <Alert severity="error" sx={{ mb: 2 }}>
+                                    Ya existe una cuenta registrada a esa direccion de correo y código
                                 </Alert>
                             )}
                             <Button type="submit" variant="contained" style={{ marginTop: "30px", backgroundColor: '#FA7525', color: 'white', borderRadius: "18px" }}

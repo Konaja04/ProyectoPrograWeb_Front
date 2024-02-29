@@ -60,7 +60,7 @@ const PeliculasRecomendadas = () => {
                                         <Link to={"/pelicula/" + pelicula.path} style={{ textDecoration: 'none' }}>
                                             <button className='botones-overlay-comprar' >
                                                 <ConfirmationNumberOutlinedIcon style={{ marginRight: '8px' }} />
-                                                Comprar</button>
+                                                ({pelicula.puntuacion * 100}%)Comprar</button>
                                         </Link>
 
                                     </div>

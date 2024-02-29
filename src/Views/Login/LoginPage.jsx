@@ -1,5 +1,5 @@
 import './LoginPage.css';
-import { Button, Alert, TextField, InputAdornment } from '@mui/material';
+import { Button, Alert, TextField, InputAdornment, CircularProgress } from '@mui/material';
 import CheckIcon from "@mui/icons-material/Check"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
@@ -11,6 +11,7 @@ const LoginPage = () => {
     const [codigo, setCodigo] = useState("")
     const [password, setPw] = useState("")
     const [loginError, setLoginError] = useState(false)
+    const [loginLoading, setLoginLoading] = useState(false)
 
     const navigate = useNavigate()
 
@@ -25,44 +26,18 @@ const LoginPage = () => {
         navigate('/recuperar-password')
     }
     const loginOnClick = async () => {
-        // const user = dataUsers.find((usuario) => {
-        //     return usuario.username === username && usuario.password === password;
-        // });
-
-        // if (user) {
-        //     // Hay por lo menos un usuario
-        //     const { username, name, lastname, img, codigo } = user;
-        //     console.log("bien");
-        //     sessionStorage.setItem("name", name);
-        //     sessionStorage.setItem("lastname", lastname);
-        //     sessionStorage.setItem("username", username);
-        //     sessionStorage.setItem("codigo", codigo);
-        //     sessionStorage.setItem("img", img);
-
-        //     navigate("/inicio", {
-        //         state: {
-        //             username: username
-        //         }
-        //     });
-        // } else {
-        //     console.log("pocho");
-        //     setLoginError(true);
-        // }
-
         const dataUsername = {
             codigo: codigo,
             password: password
         }
-
+        setLoginLoading(true)
         const response = await fetch("http://localhost:8000/salas_cine/login-json", {
             method: "post",
             body: JSON.stringify(dataUsername)
         })
         const data = await response.json()
-
+        setLoginLoading(false)
         if (data.msg === "") {
-            // Login correcto
-            // Almacenando en localStorage
             sessionStorage.setItem("USER_ID", data.id)
             sessionStorage.setItem("CODIGO", codigo)
             sessionStorage.setItem("ID", data.id,)
@@ -77,18 +52,16 @@ const LoginPage = () => {
                 }
             })
         } else {
-            // Login incorrecto
             setLoginError(true)
         }
     }
 
-    // useEffect(() => {
-    //     // getUsersHTTP()
-    //     if (sessionStorage.getItem("CODIGO") !== null) {
-    //         navigate("/inicio")
-    //         return
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (sessionStorage.getItem("USER_ID") !== null) {
+            navigate("/inicio")
+            return
+        }
+    }, [])
 
     return (
         <>
@@ -153,32 +126,40 @@ const LoginPage = () => {
                                 </div>
 
                             </form>
-                            <div className="row form-group">
-                                <Button variant="contained"
-                                    style={{ width: '100%', backgroundColor: '#FA7525', color: 'white', borderRadius: "18px" }}
-                                    onClick={loginOnClick}>
-                                    Iniciar Sesión
-                                </Button>
-                            </div>
-                            <div className="text-center" style={{ fontSize: '14px', marginTop: '10px' }}>
-                                <Button variant="text" onClick={navigateOlvidarContraseña}>¿Olvidó su contraseña?</Button>
-                            </div>
+                            {loginLoading ?
+                                <CircularProgress />
+                                :
+                                <>
+                                    <div className="row form-group">
+                                        <Button variant="contained"
+                                            style={{ width: '100%', backgroundColor: '#FA7525', color: 'white', borderRadius: "18px" }}
+                                            onClick={loginOnClick}>
+                                            Iniciar Sesión
+                                        </Button>
+                                    </div>
+                                    <div className="text-center" style={{ fontSize: '14px', marginTop: '10px' }}>
+                                        <Button variant="text" onClick={navigateOlvidarContraseña}>¿Olvidó su contraseña?</Button>
+                                    </div>
+                                </>
+                            }
+                            {
+                                (() => {
+                                    if (loginError) {
+                                        return <Alert
+                                            icon={<CheckIcon fontSize="inherit" />}
+                                            severity="error"
+                                            sx={{ mt: 2 }}>
+                                            Error en el login.
+                                        </Alert>
+                                    }
+                                })()
+                            }
+
                         </div>
 
 
                     </div>
-                    {
-                        (() => {
-                            if (loginError) {
-                                return <Alert
-                                    icon={<CheckIcon fontSize="inherit" />}
-                                    severity="error"
-                                    sx={{ mt: 2 }}>
-                                    Error en el login.
-                                </Alert>
-                            }
-                        })()
-                    }
+
                 </div >
 
             </div >

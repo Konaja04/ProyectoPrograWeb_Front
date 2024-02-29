@@ -48,8 +48,9 @@ const SearchModal = () => {
         const filteredPeliculas = busqueda ? peliculasTotal.filter((pelicula) =>
         (
             pelicula.title.toLowerCase().includes(busqueda.toLowerCase()) ||
-            pelicula.genres.map((genero) => (genero.toLowerCase())).includes(busqueda.toLowerCase()) ||
-            pelicula.year.toString().toLowerCase().includes(busqueda.toLowerCase())
+            pelicula.genres.some((genero) => (genero.toLowerCase().includes(busqueda.toLowerCase()))) ||
+            pelicula.year.toString().toLowerCase().includes(busqueda.toLowerCase()) ||
+            pelicula.cast.some((actor) => (actor.toLowerCase().includes(busqueda.toLowerCase())))
         )
         ) : [];
         setPeliculas(filteredPeliculas);

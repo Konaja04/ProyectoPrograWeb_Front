@@ -1,4 +1,4 @@
-import { Grid, Button, TextField, Alert, InputAdornment, Box } from '@mui/material';
+import { Grid, Button, TextField, Alert, InputAdornment, Box, CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
@@ -11,6 +11,8 @@ const InicioSolicitud = (props) => {
     const [codeMatch, setMatch] = useState(true);
     const [showCodeInput, setShowCodeInput] = useState(false);
     const [emailError, setEmailError] = useState(false);
+    const [emailErrorNoExiste, setEmailErrorNoExiste] = useState(false);
+    const [verificandoCorreo, setVerificandoCorreo] = useState(false);
 
     const handleInputChange = (e, index) => {
         const newInputCodes = [...inputCodes];
@@ -23,19 +25,26 @@ const InicioSolicitud = (props) => {
         return codigoDecodificado;
     }
     const EnviarCodigo = async () => {
+        setEmailErrorNoExiste(false)
+        setEmailError(false)
         if (!correo || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(correo)) {
             setEmailError(true);
             return;
         }
-        setEmailError(false);
         const dataUser = {
             correo: correo
         }
+        setVerificandoCorreo(true)
         const response = await fetch("http://localhost:8000/salas_cine/enviarCorreoRecuperacion", {
             method: "post",
             body: JSON.stringify(dataUser)
         })
         const data = await response.json()
+        setVerificandoCorreo(false)
+        if (data.msg == 'error correo') {
+            setEmailErrorNoExiste(true)
+            return
+        }
         sessionStorage.setItem("CORREO_RECUPERAR", correo)
         setRecievedCode(decodificarCodigo(data.codigo));
         setShowCodeInput(true);
@@ -96,19 +105,30 @@ const InicioSolicitud = (props) => {
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={EnviarCodigo}
-                                        style={{ backgroundColor: '#FA7525', color: 'white', marginTop: '15px', borderRadius: "18px" }}
-                                    >
-                                        Enviar Código
-                                    </Button>
+                                    {verificandoCorreo ?
+                                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh', color: 'rgb(250, 117, 37)' }}>
+                                            <CircularProgress />
+                                        </div>
+                                        :
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={EnviarCodigo}
+                                            style={{ backgroundColor: '#FA7525', color: 'white', marginTop: '15px', borderRadius: "18px" }}
+                                        >
+                                            Enviar Código
+                                        </Button>
+                                    }
                                 </Grid>
                                 <Grid item xs={12}>
                                     {emailError && (
                                         <Alert severity="error" sx={{ mb: 2 }}>
                                             Por favor, introduce un correo electrónico válido.
+                                        </Alert>
+                                    )}
+                                    {emailErrorNoExiste && (
+                                        <Alert severity="error" sx={{ mb: 2 }}>
+                                            La cuenta que intentas recuperar no se encuentra registrada
                                         </Alert>
                                     )}
                                 </Grid>
