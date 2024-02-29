@@ -10,8 +10,27 @@ const SinopsisMovie = (props) => {
     const user_id = sessionStorage.getItem("USER_ID");
 
     const [calificacion, setCalificacion] = useState(null);
+    const [calificacionPromedio, setCalificacionPromedio] = useState(null);
     const [userRating, setUserRating] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [hasRated, setHasRated] = useState(false);
+
+    const fetchCalificacion = async () => {
+        try {
+            const response = await fetch(`http://localhost:8000/salas_cine/calificacionPelicula`, {
+                method: "POST",
+                body: JSON.stringify({ pelicula_id: pelicula.id })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                setCalificacionPromedio(data.calificacion);
+                setUserRating(data.calificacion / 2);
+            }
+        } catch (error) {
+            console.error('Error al obtener la calificación:', error);
+        }
+    };
+
 
     const guardarCalificacion = async (newValue) => {
         setIsLoading(true);
@@ -30,6 +49,8 @@ const SinopsisMovie = (props) => {
             if (response.ok) {
                 console.log('Calificación guardada correctamente');
                 setUserRating(newValue);
+                setHasRated(true);
+                fetchCalificacion();
             } else {
                 console.error('Error al guardar la calificación');
             }
@@ -57,68 +78,80 @@ const SinopsisMovie = (props) => {
         fetchCalificacion();
     }, [pelicula, user_id]);
 
-    const handleRatingChange = (event, newValue) => {
-        guardarCalificacion(newValue);
+    useEffect(() => {
+        fetchCalificacion();
+    }, [pelicula]);
 
+    const handleRatingChange = (event, newValue) => {
+        if (!hasRated) {
+            guardarCalificacion(newValue);
+        }
     };
 
-    return <Container>
-        <div id="sinopsis-imagen" className="row flex-column flex-lg-row">
-            <div className="col d-flex justify-content-center align-items-center">
-                <img className="image-principal" src={pelicula.thumbnail || placeholderImage} style={{ maxWidth: '100%', maxHeight: '100%' }} />
-            </div>
-            <div className="col">
-                <div className="info-container">
-
-                    <h2 className="title-sub-peliculas">Sinopsis</h2>
 
 
-                    <p className="card-text" style={{ textAlign: 'justify' }}>
-                        {pelicula.extract ? pelicula.extract :
-                            <>
+    return (
+        <Container>
+            <div id="sinopsis-imagen" className="row flex-column flex-lg-row">
+                <div className="col d-flex justify-content-center align-items-center">
+                    <img className="image-principal" src={pelicula.thumbnail || placeholderImage} style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                </div>
+                <div className="col">
+                    <div className="info-container">
+
+                        <h2 className="title-sub-peliculas">Sinopsis</h2>
+
+                        <p className="card-text" style={{ textAlign: 'justify' }}>
+                            {pelicula.extract ? pelicula.extract :
+                                <>
+                                    <Skeleton variant="text" width={500} />
+                                    <Skeleton variant="text" width={500} />
+                                    <Skeleton variant="text" width={500} />
+                                    <Skeleton variant="text" width={500} />
+                                </>
+                            }
+                        </p>
+
+                        <h2 className="title-sub-elenco">Elenco <PersonIcon /></h2>
+
+                        <p className="card-text" style={{ textAlign: 'justify' }}>
+                            {pelicula.cast ? pelicula.cast.join(', ') : (
                                 <Skeleton variant="text" width={500} />
-                                <Skeleton variant="text" width={500} />
-                                <Skeleton variant="text" width={500} />
-                                <Skeleton variant="text" width={500} />
-                            </>
-                        }
-                    </p>
+                            )}
+                        </p>
+                        {(pelicula.genres != null ? pelicula.genres : []).map((genero, index) => (
+                            <label key={index} className="type-pelicula">{genero}</label>
+                        ))}
 
-                    <h2 className="title-sub-elenco">Elenco <PersonIcon /></h2>
+                        <Box pl={2} style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                            {isLoading ? (
+                                <div className="stars-loading-container">
+                                    <StarIcon className="star"></StarIcon>
+                                    <StarIcon className="star"></StarIcon>
+                                    <StarIcon className="star"></StarIcon>
+                                    <StarIcon className="star"></StarIcon>
+                                    <StarIcon className="star"></StarIcon>
+                                </div>
 
-                    <p className="card-text" style={{ textAlign: 'justify' }}>
-                        {pelicula.cast ? pelicula.cast.join(', ') : (
-                            <Skeleton variant="text" width={500} />
-                        )}
-                    </p>
-                    {(pelicula.genres != null ? pelicula.genres : []).map((genero, index) => (
-                        <label key={index} className="type-pelicula">{genero}</label>
-                    ))}
-
-                    <Box pl={2} style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-                        {isLoading ? (
-                            <div className="stars-loading-container">
-                                <StarIcon className="star"></StarIcon>
-                                <StarIcon className="star"></StarIcon>
-                                <StarIcon className="star"></StarIcon>
-                                <StarIcon className="star"></StarIcon>
-                                <StarIcon className="star"></StarIcon>
-                            </div>
-
-                        ) : (
-                            <Rating
-                                precision={0.5}
-                                name="simple-controlled"
-                                value={userRating !== null ? userRating : calificacion}
-                                onChange={handleRatingChange}
-                                readOnly={calificacion !== null}
-                            />
-                        )}
-                    </Box>
+                            ) : (
+                                <Rating
+                                    precision={0.5}
+                                    name="simple-controlled"
+                                    value={userRating !== null ? userRating : calificacionPromedio}
+                                    onChange={handleRatingChange}
+                                    readOnly={calificacion !== null || hasRated}
+                                />
+                            )}
+                            {calificacionPromedio !== null && (
+                                <span style={{ marginLeft: 10 }}>{calificacionPromedio}</span>
+                            )}
+                        </Box>
+                    </div>
                 </div>
             </div>
-        </div>
-    </Container>
+
+        </Container>
+    )
 }
 
 export default SinopsisMovie

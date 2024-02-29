@@ -17,9 +17,18 @@ const BotView = () => {
     };
 
     useEffect(() => {
+        sessionStorage.setItem("MENSAJES", JSON.stringify(messages));
+
         scrollToBottom();
     }, [messages]);
 
+    useEffect(() => {
+        const storedMessages = sessionStorage.getItem("MENSAJES");
+        if (storedMessages !== null) {
+            setMessages(JSON.parse(storedMessages));
+        }
+        console.log(JSON.parse(storedMessages))
+    }, []);
 
 
     const handleInputChange = (event) => {
@@ -42,7 +51,6 @@ const BotView = () => {
             body: JSON.stringify(mensaje)
         });
         const data = await response.json();
-        console.log(data);
         setIsTyping(false);
         setIsSendingMessage(false);
         data.forEach(mensaje => {
@@ -60,7 +68,6 @@ const BotView = () => {
             setMessages([...messages, userMessage]);
             enviarMensaje(inputText);
             setInputText('');
-            localStorage.setItem("MENSAJES", messages)
         }
     };
 

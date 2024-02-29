@@ -6,12 +6,12 @@ import { Typography, Card, CardMedia, CardContent, CardActions, Chip } from '@mu
 const CalificacionItem = ({ pelicula, index }) => {
     return (
 
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
             <Typography variant="h6" gutterBottom id="title-peliculas" style={{ marginRight: "15px" }}>
                 #{index}
             </Typography>
 
-            <Card id='top-container-inicio' sx={{ display: 'flex', flexDirection: 'row', my: 1, p: 0.5, width: '100%' }}>
+            <Card id='top-container-inicio' sx={{ display: 'flex', flexDirection: 'row', my: 1, p: 0.5, width: '100%', alignItems: 'center' }}>
                 <CardContent>
                     <Typography variant="h6" gutterBottom>
                     </Typography>
@@ -19,12 +19,10 @@ const CalificacionItem = ({ pelicula, index }) => {
                 <CardMedia
                     component="img"
                     sx={{
-                        height: "20%",
-                        minHeight: "20%",
-                        width: '20%',
-                        minWidth: '20%',
+                        height: "140px",
+                        width: '95px',
+                        borderRadius: "8px",
                         flexShrink: 0,
-                        mr: 1,
                     }}
                     image={pelicula.thumbnail || "https://source.unsplash.com/random?wallpapers"}
                 />
