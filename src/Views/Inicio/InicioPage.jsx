@@ -139,6 +139,7 @@ const InicioPage = () => {
 
             <Cartelera />
             <PeliculasRecomendadas />
+
             <TopPeliculasView />
         </Box >
     );

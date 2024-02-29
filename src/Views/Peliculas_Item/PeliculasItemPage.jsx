@@ -17,8 +17,6 @@ const PeliculasItemPage = () => {
     const [salas, setDataSalas] = useState([])
     const [isLoading, setIsLoading] = useState(true);
 
-    const user_id = sessionStorage.getItem("USER_ID");
-
     const obtenerData = async () => {
 
         const responsePelis = await fetch(`http://127.0.0.1:8000/salas_cine/ver-pelicula/${path}`);
@@ -45,17 +43,6 @@ const PeliculasItemPage = () => {
 
     }, [pelicula]);
 
-    const guardarCalificacion = async () => {
-        const dataCalificacion = {
-            pelicula_id: pelicula.id,
-            usuario_id: user_id,
-            calificacion: calificacion
-        }
-        const response = await fetch("http://localhost:8000/salas_cine/guardarCalificacion", {
-            method: "post",
-            body: JSON.stringify(dataCalificacion)
-        })
-    }
 
     useEffect(() => {
         const loadDisqus = () => {
@@ -102,10 +89,7 @@ const PeliculasItemPage = () => {
 
                         </div>
 
-                        <SinopsisMovie
-                            pelicula={pelicula}
-                            guardarCalificacion={guardarCalificacion}
-                        />
+                        <SinopsisMovie pelicula={pelicula} />
 
                         {isLoading ?
                             <>

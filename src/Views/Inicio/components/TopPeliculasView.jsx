@@ -21,20 +21,22 @@ const TopPeliculasView = () => {
     useEffect(() => {
         obtenerTop()
     }, [])
-    return <Container sx={{ py: 12 }} maxWidth="md" alignItems >
-        <h1 id="title-peliculas">Top Películas</h1>
-        <Grid container spacing={4}>
-            {pelis.map((pelicula, index) => (
-                <Grid item key={index} xs={12} sm={12} md={12}>
-                    <Link
-                        to={"/pelicula/" + pelicula.path}
-                        style={{ textDecoration: "none" }}
-                    >
-                        <TopPeliculaItem pelicula={pelicula} index={index + 1} />
-                    </Link>
-                </Grid>
-            ))}
-        </Grid>
-    </Container >
+    return (
+        <Container sx={{ py: 5 }} >
+            <h1 id="title-peliculas" style={{ marginBottom: "40px" }}>Top Películas</h1>
+            <Grid container spacing={2}>
+                {pelis.map((pelicula, index) => (
+                    <Grid item key={index} xs={12} sm={12} md={12}>
+                        <Link
+                            to={"/pelicula/" + pelicula.path}
+                            style={{ textDecoration: "none" }}
+                        >
+                            <TopPeliculaItem pelicula={pelicula} index={index + 1} />
+                        </Link>
+                    </Grid>
+                ))}
+            </Grid>
+        </Container >
+    )
 }
 export default TopPeliculasView

@@ -149,3 +149,30 @@
     color: #b8b8b8;
     font: 900 30px/1 Montserrat, sans-serif;
 }
+
+.stars-loading-container {
+    display: flex;
+    align-items: center;
+}
+
+.star {
+    width: 40px;
+    height: 40px;
+    margin-right: 2px;
+    color: rgba(33, 33, 33, 0.441);
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.9);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(0.9);
+    }
+}

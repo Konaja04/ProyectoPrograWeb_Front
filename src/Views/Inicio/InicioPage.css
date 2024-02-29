@@ -257,3 +257,24 @@
     min-width: 5% !important;
     border-radius: 8px;
 }
+
+#top-container-inicio {
+    background-color: #fafafa;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.135);
+    transition: box-shadow 0.3s ease;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.top-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    color: white;
+}
