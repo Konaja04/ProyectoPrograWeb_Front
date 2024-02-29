@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import SinopsisMovie from './components/SinopsisMovie';
 import ListaSalaDisponible from './components/ListaSalaDisponible';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Skeleton } from "@mui/material";
 
 const PeliculasItemPage = () => {
 
@@ -16,12 +16,14 @@ const PeliculasItemPage = () => {
     const [pelicula, setDataPelicula] = useState({})
     const [salas, setDataSalas] = useState([])
     const [isLoading, setIsLoading] = useState(true);
+    const [isLoadingPeli, setIsLoadingPeli] = useState(true);
 
     const obtenerData = async () => {
 
         const responsePelis = await fetch(`http://127.0.0.1:8000/salas_cine/ver-pelicula/${path}`);
         const dataPelis = await responsePelis.json();
         setDataPelicula(dataPelis);
+        setIsLoadingPeli(false)
 
     };
 
@@ -82,11 +84,16 @@ const PeliculasItemPage = () => {
                     <h1 className="title-primer-peliculas">Películas</h1>
                     <hr />
                     <div className='second-content'>
-                        <h1 className='title-pelicula-detalle'>{pelicula.title}</h1>
-                        <div id="first-part">
-                            <AccessTimeFilledIcon className="icon-time" />
-                            <p class="image-logo-ubicacion">{pelicula.year}</p>
 
+                        <h1 className='title-pelicula-detalle'>
+                            {pelicula.title ? pelicula.title : <Skeleton variant="text" width={300} height={80} />}
+                        </h1>
+                        <div id="first-part">
+
+                            <AccessTimeFilledIcon className="icon-time" />
+                            <p className="image-logo-ubicacion">
+                                {pelicula.year}
+                            </p>
                         </div>
 
                         <SinopsisMovie pelicula={pelicula} />

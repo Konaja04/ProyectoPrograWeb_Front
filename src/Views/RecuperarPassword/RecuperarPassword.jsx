@@ -9,7 +9,7 @@ const RecuperarPassword = () => {
         < div className='container-fluid vertical-center-container register-page' style={{ backgroundColor: '#f8ccb4' }
         }>
             <div className='col-md-12 d-flex flex-column align-items-center justify-content-center vh-100'>
-                <div className='row w-50 justify-content-center'>
+                <div className='row justify-content-center'>
                     {isConfirmedCode ?
                         <FormularioCambioPassword />
                         :

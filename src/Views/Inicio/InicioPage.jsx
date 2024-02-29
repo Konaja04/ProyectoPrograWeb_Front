@@ -62,7 +62,7 @@ const InicioPage = () => {
             <CustomCarousel peliculas={peliculasActuales} />
             <Container style={{ marginTop: '100px' }}>
                 <div>
-                    <Box className="col inicio-container">
+                    <Box className="col inicio-container" style={{ marginBottom: "90px" }}>
                         <Grid container>
 
                             <Grid item xs={4} lg={5} className="grid-item" display="flex" justifyContent="center" alignItems="center">
@@ -138,6 +138,8 @@ const InicioPage = () => {
             </Container>
 
             <Cartelera />
+
+
             <PeliculasRecomendadas />
 
             <TopPeliculasView />

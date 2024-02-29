@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Rating from '@mui/material/Rating';
 import placeholderImage from '../../../Img/pelicula_placeholder.jpg';
 import PersonIcon from '@mui/icons-material/Person';
-import { Box } from '@mui/material';
+import { Box, Skeleton } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 const SinopsisMovie = (props) => {
     const pelicula = props.pelicula
@@ -69,17 +69,32 @@ const SinopsisMovie = (props) => {
             </div>
             <div className="col">
                 <div className="info-container">
-                    <h2 className="title-sub-peliculas" >Sinopsis</h2>
-                    <p className="card-text" style={{ textAlign: 'justify' }}>{pelicula.extract}</p>
-                    <h2 className="title-sub-elenco" >Elenco <PersonIcon /></h2>
-                    <p className="card-text" style={{ textAlign: 'justify' }}>{pelicula.cast ? pelicula.cast.join(', ') : ''}</p>
 
-                    {
-                        (pelicula.genres != null ? pelicula.genres : []).map((genero) => (
+                    <h2 className="title-sub-peliculas">Sinopsis</h2>
 
-                            <label className="type-pelicula">{genero}</label>
-                        ))
-                    }
+
+                    <p className="card-text" style={{ textAlign: 'justify' }}>
+                        {pelicula.extract ? pelicula.extract :
+                            <>
+                                <Skeleton variant="text" width={500} />
+                                <Skeleton variant="text" width={500} />
+                                <Skeleton variant="text" width={500} />
+                                <Skeleton variant="text" width={500} />
+                            </>
+                        }
+                    </p>
+
+                    <h2 className="title-sub-elenco">Elenco <PersonIcon /></h2>
+
+                    <p className="card-text" style={{ textAlign: 'justify' }}>
+                        {pelicula.cast ? pelicula.cast.join(', ') : (
+                            <Skeleton variant="text" width={500} />
+                        )}
+                    </p>
+                    {(pelicula.genres != null ? pelicula.genres : []).map((genero, index) => (
+                        <label key={index} className="type-pelicula">{genero}</label>
+                    ))}
+
                     <Box pl={2} style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
                         {isLoading ? (
                             <div className="stars-loading-container">
@@ -89,18 +104,27 @@ const SinopsisMovie = (props) => {
                                 <StarIcon className="star"></StarIcon>
                                 <StarIcon className="star"></StarIcon>
                             </div>
-
                         ) : (
-                            <Rating
-                                precision={0.5}
-                                name="simple-controlled"
-                                value={userRating !== null ? userRating : calificacion}
-                                onChange={handleRatingChange}
-                                readOnly={calificacion !== null}
-                            />
+                            <>
+                                {calificacion !== null ? (
+                                    <Rating
+                                        precision={0.5}
+                                        name="simple-controlled"
+                                        value={calificacion}
+                                        readOnly
+                                    />
+                                ) : (
+                                    <div className="stars-loading-container">
+                                        <StarIcon className="star"></StarIcon>
+                                        <StarIcon className="star"></StarIcon>
+                                        <StarIcon className="star"></StarIcon>
+                                        <StarIcon className="star"></StarIcon>
+                                        <StarIcon className="star"></StarIcon>
+                                    </div>
+                                )}
+                            </>
                         )}
                     </Box>
-
                 </div>
             </div>
         </div>

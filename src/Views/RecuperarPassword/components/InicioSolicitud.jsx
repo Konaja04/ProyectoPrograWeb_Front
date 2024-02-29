@@ -88,6 +88,11 @@ const InicioSolicitud = (props) => {
                                                 </InputAdornment>
                                             )
                                         }}
+                                        onKeyPress={(e) => {
+                                            if (e.key === 'Enter') {
+                                                e.preventDefault();
+                                            }
+                                        }}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -96,6 +101,7 @@ const InicioSolicitud = (props) => {
                                         color="primary"
                                         onClick={EnviarCodigo}
                                         style={{ backgroundColor: '#FA7525', color: 'white', marginTop: '15px', borderRadius: "18px" }}
+                                        type="button"
                                     >
                                         Enviar Código
                                     </Button>

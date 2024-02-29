@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap"
 import '../../Peliculas_Item/PeliculasItemPage.css'
-import { Grid } from "@mui/material";
+import { Grid, CircularProgress, Skeleton } from "@mui/material";
 import Carousel from 'react-material-ui-carousel';
 import { Link } from 'react-router-dom';
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
@@ -10,13 +10,16 @@ import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumb
 
 const PeliculasRecomendadas = () => {
     const [pelis, setDataPelis] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
+
+
     const obtenerSala = async () => {
         const user_id = sessionStorage.getItem('ID')
         console.log(user_id)
         const response = await fetch(`http://127.0.0.1:8000/salas_cine/getRecomendaciones/${user_id}`)
         const data = await response.json()
         setDataPelis(data)
-
+        setIsLoading(false)
     }
     useEffect(() => {
         obtenerSala()
@@ -24,43 +27,57 @@ const PeliculasRecomendadas = () => {
 
     return <Container sx={{ py: 12 }} maxWidth="md">
         <h1 id="title-peliculas">Recomendados</h1>
-        <Carousel
-            autoPlay={false}
-            animation="slide"
-            indicators={false}
-        >
+        {isLoading ?
+            <>
+                <div style={{ display: 'flex' }}>
+                    <Skeleton variant="rectangular" width={232} height={350} style={{ marginLeft: "15px", marginRight: "45px", borderRadius: "12px" }} />
+                    <Skeleton variant="rectangular" width={232} height={350} style={{ marginLeft: "15px", marginRight: "40px", borderRadius: "12px" }} />
+                    <Skeleton variant="rectangular" width={232} height={350} style={{ marginLeft: "15px", marginRight: "35px", borderRadius: "12px" }} />
+                    <Skeleton variant="rectangular" width={232} height={350} style={{ marginLeft: "20px", borderRadius: "12px" }} />
+                </div>
+            </>
+            :
+            <>
 
 
-            {pelis.reduce((rows, pelicula, index) => {
-                if (index % 4 === 0) rows.push([]);
-                rows[rows.length - 1].push(
+                <Carousel
+                    autoPlay={false}
+                    animation="slide"
+                    indicators={false}
+                >
 
-                    <Grid item key={index} xs={12} sm={6} md={3}>
-                        <div key={index} className="cartelera-card">
-                            <img className="img-peliculas-dispo"
-                                src={pelicula.thumbnail || "ProyectoPrograWeb_Front\src\Img\pelicula_placeholder.jpg"}
-                            />
-                            <div className="botones-overlay">
-                                <Link to={"/pelicula/" + pelicula.path} style={{ textDecoration: 'none' }}>
-                                    <button className='botones-overlay-comprar' >
-                                        <ConfirmationNumberOutlinedIcon style={{ marginRight: '8px' }} />
-                                        Comprar</button>
-                                </Link>
 
-                            </div>
-                        </div>
+                    {pelis.reduce((rows, pelicula, index) => {
+                        if (index % 4 === 0) rows.push([]);
+                        rows[rows.length - 1].push(
 
-                    </Grid>
-                );
-                return rows;
+                            <Grid item key={index} xs={12} sm={6} md={3}>
+                                <div key={index} className="cartelera-card">
+                                    <img className="img-peliculas-dispo"
+                                        src={pelicula.thumbnail || "ProyectoPrograWeb_Front\src\Img\pelicula_placeholder.jpg"}
+                                    />
+                                    <div className="botones-overlay">
+                                        <Link to={"/pelicula/" + pelicula.path} style={{ textDecoration: 'none' }}>
+                                            <button className='botones-overlay-comprar' >
+                                                <ConfirmationNumberOutlinedIcon style={{ marginRight: '8px' }} />
+                                                Comprar</button>
+                                        </Link>
 
-            }, []).map((row, index) => (
-                <Grid key={index} container spacing={4}>
-                    {row}
-                </Grid>
-            ))}
-        </Carousel>
+                                    </div>
+                                </div>
 
+                            </Grid>
+                        );
+                        return rows;
+
+                    }, []).map((row, index) => (
+                        <Grid key={index} container spacing={4}>
+                            {row}
+                        </Grid>
+                    ))}
+                </Carousel>
+            </>
+        }
     </Container >
 
 }

@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap"
 import '../Views/Peliculas_Item/PeliculasItemPage.css'
-import { Grid } from "@mui/material";
+import { Grid, CircularProgress, Box, Skeleton } from "@mui/material";
 import Carousel from 'react-material-ui-carousel';
 import { Link } from 'react-router-dom';
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
-import { CircularProgress } from '@mui/material';
 
 
 
@@ -19,18 +18,21 @@ const Cartelera = () => {
         const dataPelis = await response.json()
         setDataPelis(dataPelis)
         setIsLoading(false)
-
     }
     useEffect(() => {
         obtenerCartelera()
     }, [])
 
-    return <Container sx={{ py: 12 }} style={{ marginTop: '160px' }} maxWidth="md">
-        <h1 id="title-peliculas">En cartelera</h1>
+    return <Container sx={{ py: 12 }} style={{ marginTop: '30px' }} maxWidth="md">
+        <h1 id="title-peliculas" style={{ marginBottom: "30px" }}>En cartelera</h1>
+
         {isLoading ?
             <>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh' }}>
-                    <CircularProgress />
+                <div style={{ display: 'flex' }}>
+                    <Skeleton variant="rectangular" width={232} height={350} style={{ marginLeft: "15px", marginRight: "45px", borderRadius: "12px" }} />
+                    <Skeleton variant="rectangular" width={232} height={350} style={{ marginLeft: "15px", marginRight: "40px", borderRadius: "12px" }} />
+                    <Skeleton variant="rectangular" width={232} height={350} style={{ marginLeft: "15px", marginRight: "35px", borderRadius: "12px" }} />
+                    <Skeleton variant="rectangular" width={232} height={350} style={{ marginLeft: "20px", borderRadius: "12px" }} />
                 </div>
             </>
             :

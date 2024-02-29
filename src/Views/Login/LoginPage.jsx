@@ -94,9 +94,8 @@ const LoginPage = () => {
         <>
             <div className='container-fluid vertical-center-container login-page' style={{ backgroundColor: '#f8ccb4' }}>
                 <div className='col-md-12 d-flex flex-column align-items-center justify-content-center vh-100'>
-                    <div className='row w-100'>
-                    </div>
-                    <div className='row w-50 justify-content-center'  >
+
+                    <div className='row justify-content-center'  >
                         <div className='col-md-8 formulario-registro' >
                             <h4 className='titulo-register'>Bienvenido nuevamente a salas de cine ULIMA</h4>
                             <p className='descripcion-login'>Si aun no tienes una cuenta por favor registrese aquí</p>

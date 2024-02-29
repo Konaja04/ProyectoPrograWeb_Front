@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import HistoriaSala from './components/HistoriaSala';
 import ListaPeliculasDisponible from './components/ListaPeliculasDisponible';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Skeleton } from "@mui/material";
 
 
 const SalasItemPage = () => {
@@ -52,26 +52,18 @@ const SalasItemPage = () => {
                     <h1 className="title-primer-peliculas">Salas</h1>
                     <hr />
                     <div className='second-content'>
-                        {isLoading ?
-                            <>
-                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh', color: 'rgb(250, 117, 37)' }}>
-                                    <CircularProgress />
-                                </div>
-                            </>
-                            :
-                            <>
-                                <h1 className='title-pelicula-detalle'>{sala.name}</h1>
-                                <div id="first-part">
-                                    <FmdGoodIcon className="icon-time" />
-                                    <p className="image-logo-ubicacion">{`${sala.second_address}`}</p>
-                                </div>
+
+                        <h1 className='title-pelicula-detalle'>
+                            {sala.name ? sala.name : <Skeleton variant="text" width={300} height={80} />}
+                        </h1>
+
+                        <div id="first-part">
+                            <FmdGoodIcon className="icon-time" />
+                            <p className="image-logo-ubicacion">{sala.second_address}</p>
+                        </div>
 
 
-                                <HistoriaSala sala={sala} />
-
-                            </>
-                        }
-
+                        <HistoriaSala sala={sala} />
                         {isLoadingFunciones ?
                             <>
                                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh', color: 'rgb(250, 117, 37)' }}>

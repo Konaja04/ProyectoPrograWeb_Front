@@ -48,9 +48,11 @@ const TopPeliculaItem = ({ pelicula, index }) => {
                     </CardActions>
                 </CardContent>
                 <CardContent>
-                    <Typography variant="h6" gutterBottom>
-                        {pelicula.calificacion}
-                    </Typography>
+                    <div className="top-circle">
+                        <Typography variant="h6">
+                            {pelicula.calificacion}
+                        </Typography>
+                    </div>
                 </CardContent>
             </Card>
         </div>
