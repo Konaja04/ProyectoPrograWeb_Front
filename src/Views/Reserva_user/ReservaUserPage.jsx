@@ -11,11 +11,14 @@ import CambiarContrasena from './components/CambiarContrasena';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import PasswordIcon from '@mui/icons-material/Password';
+import StarIcon from '@mui/icons-material/Star';
 const ReservaUserPage = () => {
 
     const [reservas, setDataReservas] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const [showReservas, setShowReservas] = useState(true);
+    const [showCalificaciones, setShowCalificaciones] = useState(false);
+    const [showCambiarContrasena, setShowCambiarContrasena] = useState(false);
 
     const traerReservas = async () => {
         const datausuario = {
@@ -37,12 +40,21 @@ const ReservaUserPage = () => {
 
     const handleClickReservas = () => {
         setShowReservas(true);
+        setShowCalificaciones(false);
+        setShowCambiarContrasena(false);
+    }
+
+    const handleClickCalificaciones = () => {
+        setShowReservas(false);
+        setShowCalificaciones(true);
+        setShowCambiarContrasena(false);
     }
 
     const handleClickCambiarContrasena = () => {
         setShowReservas(false);
+        setShowCalificaciones(false);
+        setShowCambiarContrasena(true);
     }
-
 
 
     return (
@@ -68,31 +80,41 @@ const ReservaUserPage = () => {
                             <Box mt={6}>
                                 <Box sx={{ p: 2 }} >
                                     <BookmarkAddedIcon />
-                                    <Button sx={{
-                                        width: '300px',
-                                        height: '40px',
-                                        color: 'black',
-                                    }} onClick={handleClickReservas}
-                                    >Mis reservas
+                                    <Button
+                                        sx={{ width: '300px', height: '40px', color: 'black' }}
+                                        onClick={handleClickReservas}
+                                    >
+                                        Mis reservas
                                     </Button>
                                 </Box>
+
+                                <Box sx={{ p: 2 }}>
+                                    <StarIcon />
+                                    <Button
+                                        sx={{ width: '300px', height: '40px', color: 'black' }}
+                                        onClick={handleClickCalificaciones}
+                                    >
+                                        Mis calificaciones
+                                    </Button>
+                                </Box>
+
                                 <Box sx={{ p: 2 }} >
                                     <PasswordIcon />
-                                    <Button sx={{
-                                        width: '300px',
-                                        height: '40px',
-                                        color: 'black',
-                                    }} onClick={handleClickCambiarContrasena}>Cambiar Contraseña
+                                    <Button
+                                        sx={{ width: '300px', height: '40px', color: 'black' }}
+                                        onClick={handleClickCambiarContrasena}
+                                    >
+                                        Cambiar Contraseña
                                     </Button>
                                 </Box>
+
                                 <Box sx={{ p: 2 }} >
                                     <ExitToAppIcon />
                                     <Link to="/inicio/">
-                                        <Button sx={{
-                                            width: '300px',
-                                            height: '40px',
-                                            color: 'black',
-                                        }}>Cerrar Sesión
+                                        <Button
+                                            sx={{ width: '300px', height: '40px', color: 'black' }}
+                                        >
+                                            Cerrar Sesión
                                         </Button>
                                     </Link>
                                 </Box>
@@ -100,12 +122,10 @@ const ReservaUserPage = () => {
                         </Box>
                     </Grid>
 
-
                     <Grid item xs={12} lg={7.5}>
                         <Box className="col info-container" mt={2} p={2}>
                             <Typography variant="h4" align="center"><b>Mi cuenta</b></Typography>
                         </Box>
-
 
                         {showReservas ? (
                             isLoading ? (
@@ -113,18 +133,11 @@ const ReservaUserPage = () => {
                                     <CircularProgress />
                                 </div>
                             ) : (
-
                                 <div>
-                                    <Box
-                                        height="750px"
-
-                                        className="col info-container" mt={2} p={1}>
+                                    <Box height="750px" className="col info-container" mt={2} p={1}>
                                         <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis reservas</h4>
                                         <hr />
-                                        <Box
-                                            height="660px"
-                                            overflow="auto"
-                                        >
+                                        <Box height="660px" overflow="auto">
                                             {reservas && reservas.map((reserva, index) => (
                                                 <Box key={index} className="col info-container-card" mt={2} p={2}>
                                                     <ReservaItemCard reserva={reserva} />
@@ -134,10 +147,23 @@ const ReservaUserPage = () => {
                                     </Box>
                                 </div>
                             )
+                        ) : null}
 
-                        ) : (
-                            <CambiarContrasena />
-                        )}
+                        {showCalificaciones ? (
+                            <div>
+                                <Box height="750px" className="col info-container" mt={2} p={1}>
+                                    <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis calificaciones</h4>
+                                    <hr />
+                                    <Box height="660px" overflow="auto">
+                                        {/* Aquí deberías renderizar el componente para mostrar las calificaciones del usuario */}
+                                        {/* <CalificacionesItemCard /> */}
+                                    </Box>
+                                </Box>
+                            </div>
+                        ) : null}
+
+                        {showCambiarContrasena ? <CambiarContrasena /> : null}
+
                     </Grid>
                 </Grid>
             </Container>

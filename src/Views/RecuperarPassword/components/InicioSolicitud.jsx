@@ -101,7 +101,6 @@ const InicioSolicitud = (props) => {
                                         color="primary"
                                         onClick={EnviarCodigo}
                                         style={{ backgroundColor: '#FA7525', color: 'white', marginTop: '15px', borderRadius: "18px" }}
-                                        type="button"
                                     >
                                         Enviar Código
                                     </Button>
