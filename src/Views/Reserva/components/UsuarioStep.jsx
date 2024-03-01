@@ -24,7 +24,7 @@ const UsuarioStep = ({
                         1. USUARIO
                     </h5>
                     <h6 style={{ color: 'gray' }}>
-                        Si no has ingresado haslo ahora.
+                        Si no has ingresado hazlo ahora.
                     </h6>
                     <hr />
                     <form className='form-group'>

@@ -71,7 +71,7 @@ const LoginPage = () => {
                     <div className='row justify-content-center'  >
                         <div className='col-md-8 formulario-registro' >
                             <h4 className='titulo-register'>Bienvenido nuevamente a salas de cine ULIMA</h4>
-                            <p className='descripcion-login'>Si aun no tienes una cuenta por favor registrese aquí</p>
+                            <p className='descripcion-login'>Si aún no tienes una cuenta por favor registrese aquí.</p>
                             <div className="form-group">
                                 <Link to={"registro"} id="sb">
                                     <div className="row">

@@ -7,7 +7,7 @@ const ReservaItemCard = ({ reserva }) => {
     return <>
 
         <Box display="flex" alignItems="center">
-            <Typography variant="h6"> <b>Pelicula: </b> {`${reserva.funcion.pelicula.title}`}</Typography>
+            <Typography variant="h6"> <b>Película: </b> {`${reserva.funcion.pelicula.title}`}</Typography>
             <Box ml={1}>
                 <Typography variant="h6">{`(${reserva.funcion.pelicula.year})`}</Typography>
             </Box>
