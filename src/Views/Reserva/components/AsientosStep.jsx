@@ -33,11 +33,12 @@ const AsientosStep = ({
 
         fetchAsientosReservados();
     }, []);
-
     const esAsientoReservado = (fila, columna) => {
         const nombreAsiento = `${String.fromCharCode(65 + fila)}${columna + 1}`;
-        const asientosReservadosIndividuales = asientosReservados.flatMap(reserva => reserva.asientos.split(','));
-        return asientosReservadosIndividuales.includes(nombreAsiento);
+        return asientosReservados.some(reserva => {
+            const asientosReservadosIndividuales = reserva.asientos.split(',').map(asiento => asiento.trim());
+            return asientosReservadosIndividuales.includes(nombreAsiento);
+        });
     };
     if (loading) {
         return (
