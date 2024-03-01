@@ -7,7 +7,7 @@ import { Box, Skeleton } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 const SinopsisMovie = (props) => {
     const pelicula = props.pelicula
-    const user_id = sessionStorage.getItem("USER_ID");
+    const user_id = localStorage.getItem("USER_ID");
 
     const [calificacion, setCalificacion] = useState(null);
     const [calificacionPromedio, setCalificacionPromedio] = useState(null);
