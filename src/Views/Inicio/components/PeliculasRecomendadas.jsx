@@ -26,9 +26,12 @@ const PeliculasRecomendadas = () => {
     }, [])
 
     return <Container sx={{ py: 12 }} maxWidth="md">
+
         <h1 id="title-peliculas">Recomendados</h1>
+
         {isLoading ?
             <>
+
                 <div style={{ display: 'flex' }}>
                     <Skeleton variant="rectangular" width={232} height={350} style={{ marginLeft: "15px", marginRight: "45px", borderRadius: "12px" }} />
                     <Skeleton variant="rectangular" width={232} height={350} style={{ marginLeft: "15px", marginRight: "40px", borderRadius: "12px" }} />
@@ -38,7 +41,6 @@ const PeliculasRecomendadas = () => {
             </>
             :
             <>
-
 
                 <Carousel
                     autoPlay={false}
