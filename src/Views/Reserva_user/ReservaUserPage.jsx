@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../../common/Navbar'
 import { Link, useNavigate } from 'react-router-dom';
-import { Box, Container, Grid, Typography, Divider, Avatar, CircularProgress, Button } from '@mui/material';
+import { Box, Container, Grid, Typography, Divider, TextField, Avatar, CircularProgress, Button, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
 //Icons
 import { useEffect, useState } from 'react';
@@ -13,6 +13,8 @@ import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import PasswordIcon from '@mui/icons-material/Password';
 import StarIcon from '@mui/icons-material/Star';
 import CalificacionItem from './components/CalificacionItem';
+import PersonIcon from '@mui/icons-material/Person';
+
 const ReservaUserPage = () => {
 
     const navigate = useNavigate();
@@ -20,15 +22,16 @@ const ReservaUserPage = () => {
     const [reservas, setDataReservas] = useState([])
     const [calificaciones, setDataCalificaciones] = useState([])
     const [isLoading, setIsLoading] = useState(true);
-    const [showReservas, setShowReservas] = useState(true);
+    const [showReservas, setShowReservas] = useState(false);
     const [showCalificaciones, setShowCalificaciones] = useState(false);
     const [showCambiarContrasena, setShowCambiarContrasena] = useState(false);
+    const [showPerfil, setshowPerfil] = useState(true);
 
     const traerReservas = async () => {
         const datausuario = {
-            email: sessionStorage.getItem("CORREO")
+            email: localStorage.getItem("CORREO")
         }
-        const response = await fetch('http://localhost:8000/salas_cine/verReservas', {
+        const response = await fetch('https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/verReservas', {
             method: "post",
             body: JSON.stringify(datausuario)
         })
@@ -41,9 +44,9 @@ const ReservaUserPage = () => {
     const traerCalificaciones = async () => {
         setIsLoading(true)
         const datausuario = {
-            user_id: sessionStorage.getItem("USER_ID")
+            user_id: localStorage.getItem("USER_ID")
         }
-        const response = await fetch('http://localhost:8000/salas_cine/calificacionesUsuario', {
+        const response = await fetch('https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/calificacionesUsuario', {
             method: "post",
             body: JSON.stringify(datausuario)
         })
@@ -55,7 +58,7 @@ const ReservaUserPage = () => {
     }
 
     useEffect(() => {
-        if (sessionStorage.getItem("USER_ID") == null) {
+        if (localStorage.getItem("USER_ID") == null) {
             navigate("/")
             return
         }
@@ -63,26 +66,38 @@ const ReservaUserPage = () => {
         traerCalificaciones()
     }, [])
 
+
+    const handleClickPerfil = () => {
+        setshowPerfil(true);
+        setShowReservas(false);
+        setShowCalificaciones(false);
+        setShowCambiarContrasena(false);
+    }
+
+
     const handleClickReservas = () => {
+        setshowPerfil(false);
         setShowReservas(true);
         setShowCalificaciones(false);
         setShowCambiarContrasena(false);
     }
 
     const handleClickCalificaciones = () => {
+        setshowPerfil(false);
         setShowReservas(false);
         setShowCalificaciones(true);
         setShowCambiarContrasena(false);
     }
 
     const handleClickCambiarContrasena = () => {
+        setshowPerfil(false);
         setShowReservas(false);
         setShowCalificaciones(false);
         setShowCambiarContrasena(true);
     }
 
     const logoutOnClick = () => {
-        sessionStorage.clear()
+        localStorage.clear()
         navigate("/")
     }
     return (
@@ -93,58 +108,45 @@ const ReservaUserPage = () => {
                 <Grid container mt={2} spacing={2}>
                     <Grid item xs={12} lg={4.5}>
                         <Box className="col info-container" mt={2} p={2}>
-                            <Typography variant="h4" align="center"><b>Usuario</b></Typography>
+                            <Typography variant="h4" mb={3} align="center"><b> ¡Hola {localStorage.getItem("NOMBRE")}!</b></Typography>
                             <Box display="flex" justifyContent="center" mt={2}>
                                 <Avatar
-                                    src={sessionStorage.getItem("IMG")}
+                                    src={localStorage.getItem("IMG")}
                                     style={{ width: '120px', height: '120px' }}
                                 />
                             </Box>
-                            <Box mt={6} mb={30}>
-                                <Typography mt={2} variant="h6"><b>Nombre: </b>{`${sessionStorage.getItem("NOMBRE")}`}</Typography>
-                                <Typography mt={2} variant="h6"><b>Apellido: </b>{`${sessionStorage.getItem("APELLIDO")}`}</Typography>
-                                <Typography mt={2} variant="h6"><b>Correo: </b>{`${sessionStorage.getItem("CORREO")}`}</Typography>
-                            </Box>
-                            <Box mt={6}>
-                                <Box sx={{ p: 2 }} >
-                                    <BookmarkAddedIcon />
-                                    <Button
-                                        sx={{ width: '300px', height: '40px', color: 'black' }}
-                                        onClick={handleClickReservas}
-                                    >
-                                        Mis reservas
-                                    </Button>
-                                </Box>
 
-                                <Box sx={{ p: 2 }}>
-                                    <StarIcon />
-                                    <Button
-                                        sx={{ width: '300px', height: '40px', color: 'black' }}
-                                        onClick={handleClickCalificaciones}
-                                    >
-                                        Mis calificaciones
-                                    </Button>
-                                </Box>
-
-                                <Box sx={{ p: 2 }} >
-                                    <PasswordIcon />
-                                    <Button
-                                        sx={{ width: '300px', height: '40px', color: 'black' }}
-                                        onClick={handleClickCambiarContrasena}
-                                    >
-                                        Cambiar Contraseña
-                                    </Button>
-                                </Box>
-
-                                <Box sx={{ p: 2 }} >
-                                    <ExitToAppIcon />
-
-                                    <Button onClick={logoutOnClick}
-                                        sx={{ width: '300px', height: '40px', color: 'black' }}
-                                    >
-                                        Cerrar Sesión
-                                    </Button>
-                                </Box>
+                            <Box mt={6} marginBottom={33}>
+                                <ListItem sx={{ p: 2 }} button onClick={handleClickPerfil}>
+                                    <ListItemIcon>
+                                        <PersonIcon sx={{ color: "black" }} />
+                                    </ListItemIcon>
+                                    <ListItemText sx={{ textAlign: 'left', marginLeft: '10px' }}>Mi Perfil</ListItemText>
+                                </ListItem>
+                                <ListItem sx={{ p: 2 }} button onClick={handleClickCambiarContrasena}>
+                                    <ListItemIcon>
+                                        <PasswordIcon sx={{ color: "black" }} />
+                                    </ListItemIcon>
+                                    <ListItemText sx={{ textAlign: 'left', marginLeft: '10px' }}>Cambiar Contraseña</ListItemText>
+                                </ListItem>
+                                <ListItem sx={{ p: 2 }} button onClick={handleClickReservas}>
+                                    <ListItemIcon>
+                                        <BookmarkAddedIcon sx={{ color: "black" }} />
+                                    </ListItemIcon>
+                                    <ListItemText sx={{ textAlign: 'left', marginLeft: '10px' }}>Mis Reservas</ListItemText>
+                                </ListItem>
+                                <ListItem sx={{ p: 2 }} button onClick={handleClickCalificaciones}>
+                                    <ListItemIcon>
+                                        <StarIcon sx={{ color: "black" }} />
+                                    </ListItemIcon>
+                                    <ListItemText sx={{ textAlign: 'left', marginLeft: '10px' }}>Mis Calificaciones</ListItemText>
+                                </ListItem>
+                                <ListItem sx={{ p: 2 }} button onClick={logoutOnClick}>
+                                    <ListItemIcon>
+                                        <ExitToAppIcon sx={{ color: "black" }} />
+                                    </ListItemIcon>
+                                    <ListItemText sx={{ textAlign: 'left', marginLeft: '10px' }}>Cerrar Sesión</ListItemText>
+                                </ListItem>
                             </Box>
                         </Box>
                     </Grid>
@@ -153,6 +155,70 @@ const ReservaUserPage = () => {
                         <Box className="col info-container" mt={2} p={2}>
                             <Typography variant="h4" align="center"><b>Mi cuenta</b></Typography>
                         </Box>
+                        {showPerfil ? (
+                            isLoading ? (
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh' }}>
+                                    <CircularProgress />
+                                </div>
+                            ) : (
+                                <div className="col info-container" style={{ marginTop: "20px", padding: "10px" }}>
+                                    <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis datos personales</h4>
+                                    <hr />
+                                    <Box mt={6} mb={6} className="form-userdata">
+                                        <Grid container spacing={3}>
+                                            <Grid item xs={6}>
+                                                <TextField
+                                                    label="Nombre"
+                                                    value={localStorage.getItem("NOMBRE")}
+                                                    variant="outlined"
+                                                    fullWidth
+                                                    InputProps={{
+                                                        readOnly: true,
+                                                    }}
+                                                    sx={{ mb: 2 }}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={6}>
+                                                <TextField
+                                                    label="Apellido"
+                                                    value={localStorage.getItem("APELLIDO")}
+                                                    variant="outlined"
+                                                    fullWidth
+                                                    InputProps={{
+                                                        readOnly: true,
+                                                    }}
+                                                    sx={{ mb: 2 }}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={6}>
+                                                <TextField
+                                                    label="Código"
+                                                    value={localStorage.getItem("CODIGO")}
+                                                    variant="outlined"
+                                                    fullWidth
+                                                    InputProps={{
+                                                        readOnly: true,
+                                                    }}
+                                                    sx={{ mb: 2 }}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={6}>
+                                                <TextField
+                                                    label="Correo"
+                                                    value={localStorage.getItem("CORREO")}
+                                                    variant="outlined"
+                                                    fullWidth
+                                                    InputProps={{
+                                                        readOnly: true,
+                                                    }}
+                                                    sx={{ mb: 2 }}
+                                                />
+                                            </Grid>
+                                        </Grid>
+                                    </Box>
+                                </div>
+                            )
+                        ) : null}
 
                         {showReservas ? (
                             isLoading ? (
@@ -160,18 +226,20 @@ const ReservaUserPage = () => {
                                     <CircularProgress />
                                 </div>
                             ) : (
-                                <div>
-                                    <Box height="750px" className="col info-container" mt={2} p={1}>
-                                        <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis reservas</h4>
-                                        <hr />
-                                        <Box height="660px" overflow="auto">
-                                            {reservas && reservas.map((reserva, index) => (
-                                                <Box key={index} className="col info-container-card" mt={2} p={2}>
+                                <div className="col info-container" style={{ marginTop: "20px", padding: "10px" }}>
+                                    <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis reservas</h4>
+                                    <hr />
+                                    <div style={{ height: "660px", overflow: "auto" }}>
+                                        {reservas && reservas.length > 0 ? (
+                                            reservas.map((reserva, index) => (
+                                                <div key={index} className="col info-container-card" style={{ marginTop: "20px", padding: "10px" }}>
                                                     <ReservaItemCard reserva={reserva} />
-                                                </Box>
-                                            ))}
-                                        </Box>
-                                    </Box>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p style={{ marginLeft: "15px", marginTop: "10px" }}>No tienes reservas.</p>
+                                        )}
+                                    </div>
                                 </div>
                             )
                         ) : null}
@@ -182,21 +250,24 @@ const ReservaUserPage = () => {
                                     <CircularProgress />
                                 </div>
                             ) : (
-                                <div>
-                                    <Box height="750px" className="col info-container" mt={2} p={1}>
-                                        <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis calificaciones</h4>
-                                        <hr />
-                                        <Box height="660px" overflow="auto">
-                                            {calificaciones.map((calificacion, index) => (
-                                                <Box key={index} className="col" mt={2} p={2}>
+                                <div className="col info-container" style={{ marginTop: "20px", padding: "10px" }}>
+                                    <h4 style={{ marginLeft: "15px", marginTop: "10px" }}>Mis calificaciones</h4>
+                                    <hr />
+                                    <div style={{ height: "660px", overflow: "auto" }}>
+                                        {calificaciones.length > 0 ? (
+                                            calificaciones.map((calificacion, index) => (
+                                                <div key={index} className="col" style={{ padding: "10px" }}>
                                                     <CalificacionItem pelicula={calificacion} index={index + 1} />
-                                                </Box>
-                                            ))}
-                                        </Box>
-                                    </Box>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p style={{ marginLeft: "15px", marginTop: "10px" }}>No tienes calificaciones.</p>
+                                        )}
+                                    </div>
                                 </div>
                             )
                         ) : null}
+
 
                         {showCambiarContrasena ? <CambiarContrasena /> : null}
 

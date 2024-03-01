@@ -14,9 +14,9 @@ const PeliculasRecomendadas = () => {
 
 
     const obtenerSala = async () => {
-        const user_id = sessionStorage.getItem('ID')
+        const user_id = localStorage.getItem('ID')
         console.log(user_id)
-        const response = await fetch(`http://127.0.0.1:8000/salas_cine/getRecomendaciones/${user_id}`)
+        const response = await fetch(`https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/getRecomendaciones/${user_id}`)
         const data = await response.json()
         setDataPelis(data)
         setIsLoading(false)
@@ -26,9 +26,12 @@ const PeliculasRecomendadas = () => {
     }, [])
 
     return <Container sx={{ py: 12 }} maxWidth="md">
+
         <h1 id="title-peliculas">Recomendados</h1>
+
         {isLoading ?
             <>
+
                 <div style={{ display: 'flex' }}>
                     <Skeleton variant="rectangular" width={232} height={350} style={{ marginLeft: "15px", marginRight: "45px", borderRadius: "12px" }} />
                     <Skeleton variant="rectangular" width={232} height={350} style={{ marginLeft: "15px", marginRight: "40px", borderRadius: "12px" }} />
@@ -38,7 +41,6 @@ const PeliculasRecomendadas = () => {
             </>
             :
             <>
-
 
                 <Carousel
                     autoPlay={false}
@@ -60,7 +62,7 @@ const PeliculasRecomendadas = () => {
                                         <Link to={"/pelicula/" + pelicula.path} style={{ textDecoration: 'none' }}>
                                             <button className='botones-overlay-comprar' >
                                                 <ConfirmationNumberOutlinedIcon style={{ marginRight: '8px' }} />
-                                                ({pelicula.puntuacion * 100}%)Comprar</button>
+                                                Comprar</button>
                                         </Link>
 
                                     </div>

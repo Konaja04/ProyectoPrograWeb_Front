@@ -14,7 +14,7 @@ const Cartelera = () => {
 
     const obtenerCartelera = async () => {
 
-        const response = await fetch("http://127.0.0.1:8000/salas_cine/cartelera")
+        const response = await fetch("https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/cartelera")
         const dataPelis = await response.json()
         setDataPelis(dataPelis)
         setIsLoading(false)

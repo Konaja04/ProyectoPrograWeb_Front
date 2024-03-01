@@ -21,7 +21,7 @@ const AsientosStep = ({
     useEffect(() => {
         const fetchAsientosReservados = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/salas_cine/obtener-reservas/${FUNCION_ID}`);
+                const response = await fetch(`https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/obtener-reservas/${FUNCION_ID}`);
                 const data = await response.json();
                 setAsientosReservados(data);
             } catch (error) {
@@ -33,11 +33,12 @@ const AsientosStep = ({
 
         fetchAsientosReservados();
     }, []);
-
     const esAsientoReservado = (fila, columna) => {
         const nombreAsiento = `${String.fromCharCode(65 + fila)}${columna + 1}`;
-        const asientosReservadosIndividuales = asientosReservados.flatMap(reserva => reserva.asientos.split(','));
-        return asientosReservadosIndividuales.includes(nombreAsiento);
+        return asientosReservados.some(reserva => {
+            const asientosReservadosIndividuales = reserva.asientos.split(',').map(asiento => asiento.trim());
+            return asientosReservadosIndividuales.includes(nombreAsiento);
+        });
     };
     if (loading) {
         return (
@@ -47,11 +48,10 @@ const AsientosStep = ({
         );
     }
 
-
     const handleBackWithReset = () => {
         resetAsientosSeleccionados();
         handleBack();
-    };
+    }
 
     return (
 

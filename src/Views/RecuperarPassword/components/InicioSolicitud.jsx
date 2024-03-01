@@ -35,7 +35,7 @@ const InicioSolicitud = (props) => {
             correo: correo
         }
         setVerificandoCorreo(true)
-        const response = await fetch("http://localhost:8000/salas_cine/enviarCorreoRecuperacion", {
+        const response = await fetch("https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/enviarCorreoRecuperacion", {
             method: "post",
             body: JSON.stringify(dataUser)
         })

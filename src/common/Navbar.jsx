@@ -18,9 +18,9 @@ export default function ButtonAppBar() {
     const [state, setState] = React.useState({
         left: false,
     });
-    const name = sessionStorage.getItem("NOMBRE");
-    const lastname = sessionStorage.getItem("APELLIDO");
-    const img = sessionStorage.getItem("IMG");
+    const name = localStorage.getItem("NOMBRE");
+    const lastname = localStorage.getItem("APELLIDO");
+    const img = localStorage.getItem("IMG");
 
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -46,7 +46,7 @@ export default function ButtonAppBar() {
     };
 
     const logoutOnClick = () => {
-        sessionStorage.clear()
+        localStorage.clear()
         navigate("/")
     }
 

@@ -20,7 +20,7 @@ const PeliculasItemPage = () => {
 
     const obtenerData = async () => {
 
-        const responsePelis = await fetch(`http://127.0.0.1:8000/salas_cine/ver-pelicula/${path}`);
+        const responsePelis = await fetch(`https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/ver-pelicula/${path}`);
         const dataPelis = await responsePelis.json();
         setDataPelicula(dataPelis);
         setIsLoadingPeli(false)
@@ -32,7 +32,7 @@ const PeliculasItemPage = () => {
 
         const obtenerSalas = async () => {
 
-            const responseSalas = await fetch(`http://127.0.0.1:8000/salas_cine/obtener-salas-disponibles/${pelicula.id}/`);
+            const responseSalas = await fetch(`https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/obtener-salas-disponibles/${pelicula.id}/`);
             const dataSalas = await responseSalas.json();
             setDataSalas(dataSalas);
             setIsLoading(false)
@@ -44,7 +44,7 @@ const PeliculasItemPage = () => {
 
 
     useEffect(() => {
-        if (sessionStorage.getItem("USER_ID") == null) {
+        if (localStorage.getItem("USER_ID") == null) {
             navigate("/")
             return
         }

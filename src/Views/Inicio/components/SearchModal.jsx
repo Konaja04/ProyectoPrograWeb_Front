@@ -20,7 +20,7 @@ const SearchModal = () => {
     const obtenerPeliculas = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch("http://127.0.0.1:8000/salas_cine/ver-peliculas");
+            const response = await fetch("https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/ver-peliculas");
             if (!response.ok) {
                 throw new Error('Error al obtener los datos');
             }
@@ -35,7 +35,7 @@ const SearchModal = () => {
 
     const obtenerSalas = async () => {
         setIsLoading(true)
-        const response = await fetch("http://127.0.0.1:8000/salas_cine/ver-salas")
+        const response = await fetch("https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/ver-salas")
         const data = await response.json()
         setDataSalasTotal(data)
         setDataSalas(

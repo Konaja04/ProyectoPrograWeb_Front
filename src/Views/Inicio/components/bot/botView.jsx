@@ -17,17 +17,14 @@ const BotView = () => {
     };
 
     useEffect(() => {
-        sessionStorage.setItem("MENSAJES", JSON.stringify(messages));
-
         scrollToBottom();
     }, [messages]);
 
     useEffect(() => {
-        const storedMessages = sessionStorage.getItem("MENSAJES");
+        const storedMessages = localStorage.getItem("MENSAJES");
         if (storedMessages !== null) {
             setMessages(JSON.parse(storedMessages));
         }
-        console.log(JSON.parse(storedMessages))
     }, []);
 
 
@@ -44,9 +41,9 @@ const BotView = () => {
 
         const mensaje = {
             text: inputText,
-            user_name: sessionStorage.getItem("NOMBRE")
+            user_name: localStorage.getItem("NOMBRE")
         };
-        const response = await fetch("http://127.0.0.1:8000/bot/mensaje", {
+        const response = await fetch("https://backend-salas-ulima-20211628.azurewebsites.net/bot/mensaje", {
             method: "post",
             body: JSON.stringify(mensaje)
         });
@@ -59,6 +56,7 @@ const BotView = () => {
                 setMessages(prevMessages => [...prevMessages, newMessage]);
             }, 500);
         });
+        localStorage.setItem("MENSAJES", JSON.stringify(messages));
     };
 
     const handleSendMessage = () => {
@@ -165,7 +163,7 @@ const Message = ({ author, text, isTyping }) => {
                         Para más información:
                         <MuiLink href={word} target="_blank" rel="noopener noreferrer">
                             <IconButton size="small" color="secondary" style={{ padding: 0, marginLeft: 4, verticalAlign: 'bottom' }}>
-                                <LinkIcon />{text.substring(30,)}
+                                <LinkIcon />{text.substring(61,)}
                             </IconButton>
                         </MuiLink>
                     </span>

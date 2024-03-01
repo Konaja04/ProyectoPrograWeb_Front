@@ -64,7 +64,7 @@ const RegisterPage = () => {
 
     const registrarUsuario = async () => {
         try {
-            const response = await fetch("http://localhost:8000/salas_cine/register", {
+            const response = await fetch("https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/register", {
                 method: "POST",
                 body: JSON.stringify({
                     codigo: formData.codigo,
@@ -97,7 +97,7 @@ const RegisterPage = () => {
                 <div className='row w-50 justify-content-center'  >
                     <div className='col-md-8 formulario-registro'>
                         <h4 className='titulo-login'>Bienvenido a salas de cine ULIMA</h4>
-                        <p className='descripcion-login'>Para unirte a nuestra comunidad por favor Inicia Sesión con tus datos</p>
+                        <p className='descripcion-login'>Para unirte a nuestra comunidad por favor Inicia Sesión con tus datos.</p>
                         <div className="form-group">
                             <div className="text-center" style={{ fontSize: '14px', marginTop: '10px' }}>
                                 ¿Ya se encuentra registrado? <Link to={"/"}>Log in</Link>

@@ -29,7 +29,7 @@ const SalasIndexPage = () => {
 
     const obtenerSalas = async () => {
         setIsLoading(true)
-        const response = await fetch("http://127.0.0.1:8000/salas_cine/ver-salas")
+        const response = await fetch("https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/ver-salas")
         const data = await response.json()
         setDataSalasTotal(data)
         setDataSalas(
@@ -47,7 +47,7 @@ const SalasIndexPage = () => {
         )
     }
     useEffect(() => {
-        if (sessionStorage.getItem("USER_ID") == null) {
+        if (localStorage.getItem("USER_ID") == null) {
             navigate("/")
             return
         }

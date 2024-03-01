@@ -46,7 +46,7 @@ const ReservaPage = () => {
 
     const obtenerData = async () => {
 
-        const response = await fetch(`http://127.0.0.1:8000/salas_cine/verificar-funcion/${funcion_id}`);
+        const response = await fetch(`https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/verificar-funcion/${funcion_id}`);
         const data = await response.json()
 
         if (data.msg === "") {
@@ -62,9 +62,9 @@ const ReservaPage = () => {
     }
 
 
-    const name = sessionStorage.getItem("NOMBRE");
-    const lastname = sessionStorage.getItem("APELLIDO");
-    const username = sessionStorage.getItem("CORREO");
+    const name = localStorage.getItem("NOMBRE");
+    const lastname = localStorage.getItem("APELLIDO");
+    const username = localStorage.getItem("CORREO");
 
     const [cantidadAsientosSeleccionados, setCantidadAsientosSeleccionados] = useState(0);
 
@@ -98,6 +98,10 @@ const ReservaPage = () => {
             setFormData({ ...formData, [name]: value, [`${name}Error`]: 'El valor debe ser un número entero positivo' });
             return;
         }
+        if (/^0\d/.test(value)) {
+            setFormData({ ...formData, [name]: value, [`${name}Error`]: 'No puede comenzar con 0 seguido de otro dígito' });
+            return;
+        }
 
         if (name === 'cantidad') {
             if (parseInt(value) === 0) {
@@ -124,7 +128,7 @@ const ReservaPage = () => {
             peli: peli.title
         }
         console.log(dataReserva)
-        const response = await fetch("http://localhost:8000/salas_cine/enviar-correo", {
+        const response = await fetch("https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/enviar-correo", {
             method: "post",
             body: JSON.stringify(dataReserva)
         })
@@ -135,7 +139,7 @@ const ReservaPage = () => {
             usuario: formData.codigo,
             asientos: asientosSeleccionados.join(', ')
         }
-        const response = await fetch("http://localhost:8000/salas_cine/guardarReserva", {
+        const response = await fetch("https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/guardarReserva", {
             method: "post",
             body: JSON.stringify(dataReserva)
         })
@@ -151,7 +155,7 @@ const ReservaPage = () => {
     };
 
     useEffect(() => {
-        if (sessionStorage.getItem("USER_ID") == null) {
+        if (localStorage.getItem("USER_ID") == null) {
             navigate("/")
             return
         }
@@ -248,16 +252,6 @@ const ReservaPage = () => {
 
     };
     const todosAsientosSelec = cantidadAsientosSeleccionados === parseInt(formData.cantidad);
-
-    // useEffect(() => {
-    //     if (sessionStorage.getItem("USERNAME") == null) {
-    //         navigate("/")
-    //         return
-    //     }
-    // }, []);
-
-
-
 
     return <div>
         <NavBar />
@@ -397,7 +391,6 @@ const ReservaPage = () => {
                                     todosAsientosSelec={todosAsientosSelec}
                                     FUNCION_ID={funcion_id}
                                     resetAsientosSeleccionados={resetAsientosSeleccionados}
-
                                 />
 
                             )}

@@ -16,11 +16,9 @@ const TopPeliculaItem = ({ pelicula, index }) => {
                 <CardMedia
                     component="img"
                     sx={{
-                        height: "20%",
-                        minHeight: "20%",
-                        width: '20%',
-                        minWidth: '20%',
-                        flexShrink: 0,
+                        height: "150px",
+                        width: '100px',
+                        borderRadius: "10px",
                         mr: 1,
                     }}
                     image={pelicula.thumbnail || "https://source.unsplash.com/random?wallpapers"}
