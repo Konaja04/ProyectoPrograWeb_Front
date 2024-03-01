@@ -14,9 +14,9 @@ const PeliculasRecomendadas = () => {
 
 
     const obtenerSala = async () => {
-        const user_id = sessionStorage.getItem('ID')
+        const user_id = localStorage.getItem('ID')
         console.log(user_id)
-        const response = await fetch(`http://127.0.0.1:8000/salas_cine/getRecomendaciones/${user_id}`)
+        const response = await fetch(`https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/getRecomendaciones/${user_id}`)
         const data = await response.json()
         setDataPelis(data)
         setIsLoading(false)

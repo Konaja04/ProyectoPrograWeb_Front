@@ -35,7 +35,7 @@ const PeliculasIndexPage = () => {
     const obtenerPeliculas = async () => {
         setIsLoading(true);
         const response = await fetch(
-            "http://127.0.0.1:8000/salas_cine/ver-peliculas"
+            "https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/ver-peliculas"
         );
         const data = await response.json();
         setDataPeliculasTotal(data)
@@ -46,7 +46,8 @@ const PeliculasIndexPage = () => {
         const filteredPeliculas = busqueda ? peliculasTotal.filter((pelicula) =>
         (
             pelicula.title.toLowerCase().includes(busqueda.toLowerCase()) ||
-            pelicula.genres.map((genero) => (genero.toLowerCase())).includes(busqueda.toLowerCase()) ||
+            pelicula.genres.some((genero) => (genero.toLowerCase().includes(busqueda.toLowerCase()))) ||
+            pelicula.cast.some((actor) => (actor.toLowerCase().includes(busqueda.toLowerCase()))) ||
             pelicula.year.toString().toLowerCase().includes(busqueda.toLowerCase())
         )
         ) : peliculasTotal;
@@ -64,7 +65,7 @@ const PeliculasIndexPage = () => {
     }
 
     useEffect(() => {
-        if (sessionStorage.getItem("USER_ID") == null) {
+        if (localStorage.getItem("USER_ID") == null) {
             navigate("/")
             return
         }

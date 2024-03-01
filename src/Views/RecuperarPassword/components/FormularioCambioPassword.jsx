@@ -30,7 +30,7 @@ const FormularioCambioPassword = () => {
             correo: sessionStorage.getItem("CORREO_RECUPERAR"),
             password: password
         }
-        const response = await fetch("http://localhost:8000/salas_cine/cambiarPassword", {
+        const response = await fetch("https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/cambiarPassword", {
             method: "post",
             body: JSON.stringify(dataUser)
         })

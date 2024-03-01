@@ -17,7 +17,7 @@ const SinopsisMovie = (props) => {
 
     const fetchCalificacion = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/salas_cine/calificacionPelicula`, {
+            const response = await fetch(`https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/calificacionPelicula`, {
                 method: "POST",
                 body: JSON.stringify({ pelicula_id: pelicula.id })
             });
@@ -41,7 +41,7 @@ const SinopsisMovie = (props) => {
         };
 
         try {
-            const response = await fetch("http://localhost:8000/salas_cine/guardarCalificacion", {
+            const response = await fetch("https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/guardarCalificacion", {
                 method: "post",
                 body: JSON.stringify(dataCalificacion)
             });
@@ -64,7 +64,7 @@ const SinopsisMovie = (props) => {
     useEffect(() => {
         const fetchCalificacion = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/salas_cine/getCalificacion/${pelicula.id}/${user_id}`);
+                const response = await fetch(`https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/getCalificacion/${pelicula.id}/${user_id}`);
                 const data = await response.json();
                 if (data && data.length > 0) {
                     setCalificacion(data[0].calificacion);

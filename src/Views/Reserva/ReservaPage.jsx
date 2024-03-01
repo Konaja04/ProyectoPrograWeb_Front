@@ -46,7 +46,7 @@ const ReservaPage = () => {
 
     const obtenerData = async () => {
 
-        const response = await fetch(`http://127.0.0.1:8000/salas_cine/verificar-funcion/${funcion_id}`);
+        const response = await fetch(`https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/verificar-funcion/${funcion_id}`);
         const data = await response.json()
 
         if (data.msg === "") {
@@ -62,9 +62,9 @@ const ReservaPage = () => {
     }
 
 
-    const name = sessionStorage.getItem("NOMBRE");
-    const lastname = sessionStorage.getItem("APELLIDO");
-    const username = sessionStorage.getItem("CORREO");
+    const name = localStorage.getItem("NOMBRE");
+    const lastname = localStorage.getItem("APELLIDO");
+    const username = localStorage.getItem("CORREO");
 
     const [cantidadAsientosSeleccionados, setCantidadAsientosSeleccionados] = useState(0);
 

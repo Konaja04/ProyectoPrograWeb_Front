@@ -28,7 +28,7 @@ const ReservaUserPage = () => {
         const datausuario = {
             email: sessionStorage.getItem("CORREO")
         }
-        const response = await fetch('http://localhost:8000/salas_cine/verReservas', {
+        const response = await fetch('https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/verReservas', {
             method: "post",
             body: JSON.stringify(datausuario)
         })
@@ -41,9 +41,9 @@ const ReservaUserPage = () => {
     const traerCalificaciones = async () => {
         setIsLoading(true)
         const datausuario = {
-            user_id: sessionStorage.getItem("USER_ID")
+            user_id: localStorage.getItem("USER_ID")
         }
-        const response = await fetch('http://localhost:8000/salas_cine/calificacionesUsuario', {
+        const response = await fetch('https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/calificacionesUsuario', {
             method: "post",
             body: JSON.stringify(datausuario)
         })
@@ -55,7 +55,7 @@ const ReservaUserPage = () => {
     }
 
     useEffect(() => {
-        if (sessionStorage.getItem("USER_ID") == null) {
+        if (localStorage.getItem("USER_ID") == null) {
             navigate("/")
             return
         }
@@ -82,7 +82,7 @@ const ReservaUserPage = () => {
     }
 
     const logoutOnClick = () => {
-        sessionStorage.clear()
+        localStorage.clear()
         navigate("/")
     }
     return (

@@ -20,7 +20,7 @@ const AsientosStep = ({
     useEffect(() => {
         const fetchAsientosReservados = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/salas_cine/obtener-reservas/${FUNCION_ID}`);
+                const response = await fetch(`https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/obtener-reservas/${FUNCION_ID}`);
                 const data = await response.json();
                 setAsientosReservados(data);
             } catch (error) {

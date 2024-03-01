@@ -39,7 +39,7 @@ const CambiarContrasena = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:8000/salas_cine/cambiar-contrasena-perfil', {
+            const response = await fetch('https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/cambiar-contrasena-perfil', {
                 method: 'POST',
                 body: JSON.stringify({
                     user_id: sessionStorage.getItem("USER_ID"),

@@ -64,7 +64,7 @@ const RegisterPage = () => {
 
     const registrarUsuario = async () => {
         try {
-            const response = await fetch("http://localhost:8000/salas_cine/register", {
+            const response = await fetch("https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/register", {
                 method: "POST",
                 body: JSON.stringify({
                     codigo: formData.codigo,

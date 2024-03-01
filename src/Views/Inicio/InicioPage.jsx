@@ -47,13 +47,13 @@ const InicioPage = () => {
     const [peliculas, setPeliculas] = useState([]);
 
     const obtenerPeliculas = async () => {
-        const response = await fetch("http://localhost:3000/data_json/peliculas_data.json");
+        const response = await fetch("https://konaja04.github.io/ProyectoPrograWeb_Front/data_json/peliculas_data.json");
         const data = await response.json();
         setPeliculas(data);
     }
 
     useEffect(() => {
-        if (sessionStorage.getItem("USER_ID") == null) {
+        if (localStorage.getItem("USER_ID") == null) {
             navigate("/")
             return
         }

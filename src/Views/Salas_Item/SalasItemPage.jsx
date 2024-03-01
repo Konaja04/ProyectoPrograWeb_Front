@@ -21,14 +21,14 @@ const SalasItemPage = () => {
     const obtenerData = async () => {
 
 
-        const responseSala = await fetch(`http://127.0.0.1:8000/salas_cine/ver-sala/${path}`);
+        const responseSala = await fetch(`https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/ver-sala/${path}`);
         const dataSala = await responseSala.json();
         setDataSala(dataSala);
         setIsLoading(false);
     };
 
     useEffect(() => {
-        if (sessionStorage.getItem("USER_ID") == null) {
+        if (localStorage.getItem("USER_ID") == null) {
             navigate("/")
             return
         }
@@ -39,7 +39,7 @@ const SalasItemPage = () => {
 
         const obtenerPelis = async () => {
 
-            const responsePelis = await fetch(`http://127.0.0.1:8000/salas_cine/obtener_peliculas_disponibles/${sala.id}/`);
+            const responsePelis = await fetch(`https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/obtener_peliculas_disponibles/${sala.id}/`);
             const dataPelis = await responsePelis.json();
             setDataPelicula(dataPelis);
             setIsLoadingFunciones(false);

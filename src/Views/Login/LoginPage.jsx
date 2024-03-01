@@ -31,20 +31,20 @@ const LoginPage = () => {
             password: password
         }
         setLoginLoading(true)
-        const response = await fetch("http://localhost:8000/salas_cine/login-json", {
+        const response = await fetch("https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/login-json", {
             method: "post",
             body: JSON.stringify(dataUsername)
         })
         const data = await response.json()
         setLoginLoading(false)
         if (data.msg === "") {
-            sessionStorage.setItem("USER_ID", data.id)
-            sessionStorage.setItem("CODIGO", codigo)
-            sessionStorage.setItem("ID", data.id,)
-            sessionStorage.setItem("NOMBRE", data.names)
-            sessionStorage.setItem("APELLIDO", data.last_names)
-            sessionStorage.setItem("IMG", data.img)
-            sessionStorage.setItem("CORREO", data.mail)
+            localStorage.setItem("USER_ID", data.id)
+            localStorage.setItem("CODIGO", codigo)
+            localStorage.setItem("ID", data.id,)
+            localStorage.setItem("NOMBRE", data.names)
+            localStorage.setItem("APELLIDO", data.last_names)
+            localStorage.setItem("IMG", data.img)
+            localStorage.setItem("CORREO", data.mail)
 
             navigate("/inicio", {
                 state: {
@@ -57,7 +57,7 @@ const LoginPage = () => {
     }
 
     useEffect(() => {
-        if (sessionStorage.getItem("USER_ID") !== null) {
+        if (localStorage.getItem("USER_ID") !== null) {
             navigate("/inicio")
             return
         }
