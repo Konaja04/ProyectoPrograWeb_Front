@@ -17,8 +17,6 @@ const BotView = () => {
     };
 
     useEffect(() => {
-        localStorage.setItem("MENSAJES", JSON.stringify(messages));
-
         scrollToBottom();
     }, [messages]);
 
@@ -27,7 +25,6 @@ const BotView = () => {
         if (storedMessages !== null) {
             setMessages(JSON.parse(storedMessages));
         }
-        console.log(JSON.parse(storedMessages))
     }, []);
 
 
@@ -59,6 +56,7 @@ const BotView = () => {
                 setMessages(prevMessages => [...prevMessages, newMessage]);
             }, 500);
         });
+        localStorage.setItem("MENSAJES", JSON.stringify(messages));
     };
 
     const handleSendMessage = () => {

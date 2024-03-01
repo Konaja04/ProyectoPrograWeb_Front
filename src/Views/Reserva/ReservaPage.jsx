@@ -147,7 +147,7 @@ const ReservaPage = () => {
     };
 
     useEffect(() => {
-        if (sessionStorage.getItem("USER_ID") == null) {
+        if (localStorage.getItem("USER_ID") == null) {
             navigate("/")
             return
         }

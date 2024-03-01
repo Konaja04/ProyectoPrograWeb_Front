@@ -101,9 +101,9 @@ const ReservaUserPage = () => {
                                 />
                             </Box>
                             <Box mt={6} mb={30}>
-                                <Typography mt={2} variant="h6"><b>Nombre: </b>{`${sessionStorage.getItem("NOMBRE")}`}</Typography>
-                                <Typography mt={2} variant="h6"><b>Apellido: </b>{`${sessionStorage.getItem("APELLIDO")}`}</Typography>
-                                <Typography mt={2} variant="h6"><b>Correo: </b>{`${sessionStorage.getItem("CORREO")}`}</Typography>
+                                <Typography mt={2} variant="h6"><b>Nombre: </b>{`${localStorage.getItem("NOMBRE")}`}</Typography>
+                                <Typography mt={2} variant="h6"><b>Apellido: </b>{`${localStorage.getItem("APELLIDO")}`}</Typography>
+                                <Typography mt={2} variant="h6"><b>Correo: </b>{`${localStorage.getItem("CORREO")}`}</Typography>
                             </Box>
                             <Box mt={6}>
                                 <Box sx={{ p: 2 }} >
