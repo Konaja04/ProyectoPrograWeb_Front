@@ -94,6 +94,10 @@ const ReservaPage = () => {
             setFormData({ ...formData, [name]: value, [`${name}Error`]: 'El valor debe ser un número entero positivo' });
             return;
         }
+        if (/^0\d/.test(value)) {
+            setFormData({ ...formData, [name]: value, [`${name}Error`]: 'No puede comenzar con 0 seguido de otro dígito' });
+            return;
+        }
 
         if (name === 'cantidad') {
             if (parseInt(value) === 0) {

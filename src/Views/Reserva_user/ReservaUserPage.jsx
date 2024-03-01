@@ -22,10 +22,10 @@ const ReservaUserPage = () => {
     const [reservas, setDataReservas] = useState([])
     const [calificaciones, setDataCalificaciones] = useState([])
     const [isLoading, setIsLoading] = useState(true);
-    const [showReservas, setShowReservas] = useState(true);
+    const [showReservas, setShowReservas] = useState(false);
     const [showCalificaciones, setShowCalificaciones] = useState(false);
     const [showCambiarContrasena, setShowCambiarContrasena] = useState(false);
-    const [showPerfil, setshowPerfil] = useState(false);
+    const [showPerfil, setshowPerfil] = useState(true);
 
     const traerReservas = async () => {
         const datausuario = {
@@ -108,7 +108,7 @@ const ReservaUserPage = () => {
                 <Grid container mt={2} spacing={2}>
                     <Grid item xs={12} lg={4.5}>
                         <Box className="col info-container" mt={2} p={2}>
-                            <Typography variant="h4" align="center"><b>Usuario</b></Typography>
+                            <Typography variant="h4" mb={3} align="center"><b> ¡Hola {localStorage.getItem("NOMBRE")}!</b></Typography>
                             <Box display="flex" justifyContent="center" mt={2}>
                                 <Avatar
                                     src={localStorage.getItem("IMG")}
@@ -116,12 +116,18 @@ const ReservaUserPage = () => {
                                 />
                             </Box>
 
-                            <Box mt={6} marginBottom={34.5}>
+                            <Box mt={6} marginBottom={33}>
                                 <ListItem sx={{ p: 2 }} button onClick={handleClickPerfil}>
                                     <ListItemIcon>
                                         <PersonIcon sx={{ color: "black" }} />
                                     </ListItemIcon>
                                     <ListItemText sx={{ textAlign: 'left', marginLeft: '10px' }}>Mi Perfil</ListItemText>
+                                </ListItem>
+                                <ListItem sx={{ p: 2 }} button onClick={handleClickCambiarContrasena}>
+                                    <ListItemIcon>
+                                        <PasswordIcon sx={{ color: "black" }} />
+                                    </ListItemIcon>
+                                    <ListItemText sx={{ textAlign: 'left', marginLeft: '10px' }}>Cambiar Contraseña</ListItemText>
                                 </ListItem>
                                 <ListItem sx={{ p: 2 }} button onClick={handleClickReservas}>
                                     <ListItemIcon>
@@ -129,21 +135,12 @@ const ReservaUserPage = () => {
                                     </ListItemIcon>
                                     <ListItemText sx={{ textAlign: 'left', marginLeft: '10px' }}>Mis Reservas</ListItemText>
                                 </ListItem>
-
                                 <ListItem sx={{ p: 2 }} button onClick={handleClickCalificaciones}>
                                     <ListItemIcon>
                                         <StarIcon sx={{ color: "black" }} />
                                     </ListItemIcon>
                                     <ListItemText sx={{ textAlign: 'left', marginLeft: '10px' }}>Mis Calificaciones</ListItemText>
                                 </ListItem>
-
-                                <ListItem sx={{ p: 2 }} button onClick={handleClickCambiarContrasena}>
-                                    <ListItemIcon>
-                                        <PasswordIcon sx={{ color: "black" }} />
-                                    </ListItemIcon>
-                                    <ListItemText sx={{ textAlign: 'left', marginLeft: '10px' }}>Cambiar Contraseña</ListItemText>
-                                </ListItem>
-
                                 <ListItem sx={{ p: 2 }} button onClick={logoutOnClick}>
                                     <ListItemIcon>
                                         <ExitToAppIcon sx={{ color: "black" }} />
@@ -259,7 +256,7 @@ const ReservaUserPage = () => {
                                     <div style={{ height: "660px", overflow: "auto" }}>
                                         {calificaciones.length > 0 ? (
                                             calificaciones.map((calificacion, index) => (
-                                                <div key={index} className="col" style={{ marginTop: "20px", padding: "10px" }}>
+                                                <div key={index} className="col" style={{ padding: "10px" }}>
                                                     <CalificacionItem pelicula={calificacion} index={index + 1} />
                                                 </div>
                                             ))
