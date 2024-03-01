@@ -26,7 +26,7 @@ const ReservaUserPage = () => {
 
     const traerReservas = async () => {
         const datausuario = {
-            email: sessionStorage.getItem("CORREO")
+            email: localStorage.getItem("CORREO")
         }
         const response = await fetch('https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/verReservas', {
             method: "post",
@@ -96,7 +96,7 @@ const ReservaUserPage = () => {
                             <Typography variant="h4" align="center"><b>Usuario</b></Typography>
                             <Box display="flex" justifyContent="center" mt={2}>
                                 <Avatar
-                                    src={sessionStorage.getItem("IMG")}
+                                    src={localStorage.getItem("IMG")}
                                     style={{ width: '120px', height: '120px' }}
                                 />
                             </Box>

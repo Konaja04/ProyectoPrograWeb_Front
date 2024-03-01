@@ -163,7 +163,7 @@ const Message = ({ author, text, isTyping }) => {
                         Para más información:
                         <MuiLink href={word} target="_blank" rel="noopener noreferrer">
                             <IconButton size="small" color="secondary" style={{ padding: 0, marginLeft: 4, verticalAlign: 'bottom' }}>
-                                <LinkIcon />{text.substring(52,)}
+                                <LinkIcon />{text.substring(61,)}
                             </IconButton>
                         </MuiLink>
                     </span>

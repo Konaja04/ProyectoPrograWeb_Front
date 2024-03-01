@@ -120,7 +120,7 @@ const ReservaPage = () => {
             peli: peli.title
         }
         console.log(dataReserva)
-        const response = await fetch("http://localhost:8000/salas_cine/enviar-correo", {
+        const response = await fetch("https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/enviar-correo", {
             method: "post",
             body: JSON.stringify(dataReserva)
         })
@@ -131,7 +131,7 @@ const ReservaPage = () => {
             usuario: formData.codigo,
             asientos: asientosSeleccionados.join(', ')
         }
-        const response = await fetch("http://localhost:8000/salas_cine/guardarReserva", {
+        const response = await fetch("https://backend-salas-ulima-20211628.azurewebsites.net/salas_cine/guardarReserva", {
             method: "post",
             body: JSON.stringify(dataReserva)
         })
@@ -179,7 +179,13 @@ const ReservaPage = () => {
     };
 
     const handleBack = () => {
+        resetAsientosSeleccionados();
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+
+    const resetAsientosSeleccionados = () => {
+        setAsientos(asientos.map(fila => fila.map(asiento => 'disponible')));
+        setCantidadAsientosSeleccionados(0);
     };
 
     const handleReset = () => {
@@ -238,16 +244,6 @@ const ReservaPage = () => {
 
     };
     const todosAsientosSelec = cantidadAsientosSeleccionados === parseInt(formData.cantidad);
-
-    // useEffect(() => {
-    //     if (sessionStorage.getItem("USERNAME") == null) {
-    //         navigate("/")
-    //         return
-    //     }
-    // }, []);
-
-
-
 
     return <div>
         <NavBar />
@@ -386,6 +382,7 @@ const ReservaPage = () => {
                                     cambiarEstadoAsiento={cambiarEstadoAsiento}
                                     todosAsientosSelec={todosAsientosSelec}
                                     FUNCION_ID={funcion_id}
+                                    resetAsientosSeleccionados={resetAsientosSeleccionados}
                                 />
 
                             )}
